@@ -56,12 +56,23 @@
 --    CONSTRAINT unique_event_category_name UNIQUE (eventID, name)
 --);
 
-CREATE TABLE ROUTES (
-    routeID INT IDENTITY(1,1) PRIMARY KEY,
-    categoryID INT NOT NULL UNIQUE REFERENCES CATEGORIES(categoryID) ON DELETE CASCADE,
-    mapUrl VARCHAR(255),
-    elevationGain INT,  -- in meters
-    description TEXT,
+--CREATE TABLE ROUTES (
+--    routeID INT IDENTITY(1,1) PRIMARY KEY,
+--    categoryID INT NOT NULL UNIQUE REFERENCES CATEGORIES(categoryID) ON DELETE CASCADE,
+--    mapUrl VARCHAR(255),
+--    elevationGain INT,  -- in meters
+--    description TEXT,
+--    created_at DATETIME DEFAULT GETDATE(),
+--    updated_at DATETIME DEFAULT GETDATE()
+--);
+
+CREATE TABLE ENROLMENTS (
+    enrolmentID INT IDENTITY(1,1) PRIMARY KEY,
+    participantID INT NOT NULL REFERENCES PARTICIPANTS(participantID) ON DELETE CASCADE,
+    categoryID INT NOT NULL REFERENCES CATEGORIES(categoryID) ON DELETE CASCADE,
+    enrolmentDate DATETIME DEFAULT GETDATE(),
+    status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'confirmed', 'withdrawn')),
     created_at DATETIME DEFAULT GETDATE(),
-    updated_at DATETIME DEFAULT GETDATE()
+    updated_at DATETIME DEFAULT GETDATE(),
+    CONSTRAINT unique_participant_category UNIQUE (participantID, categoryID)
 );
