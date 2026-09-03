@@ -138,7 +138,13 @@
 
 -- 7. ENROLMENTS (Sample participant entries)
 -- Lindiwe (Participant ID 1) enrolments
-INSERT INTO enrolments (participantID, categoryID, status) VALUES
-    (1, 2, 'confirmed'),  -- Soweto Half Marathon
-    (1, 5, 'confirmed'),  -- CTCT 109km Classic
-    (1, 6, 'confirmed');  -- Durban 5km Walk (free)
+--INSERT INTO ENROLMENTS (participantID, categoryID, status) VALUES
+--    (1, 2, 'confirmed'),  -- Soweto Half Marathon
+--    (1, 5, 'confirmed'),  -- CTCT 109km Classic
+--    (1, 6, 'confirmed');  -- Durban 5km Walk (free)
+
+-- Michael (Participant ID 2) enrolments
+INSERT INTO ENROLMENTS (participantID, categoryID, status) VALUES
+    (2, 1, 'confirmed'),  -- Soweto 10km
+    (2, 5, 'confirmed'),  -- CTCT 109km Classic
+    (2, 7, 'pending');    -- Durban 5km Run (pending approval)
