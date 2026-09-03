@@ -150,6 +150,11 @@
 --    (2, 7, 'pending');    -- Durban 5km Run (pending approval)
 
 -- Sipho (Participant ID 3) enrolments
-INSERT INTO ENROLMENTS (participantID, categoryID, status) VALUES
-    (3, 3, 'confirmed'),  -- Soweto Full Marathon
-    (3, 4, 'confirmed');  -- CTCT 40km Fun Ride
+--INSERT INTO ENROLMENTS (participantID, categoryID, status) VALUES
+--    (3, 3, 'confirmed'),  -- Soweto Full Marathon
+--    (3, 4, 'confirmed');  -- CTCT 40km Fun Ride
+
+-- 8. RESULTS (Sample race results)
+-- Soweto Half Marathon (enrolmentID 1) results
+INSERT INTO RESULTS (enrolmentID, finishTimeSeconds, position) VALUES
+    (1, 6300, 42);   -- Lindiwe: 1hr 45min, position 42
