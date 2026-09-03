@@ -156,5 +156,9 @@
 
 -- 8. RESULTS (Sample race results)
 -- Soweto Half Marathon (enrolmentID 1) results
+--INSERT INTO RESULTS (enrolmentID, finishTimeSeconds, position) VALUES
+--    (1, 6300, 42);   -- Lindiwe: 1hr 45min, position 42
+
+-- CTCT 109km Classic (enrolmentID 2) results
 INSERT INTO RESULTS (enrolmentID, finishTimeSeconds, position) VALUES
-    (1, 6300, 42);   -- Lindiwe: 1hr 45min, position 42
+    (2, 14520, 156); -- Lindiwe: 4hrs 2min, position 156
