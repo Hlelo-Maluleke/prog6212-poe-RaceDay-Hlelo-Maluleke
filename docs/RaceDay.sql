@@ -68,8 +68,8 @@
 
 CREATE TABLE ENROLMENTS (
     enrolmentID INT IDENTITY(1,1) PRIMARY KEY,
-    participantID INT NOT NULL REFERENCES PARTICIPANTS(participantID) ON DELETE CASCADE,
-    categoryID INT NOT NULL REFERENCES CATEGORIES(categoryID) ON DELETE CASCADE,
+    participantID INT NOT NULL REFERENCES PARTICIPANTS(participantID),
+    categoryID INT NOT NULL REFERENCES CATEGORIES(categoryID),
     enrolmentDate DATETIME DEFAULT GETDATE(),
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'confirmed', 'withdrawn')),
     created_at DATETIME DEFAULT GETDATE(),
