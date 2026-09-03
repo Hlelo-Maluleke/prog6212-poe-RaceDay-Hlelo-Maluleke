@@ -86,11 +86,16 @@
 --    updated_at DATETIME DEFAULT GETDATE()
 --);
 
--- SAMPLE DATA SEEDING
+-- SAMPLE DATA
 -- 1. USERS (Base accounts for all users)
-INSERT INTO USERS (email, passwordHash, fullName, phone) VALUES
-    ('thabo@runningclub.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Thabo Mokoena', '082 123 4567'),
-    ('susan@capetowncycles.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Susan Klein', '083 987 6543'),
-    ('lindiwe@runsa.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Lindiwe Nkosi', '076 555 1234'),
-    ('michael@cyclezone.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Michael Jacobs', '072 444 5678'),
-    ('sipho@fitness.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Sipho Dlamini', '073 333 9012');
+--INSERT INTO USERS (email, passwordHash, fullName, phone) VALUES
+--    ('thabo@runningclub.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Thabo Mokoena', '082 123 4567'),
+--    ('susan@capetowncycles.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Susan Klein', '083 987 6543'),
+--    ('lindiwe@runsa.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Lindiwe Nkosi', '076 555 1234'),
+--    ('michael@cyclezone.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Michael Jacobs', '072 444 5678'),
+--    ('sipho@fitness.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Sipho Dlamini', '073 333 9012');
+
+-- 2. ORGANISERS (Pre-created - only these can create events)
+INSERT INTO organisers (userID, companyName) VALUES
+    (1, 'Soweto Running Club'),    -- Thabo
+    (2, 'Cape Town Cycle Tours');  -- Susan
