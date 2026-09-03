@@ -96,12 +96,19 @@
 --    ('sipho@fitness.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Sipho Dlamini', '073 333 9012');
 
 -- 2. ORGANISERS (Pre-created - only these can create events)
---INSERT INTO organisers (userID, companyName) VALUES
+--INSERT INTO ORGANISERS (userID, companyName) VALUES
 --    (1, 'Soweto Running Club'),    -- Thabo
 --    (2, 'Cape Town Cycle Tours');  -- Susan
 
 -- 3. PARTICIPANTS (Self-registered users)
-INSERT INTO participants (userID, dateOfBirth, idNumber, emergencyContact) VALUES
-    (3, '1985-06-15', '8506151234089', 'Sipho Mokoena - 082 111 2222'),  -- Lindiwe
-    (4, '1992-11-22', '9211225678012', 'Sarah Jacobs - 083 444 5555'),   -- Michael
-    (5, '1998-03-01', '9803019012345', 'Nomsa Dlamini - 076 666 7777');  -- Sipho
+--INSERT INTO participants (userID, dateOfBirth, idNumber, emergencyContact) VALUES
+--    (3, '1985-06-15', '8506151234089', 'Sipho Mokoena - 082 111 2222'),  -- Lindiwe
+--    (4, '1992-11-22', '9211225678012', 'Sarah Jacobs - 083 444 5555'),   -- Michael
+--    (5, '1998-03-01', '9803019012345', 'Nomsa Dlamini - 076 666 7777');  -- Sipho
+
+-- 4. EVENTS (3 Events managed by the 2 Organisers)
+INSERT INTO EVENTS (organiserID, name, description, eventDate, startTime, location, eventType, status) VALUES
+    (1, 'Soweto Marathon', 'One of South Africa''s most iconic road races through the heart of Soweto. Includes 10km, 21km, and 42km categories.', '2026-11-15', '06:00:00', 'Soweto, Johannesburg', 'run', 'published'),
+    (2, 'Cape Town Cycle Tour', 'The world''s largest timed cycle race. Stunning route along Chapman''s Peak and Cape Peninsula.', '2026-03-08', '07:30:00', 'Cape Town CBD', 'cycle', 'published'),
+    (1, 'Durban Community Parkrun', 'Weekly free community walking/running event at Durban Botanic Gardens. Open to all ages and fitness levels.', '2026-10-25', '08:00:00', 'Durban Botanic Gardens', 'walk', 'published');
+
