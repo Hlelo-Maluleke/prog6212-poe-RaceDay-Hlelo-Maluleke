@@ -28,16 +28,30 @@
 --    updated_at DATETIME DEFAULT GETDATE()
 --);
 
-CREATE TABLE events (
-    eventID INT IDENTITY(1,1) PRIMARY KEY,
-    organiserID INT NOT NULL REFERENCES ORGANISERS(organiserID) ON DELETE CASCADE,
-    name VARCHAR(255) NOT NULL,
+--CREATE TABLE events (
+--    eventID INT IDENTITY(1,1) PRIMARY KEY,
+--    organiserID INT NOT NULL REFERENCES ORGANISERS(organiserID) ON DELETE CASCADE,
+--    name VARCHAR(255) NOT NULL,
+--    description TEXT,
+--    eventDate DATE NOT NULL,
+--    startTime TIME,
+--    location VARCHAR(255) NOT NULL,
+--    eventType VARCHAR(20) NOT NULL CHECK (eventType IN ('run', 'walk', 'cycle')),
+--    status VARCHAR(20) DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'cancelled', 'completed')),
+--    created_at DATETIME DEFAULT GETDATE(),
+--    updated_at DATETIME DEFAULT GETDATE()
+--);
+
+CREATE TABLE CATEGORIES (
+    categoryID INT IDENTITY(1,1) PRIMARY KEY,
+    eventID INT NOT NULL REFERENCES events(eventID) ON DELETE CASCADE,
+    name VARCHAR(100) NOT NULL,
     description TEXT,
-    eventDate DATE NOT NULL,
+    distanceKm DECIMAL(5,2) NOT NULL,
+    entryFee DECIMAL(10,2) DEFAULT 0.00,
+    maxParticipants INT,
     startTime TIME,
-    location VARCHAR(255) NOT NULL,
-    eventType VARCHAR(20) NOT NULL CHECK (eventType IN ('run', 'walk', 'cycle')),
-    status VARCHAR(20) DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'cancelled', 'completed')),
     created_at DATETIME DEFAULT GETDATE(),
-    updated_at DATETIME DEFAULT GETDATE()
+    updated_at DATETIME DEFAULT GETDATE(),
+    CONSTRAINT unique_event_category_name UNIQUE (eventID, name)
 );
