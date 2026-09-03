@@ -131,8 +131,14 @@
 --    (3, '5km Community Run', 'Free 5km run for fitness enthusiasts', 5.00, 0.00, 150, '08:00:00');
 
 -- 6. ROUTES (Route information for specific categories)
-INSERT INTO ROUTES (categoryID, mapUrl, elevationGain, description) VALUES
-    (2, 'https://maps.example.com/soweto-21km-route', 180, 'Scenic route through Soweto landmarks including Mandela House and Orlando Stadium'),
-    (5, 'https://maps.example.com/ctct-109km-route', 850, 'Challenging route with Chapman''s Peak Drive and Constantia climbs'),
-    (6, 'https://maps.example.com/durban-5km-route', 25, 'Flat, family-friendly route through Durban Botanic Gardens');
+--INSERT INTO ROUTES (categoryID, mapUrl, elevationGain, description) VALUES
+--    (2, 'https://maps.example.com/soweto-21km-route', 180, 'Scenic route through Soweto landmarks including Mandela House and Orlando Stadium'),
+--    (5, 'https://maps.example.com/ctct-109km-route', 850, 'Challenging route with Chapman''s Peak Drive and Constantia climbs'),
+--    (6, 'https://maps.example.com/durban-5km-route', 25, 'Flat, family-friendly route through Durban Botanic Gardens');
 
+-- 7. ENROLMENTS (Sample participant entries)
+-- Lindiwe (Participant ID 1) enrolments
+INSERT INTO enrolments (participantID, categoryID, status) VALUES
+    (1, 2, 'confirmed'),  -- Soweto Half Marathon
+    (1, 5, 'confirmed'),  -- CTCT 109km Classic
+    (1, 6, 'confirmed');  -- Durban 5km Walk (free)
