@@ -107,8 +107,14 @@
 --    (5, '1998-03-01', '9803019012345', 'Nomsa Dlamini - 076 666 7777');  -- Sipho
 
 -- 4. EVENTS (3 Events managed by the 2 Organisers)
-INSERT INTO EVENTS (organiserID, name, description, eventDate, startTime, location, eventType, status) VALUES
-    (1, 'Soweto Marathon', 'One of South Africa''s most iconic road races through the heart of Soweto. Includes 10km, 21km, and 42km categories.', '2026-11-15', '06:00:00', 'Soweto, Johannesburg', 'run', 'published'),
-    (2, 'Cape Town Cycle Tour', 'The world''s largest timed cycle race. Stunning route along Chapman''s Peak and Cape Peninsula.', '2026-03-08', '07:30:00', 'Cape Town CBD', 'cycle', 'published'),
-    (1, 'Durban Community Parkrun', 'Weekly free community walking/running event at Durban Botanic Gardens. Open to all ages and fitness levels.', '2026-10-25', '08:00:00', 'Durban Botanic Gardens', 'walk', 'published');
+--INSERT INTO EVENTS (organiserID, name, description, eventDate, startTime, location, eventType, status) VALUES
+--    (1, 'Soweto Marathon', 'One of South Africa''s most iconic road races through the heart of Soweto. Includes 10km, 21km, and 42km categories.', '2026-11-15', '06:00:00', 'Soweto, Johannesburg', 'run', 'published'),
+--    (2, 'Cape Town Cycle Tour', 'The world''s largest timed cycle race. Stunning route along Chapman''s Peak and Cape Peninsula.', '2026-03-08', '07:30:00', 'Cape Town CBD', 'cycle', 'published'),
+--    (1, 'Durban Community Parkrun', 'Weekly free community walking/running event at Durban Botanic Gardens. Open to all ages and fitness levels.', '2026-10-25', '08:00:00', 'Durban Botanic Gardens', 'walk', 'published');
 
+-- 5. CATEGORIES (Categories for each event, with distances)
+-- Soweto Marathon Categories (Event 1)
+INSERT INTO categories (eventID, name, description, distanceKm, entryFee, maxParticipants, startTime) VALUES
+    (1, '10km Road Run', 'Short distance category for beginners and fun-runners', 10.00, 150.00, 500, '06:15:00'),
+    (1, '21km Half Marathon', 'Intermediate distance for competitive runners', 21.10, 250.00, 300, '06:00:00'),
+    (1, '42km Full Marathon', 'The ultimate challenge for endurance athletes', 42.20, 350.00, 200, '06:00:00');
