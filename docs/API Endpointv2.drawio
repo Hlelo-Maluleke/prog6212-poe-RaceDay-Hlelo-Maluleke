@@ -1,0 +1,808 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="3y-jNjcXjs_42sua32iM">
+    <mxGraphModel dx="1654" dy="972" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-83" parent="1" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=13;labelBackgroundColor=none;fontColor=none;noLabel=1;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="" vertex="1">
+          <mxGeometry height="3550" width="410" x="4" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-84" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" value="" vertex="1">
+          <mxGeometry height="40" width="410" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-85" parent="6hrPTOaYNBHnvjijD0TF-84" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="HTTP Method" vertex="1">
+          <mxGeometry height="40" width="110" as="geometry">
+            <mxRectangle height="40" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-86" parent="6hrPTOaYNBHnvjijD0TF-84" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Route" vertex="1">
+          <mxGeometry height="40" width="150" x="110" as="geometry">
+            <mxRectangle height="40" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-87" parent="6hrPTOaYNBHnvjijD0TF-84" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Description" vertex="1">
+          <mxGeometry height="40" width="150" x="260" as="geometry">
+            <mxRectangle height="40" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-88" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" value="" vertex="1">
+          <mxGeometry height="140" width="410" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-89" parent="6hrPTOaYNBHnvjijD0TF-88" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;font-family: Menlo, Monaco, Consolas, &amp;quot;Cascadia Mono&amp;quot;, &amp;quot;Ubuntu Mono&amp;quot;, &amp;quot;DejaVu Sans Mono&amp;quot;, &amp;quot;Liberation Mono&amp;quot;, &amp;quot;JetBrains Mono&amp;quot;, &amp;quot;Fira Code&amp;quot;, Cousine, &amp;quot;Roboto Mono&amp;quot;, &amp;quot;Courier New&amp;quot;, Courier, sans-serif, system-ui; font-size: 13.125px; text-align: start; color: light-dark(rgb(249, 250, 251), rgb(255, 255, 255));&quot;&gt;POST&lt;/span&gt;" vertex="1">
+          <mxGeometry height="140" width="110" as="geometry">
+            <mxRectangle height="140" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-90" parent="6hrPTOaYNBHnvjijD0TF-88" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;font-family: Menlo, Monaco, Consolas, &amp;quot;Cascadia Mono&amp;quot;, &amp;quot;Ubuntu Mono&amp;quot;, &amp;quot;DejaVu Sans Mono&amp;quot;, &amp;quot;Liberation Mono&amp;quot;, &amp;quot;JetBrains Mono&amp;quot;, &amp;quot;Fira Code&amp;quot;, Cousine, &amp;quot;Roboto Mono&amp;quot;, &amp;quot;Courier New&amp;quot;, Courier, sans-serif, system-ui; font-size: 13.125px; text-align: start; color: light-dark(rgb(249, 250, 251), rgb(255, 255, 255));&quot;&gt;/api/auth/register&lt;/span&gt;" vertex="1">
+          <mxGeometry height="140" width="150" x="110" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-91" parent="6hrPTOaYNBHnvjijD0TF-88" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;Registers a new user account (either organiser or participant).&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="150" x="260" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-92" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" value="" vertex="1">
+          <mxGeometry height="140" width="410" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-93" parent="6hrPTOaYNBHnvjijD0TF-92" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;font-family: Menlo, Monaco, Consolas, &amp;quot;Cascadia Mono&amp;quot;, &amp;quot;Ubuntu Mono&amp;quot;, &amp;quot;DejaVu Sans Mono&amp;quot;, &amp;quot;Liberation Mono&amp;quot;, &amp;quot;JetBrains Mono&amp;quot;, &amp;quot;Fira Code&amp;quot;, Cousine, &amp;quot;Roboto Mono&amp;quot;, &amp;quot;Courier New&amp;quot;, Courier, sans-serif, system-ui; font-size: 13.125px; text-align: start; caret-color: rgba(0, 0, 0, 0);&quot;&gt;POST&lt;/span&gt;" vertex="1">
+          <mxGeometry height="140" width="110" as="geometry">
+            <mxRectangle height="140" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-94" parent="6hrPTOaYNBHnvjijD0TF-92" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;font face=&quot;Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui&quot;&gt;/api/auth/login&lt;/font&gt;" vertex="1">
+          <mxGeometry height="140" width="150" x="110" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-95" parent="6hrPTOaYNBHnvjijD0TF-92" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Authenticates a user and returns a JSON Web Token access token for session management." vertex="1">
+          <mxGeometry height="140" width="150" x="260" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-113" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="140" width="410" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-114" parent="6hrPTOaYNBHnvjijD0TF-113" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;font-family: Menlo, Monaco, Consolas, &amp;quot;Cascadia Mono&amp;quot;, &amp;quot;Ubuntu Mono&amp;quot;, &amp;quot;DejaVu Sans Mono&amp;quot;, &amp;quot;Liberation Mono&amp;quot;, &amp;quot;JetBrains Mono&amp;quot;, &amp;quot;Fira Code&amp;quot;, Cousine, &amp;quot;Roboto Mono&amp;quot;, &amp;quot;Courier New&amp;quot;, Courier, sans-serif, system-ui; font-size: 13.125px; text-align: start; caret-color: rgba(0, 0, 0, 0);&quot;&gt;GET&lt;/span&gt;" vertex="1">
+          <mxGeometry height="140" width="110" as="geometry">
+            <mxRectangle height="140" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-115" parent="6hrPTOaYNBHnvjijD0TF-113" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="/api/users/me" vertex="1">
+          <mxGeometry height="140" width="150" x="110" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-116" parent="6hrPTOaYNBHnvjijD0TF-113" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Invalidates the current user&#39;s JSON Web token." vertex="1">
+          <mxGeometry height="140" width="150" x="260" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-117" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="140" width="410" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-118" parent="6hrPTOaYNBHnvjijD0TF-117" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;PUT&lt;/font&gt;" vertex="1">
+          <mxGeometry height="140" width="110" as="geometry">
+            <mxRectangle height="140" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-119" parent="6hrPTOaYNBHnvjijD0TF-117" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="/api/users/me" vertex="1">
+          <mxGeometry height="140" width="150" x="110" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-120" parent="6hrPTOaYNBHnvjijD0TF-117" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Retrieves the profile information of the currently authenticated user." vertex="1">
+          <mxGeometry height="140" width="150" x="260" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-125" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="140" width="410" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-126" parent="6hrPTOaYNBHnvjijD0TF-125" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;font-family: Menlo, Monaco, Consolas, &amp;quot;Cascadia Mono&amp;quot;, &amp;quot;Ubuntu Mono&amp;quot;, &amp;quot;DejaVu Sans Mono&amp;quot;, &amp;quot;Liberation Mono&amp;quot;, &amp;quot;JetBrains Mono&amp;quot;, &amp;quot;Fira Code&amp;quot;, Cousine, &amp;quot;Roboto Mono&amp;quot;, &amp;quot;Courier New&amp;quot;, Courier, sans-serif, system-ui; font-size: 13.125px; text-align: start; caret-color: rgba(0, 0, 0, 0);&quot;&gt;GET&lt;/span&gt;" vertex="1">
+          <mxGeometry height="140" width="110" as="geometry">
+            <mxRectangle height="140" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-127" parent="6hrPTOaYNBHnvjijD0TF-125" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="/api/events" vertex="1">
+          <mxGeometry height="140" width="150" x="110" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-128" parent="6hrPTOaYNBHnvjijD0TF-125" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Lists all events with optional filtering (status, date range). Both roles can view." vertex="1">
+          <mxGeometry height="140" width="150" x="260" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-133" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="140" width="410" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-134" parent="6hrPTOaYNBHnvjijD0TF-133" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;font-family: Menlo, Monaco, Consolas, &amp;quot;Cascadia Mono&amp;quot;, &amp;quot;Ubuntu Mono&amp;quot;, &amp;quot;DejaVu Sans Mono&amp;quot;, &amp;quot;Liberation Mono&amp;quot;, &amp;quot;JetBrains Mono&amp;quot;, &amp;quot;Fira Code&amp;quot;, Cousine, &amp;quot;Roboto Mono&amp;quot;, &amp;quot;Courier New&amp;quot;, Courier, sans-serif, system-ui; font-size: 13.125px; text-align: start; caret-color: rgba(0, 0, 0, 0);&quot;&gt;GET&lt;/span&gt;" vertex="1">
+          <mxGeometry height="140" width="110" as="geometry">
+            <mxRectangle height="140" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-135" parent="6hrPTOaYNBHnvjijD0TF-133" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="/api/events/{id}" vertex="1">
+          <mxGeometry height="140" width="150" x="110" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-136" parent="6hrPTOaYNBHnvjijD0TF-133" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Gets full details of a single event including its categories." vertex="1">
+          <mxGeometry height="140" width="150" x="260" as="geometry">
+            <mxRectangle height="140" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-141" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="410" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-142" parent="6hrPTOaYNBHnvjijD0TF-141" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="POST" vertex="1">
+          <mxGeometry height="160" width="110" as="geometry">
+            <mxRectangle height="160" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-143" parent="6hrPTOaYNBHnvjijD0TF-141" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="/api/events" vertex="1">
+          <mxGeometry height="160" width="150" x="110" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-144" parent="6hrPTOaYNBHnvjijD0TF-141" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Creates a new event." vertex="1">
+          <mxGeometry height="160" width="150" x="260" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-153" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="410" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-154" parent="6hrPTOaYNBHnvjijD0TF-153" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="PUT" vertex="1">
+          <mxGeometry height="160" width="110" as="geometry">
+            <mxRectangle height="160" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-155" parent="6hrPTOaYNBHnvjijD0TF-153" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="/api/events/{id}" vertex="1">
+          <mxGeometry height="160" width="150" x="110" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-156" parent="6hrPTOaYNBHnvjijD0TF-153" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Updates an existing event." vertex="1">
+          <mxGeometry height="160" width="150" x="260" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-157" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="410" y="1200" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-158" parent="6hrPTOaYNBHnvjijD0TF-157" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="DELETE" vertex="1">
+          <mxGeometry height="160" width="110" as="geometry">
+            <mxRectangle height="160" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-159" parent="6hrPTOaYNBHnvjijD0TF-157" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="/api/events/{id}" vertex="1">
+          <mxGeometry height="160" width="150" x="110" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-160" parent="6hrPTOaYNBHnvjijD0TF-157" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Deletes an event." vertex="1">
+          <mxGeometry height="160" width="150" x="260" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-165" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="410" y="1360" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-166" parent="6hrPTOaYNBHnvjijD0TF-165" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="&lt;span style=&quot;font-size: 13.125px; text-align: start; caret-color: rgba(0, 0, 0, 0);&quot;&gt;GET&lt;/span&gt;" vertex="1">
+          <mxGeometry height="160" width="110" as="geometry">
+            <mxRectangle height="160" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-167" parent="6hrPTOaYNBHnvjijD0TF-165" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="&lt;div style=&quot;&quot;&gt;/api/events/{eventId}&lt;/div&gt;&lt;div style=&quot;&quot;&gt;/categories&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="150" x="110" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-168" parent="6hrPTOaYNBHnvjijD0TF-165" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Lists all categories for an event (e.g., 10km, 21km)." vertex="1">
+          <mxGeometry height="160" width="150" x="260" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-173" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="410" y="1520" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-174" parent="6hrPTOaYNBHnvjijD0TF-173" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="POST" vertex="1">
+          <mxGeometry height="160" width="110" as="geometry">
+            <mxRectangle height="160" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-175" parent="6hrPTOaYNBHnvjijD0TF-173" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="&lt;div style=&quot;caret-color: rgba(0, 0, 0, 0);&quot;&gt;/api/events/{eventId}&lt;/div&gt;&lt;div style=&quot;caret-color: rgba(0, 0, 0, 0);&quot;&gt;/categories&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="150" x="110" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-176" parent="6hrPTOaYNBHnvjijD0TF-173" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Creates a new category." vertex="1">
+          <mxGeometry height="160" width="150" x="260" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-181" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="410" y="1680" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-182" parent="6hrPTOaYNBHnvjijD0TF-181" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="&lt;span style=&quot;font-size: 13.125px; text-align: start; caret-color: rgba(237, 237, 237, 0);&quot;&gt;GET&lt;/span&gt;" vertex="1">
+          <mxGeometry height="160" width="110" as="geometry">
+            <mxRectangle height="160" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-183" parent="6hrPTOaYNBHnvjijD0TF-181" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="/api/categories/{id}" vertex="1">
+          <mxGeometry height="160" width="150" x="110" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-184" parent="6hrPTOaYNBHnvjijD0TF-181" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Retrieves details for a specific category." vertex="1">
+          <mxGeometry height="160" width="150" x="260" as="geometry">
+            <mxRectangle height="160" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-189" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="410" y="1840" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-190" parent="6hrPTOaYNBHnvjijD0TF-189" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="PUT" vertex="1">
+          <mxGeometry height="190" width="110" as="geometry">
+            <mxRectangle height="190" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-191" parent="6hrPTOaYNBHnvjijD0TF-189" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="/api/categories/{id}" vertex="1">
+          <mxGeometry height="190" width="150" x="110" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-192" parent="6hrPTOaYNBHnvjijD0TF-189" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Updates a category. Organisers can update route/weather info here." vertex="1">
+          <mxGeometry height="190" width="150" x="260" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-197" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="410" y="2030" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-198" parent="6hrPTOaYNBHnvjijD0TF-197" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="DELETE" vertex="1">
+          <mxGeometry height="190" width="110" as="geometry">
+            <mxRectangle height="190" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-199" parent="6hrPTOaYNBHnvjijD0TF-197" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="/api/categories/{id}" vertex="1">
+          <mxGeometry height="190" width="150" x="110" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-200" parent="6hrPTOaYNBHnvjijD0TF-197" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Deletes a category." vertex="1">
+          <mxGeometry height="190" width="150" x="260" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-205" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="410" y="2220" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-206" parent="6hrPTOaYNBHnvjijD0TF-205" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="POST" vertex="1">
+          <mxGeometry height="190" width="110" as="geometry">
+            <mxRectangle height="190" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-207" parent="6hrPTOaYNBHnvjijD0TF-205" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="/api/enrolments" vertex="1">
+          <mxGeometry height="190" width="150" x="110" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-208" parent="6hrPTOaYNBHnvjijD0TF-205" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Participant enters an event by selecting a category." vertex="1">
+          <mxGeometry height="190" width="150" x="260" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-213" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="410" y="2410" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-214" parent="6hrPTOaYNBHnvjijD0TF-213" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="&lt;span style=&quot;font-size: 13.125px; text-align: start; caret-color: rgba(33, 33, 33, 0);&quot;&gt;GET&lt;/span&gt;" vertex="1">
+          <mxGeometry height="190" width="110" as="geometry">
+            <mxRectangle height="190" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-215" parent="6hrPTOaYNBHnvjijD0TF-213" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="/api/enrolments/me" vertex="1">
+          <mxGeometry height="190" width="150" x="110" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-216" parent="6hrPTOaYNBHnvjijD0TF-213" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Gets all enrolments for the logged-in participant." vertex="1">
+          <mxGeometry height="190" width="150" x="260" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-221" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="410" y="2600" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-222" parent="6hrPTOaYNBHnvjijD0TF-221" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="DELETE" vertex="1">
+          <mxGeometry height="190" width="110" as="geometry">
+            <mxRectangle height="190" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-223" parent="6hrPTOaYNBHnvjijD0TF-221" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="/api/enrolments/{id}" vertex="1">
+          <mxGeometry height="190" width="150" x="110" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-224" parent="6hrPTOaYNBHnvjijD0TF-221" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Withdraws/cancels a specific enrolment." vertex="1">
+          <mxGeometry height="190" width="150" x="260" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-229" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="410" y="2790" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-230" parent="6hrPTOaYNBHnvjijD0TF-229" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="&lt;span style=&quot;font-size: 13.125px; text-align: start; caret-color: rgba(209, 209, 209, 0);&quot;&gt;GET&lt;/span&gt;" vertex="1">
+          <mxGeometry height="190" width="110" as="geometry">
+            <mxRectangle height="190" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-231" parent="6hrPTOaYNBHnvjijD0TF-229" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="/api/events/{eventId}&lt;div&gt;/enrolments&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="150" x="110" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-232" parent="6hrPTOaYNBHnvjijD0TF-229" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Organiser views all participant enrolments for their event." vertex="1">
+          <mxGeometry height="190" width="150" x="260" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-237" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="410" y="2980" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-238" parent="6hrPTOaYNBHnvjijD0TF-237" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="POST" vertex="1">
+          <mxGeometry height="190" width="110" as="geometry">
+            <mxRectangle height="190" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-239" parent="6hrPTOaYNBHnvjijD0TF-237" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="/api/enrolments/&lt;div&gt;{enrolmentId}&lt;div&gt;/results&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="150" x="110" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-240" parent="6hrPTOaYNBHnvjijD0TF-237" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Organiser captures OR updates a participant&#39;s finish time/position. (If a result exists, update it; if not, create it)." vertex="1">
+          <mxGeometry height="190" width="150" x="260" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-245" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="410" y="3170" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-246" parent="6hrPTOaYNBHnvjijD0TF-245" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="&lt;span style=&quot;font-size: 13.125px; text-align: start; caret-color: rgba(57, 57, 57, 0);&quot;&gt;GET&lt;/span&gt;" vertex="1">
+          <mxGeometry height="190" width="110" as="geometry">
+            <mxRectangle height="190" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-247" parent="6hrPTOaYNBHnvjijD0TF-245" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="/api/results/me" vertex="1">
+          <mxGeometry height="190" width="150" x="110" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-248" parent="6hrPTOaYNBHnvjijD0TF-245" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Participant views their own personal race history." vertex="1">
+          <mxGeometry height="190" width="150" x="260" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-253" parent="6hrPTOaYNBHnvjijD0TF-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="410" y="3360" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-254" parent="6hrPTOaYNBHnvjijD0TF-253" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=13;fontFamily=Menlo, Monaco, Consolas, Cascadia Mono, Ubuntu Mono, DejaVu Sans Mono, Liberation Mono, JetBrains Mono, Fira Code, Cousine, Roboto Mono, Courier New, Courier, sans-serif, system-ui;" value="&lt;span style=&quot;font-size: 13.125px; text-align: start; caret-color: rgba(188, 188, 188, 0);&quot;&gt;GET&lt;/span&gt;" vertex="1">
+          <mxGeometry height="190" width="110" as="geometry">
+            <mxRectangle height="190" width="110" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-255" parent="6hrPTOaYNBHnvjijD0TF-253" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;align=center;" value="/api/events/{eventId}&lt;div&gt;/results&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="150" x="110" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-256" parent="6hrPTOaYNBHnvjijD0TF-253" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Lists all official results for an event (public race results)." vertex="1">
+          <mxGeometry height="190" width="150" x="260" as="geometry">
+            <mxRectangle height="190" width="150" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-96" parent="1" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=16;labelBackgroundColor=none;fontColor=none;noLabel=1;" value="" vertex="1">
+          <mxGeometry height="3550" width="406" x="414" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-97" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" value="" vertex="1">
+          <mxGeometry height="40" width="406" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-98" parent="6hrPTOaYNBHnvjijD0TF-97" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Role Required" vertex="1">
+          <mxGeometry height="40" width="106" as="geometry">
+            <mxRectangle height="40" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-99" parent="6hrPTOaYNBHnvjijD0TF-97" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Request Body" vertex="1">
+          <mxGeometry height="40" width="130" x="106" as="geometry">
+            <mxRectangle height="40" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-100" parent="6hrPTOaYNBHnvjijD0TF-97" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Expected Response" vertex="1">
+          <mxGeometry height="40" width="170" x="236" as="geometry">
+            <mxRectangle height="40" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-101" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" value="" vertex="1">
+          <mxGeometry height="140" width="406" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-102" parent="6hrPTOaYNBHnvjijD0TF-101" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None (public)" vertex="1">
+          <mxGeometry height="140" width="106" as="geometry">
+            <mxRectangle height="140" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-103" parent="6hrPTOaYNBHnvjijD0TF-101" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="{ email, password, full_name, phone, role }" vertex="1">
+          <mxGeometry height="140" width="130" x="106" as="geometry">
+            <mxRectangle height="140" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-104" parent="6hrPTOaYNBHnvjijD0TF-101" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;201 Created – user object (password excluded).&lt;/div&gt;&lt;div&gt;400 Bad Request – validation error.&lt;/div&gt;&lt;div&gt;409 Conflict – email already registered.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="170" x="236" as="geometry">
+            <mxRectangle height="140" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-105" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" value="" vertex="1">
+          <mxGeometry height="140" width="406" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-106" parent="6hrPTOaYNBHnvjijD0TF-105" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None (public)" vertex="1">
+          <mxGeometry height="140" width="106" as="geometry">
+            <mxRectangle height="140" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-107" parent="6hrPTOaYNBHnvjijD0TF-105" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="{ email, password }" vertex="1">
+          <mxGeometry height="140" width="130" x="106" as="geometry">
+            <mxRectangle height="140" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-108" parent="6hrPTOaYNBHnvjijD0TF-105" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK – { token, user }.&lt;/div&gt;&lt;div&gt;401 Unauthorized – invalid credentials.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="170" x="236" as="geometry">
+            <mxRectangle height="140" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-109" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="140" width="406" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-110" parent="6hrPTOaYNBHnvjijD0TF-109" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Any (logged in)" vertex="1">
+          <mxGeometry height="140" width="106" as="geometry">
+            <mxRectangle height="140" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-111" parent="6hrPTOaYNBHnvjijD0TF-109" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="140" width="130" x="106" as="geometry">
+            <mxRectangle height="140" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-112" parent="6hrPTOaYNBHnvjijD0TF-109" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;204 No Content.&lt;/div&gt;&lt;div&gt;401 Unauthorized – no valid token.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="170" x="236" as="geometry">
+            <mxRectangle height="140" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-121" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="140" width="406" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-122" parent="6hrPTOaYNBHnvjijD0TF-121" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0);&quot;&gt;Any (logged in)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="140" width="106" as="geometry">
+            <mxRectangle height="140" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-123" parent="6hrPTOaYNBHnvjijD0TF-121" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="{ &quot;fullName&quot;, &quot;phone&quot;, &quot;email&quot; } (all optional)" vertex="1">
+          <mxGeometry height="140" width="130" x="106" as="geometry">
+            <mxRectangle height="140" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-124" parent="6hrPTOaYNBHnvjijD0TF-121" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK – updated user.&lt;/div&gt;&lt;div&gt;400 – bad Request.&lt;/div&gt;&lt;div&gt;409 – email conflict.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="170" x="236" as="geometry">
+            <mxRectangle height="140" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-129" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="140" width="406" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-130" parent="6hrPTOaYNBHnvjijD0TF-129" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None (public)" vertex="1">
+          <mxGeometry height="140" width="106" as="geometry">
+            <mxRectangle height="140" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-131" parent="6hrPTOaYNBHnvjijD0TF-129" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Query params:&lt;div&gt;&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;?&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;status&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;=published&amp;amp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;from_date=&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;2026-01-01&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="130" x="106" as="geometry">
+            <mxRectangle height="140" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-132" parent="6hrPTOaYNBHnvjijD0TF-129" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="200 OK – array of event objects (with organiser details)." vertex="1">
+          <mxGeometry height="140" width="170" x="236" as="geometry">
+            <mxRectangle height="140" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-137" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="140" width="406" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-138" parent="6hrPTOaYNBHnvjijD0TF-137" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None (public)" vertex="1">
+          <mxGeometry height="140" width="106" as="geometry">
+            <mxRectangle height="140" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-139" parent="6hrPTOaYNBHnvjijD0TF-137" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="140" width="130" x="106" as="geometry">
+            <mxRectangle height="140" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-140" parent="6hrPTOaYNBHnvjijD0TF-137" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK – event object.&lt;/div&gt;&lt;div&gt;404 – not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="170" x="236" as="geometry">
+            <mxRectangle height="140" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-145" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="406" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-146" parent="6hrPTOaYNBHnvjijD0TF-145" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Organiser" vertex="1">
+          <mxGeometry height="160" width="106" as="geometry">
+            <mxRectangle height="160" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-147" parent="6hrPTOaYNBHnvjijD0TF-145" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="{ name, description, date, start_time, location, distance_km, event_type (run/walk/cycle), status }" vertex="1">
+          <mxGeometry height="160" width="130" x="106" as="geometry">
+            <mxRectangle height="160" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-148" parent="6hrPTOaYNBHnvjijD0TF-145" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;201 Created – new event.&lt;/div&gt;&lt;div&gt;400 Bad Request – missing required fields.&lt;/div&gt;&lt;div&gt;403 Forbidden – not an organiser.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="170" x="236" as="geometry">
+            <mxRectangle height="160" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-149" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="406" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-150" parent="6hrPTOaYNBHnvjijD0TF-149" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Organiser (owner)" vertex="1">
+          <mxGeometry height="160" width="106" as="geometry">
+            <mxRectangle height="160" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-151" parent="6hrPTOaYNBHnvjijD0TF-149" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="{ name, description, date, start_time, location, event_type, status }(all optional)" vertex="1">
+          <mxGeometry height="160" width="130" x="106" as="geometry">
+            <mxRectangle height="160" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-152" parent="6hrPTOaYNBHnvjijD0TF-149" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK – updated event.&lt;/div&gt;&lt;div&gt;403 Forbidden – not owner.&lt;/div&gt;&lt;div&gt;404 – not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="170" x="236" as="geometry">
+            <mxRectangle height="160" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-161" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="406" y="1200" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-162" parent="6hrPTOaYNBHnvjijD0TF-161" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0);&quot;&gt;Organiser (owner)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="160" width="106" as="geometry">
+            <mxRectangle height="160" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-163" parent="6hrPTOaYNBHnvjijD0TF-161" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="160" width="130" x="106" as="geometry">
+            <mxRectangle height="160" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-164" parent="6hrPTOaYNBHnvjijD0TF-161" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;204 No Content.&lt;/div&gt;&lt;div&gt;403 – not owner.&lt;/div&gt;&lt;div&gt;404 – not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="170" x="236" as="geometry">
+            <mxRectangle height="160" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-169" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="406" y="1360" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-170" parent="6hrPTOaYNBHnvjijD0TF-169" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None (public)" vertex="1">
+          <mxGeometry height="160" width="106" as="geometry">
+            <mxRectangle height="160" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-171" parent="6hrPTOaYNBHnvjijD0TF-169" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="160" width="130" x="106" as="geometry">
+            <mxRectangle height="160" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-172" parent="6hrPTOaYNBHnvjijD0TF-169" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK – array of categories (includes distance, fee, route fields).&lt;/div&gt;&lt;div&gt;404 – event not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="170" x="236" as="geometry">
+            <mxRectangle height="160" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-177" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="406" y="1520" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-178" parent="6hrPTOaYNBHnvjijD0TF-177" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0);&quot;&gt;Organiser (owner)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="160" width="106" as="geometry">
+            <mxRectangle height="160" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-179" parent="6hrPTOaYNBHnvjijD0TF-177" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="{ &quot;name&quot;, &quot;distanceKm&quot;, &quot;entryFee&quot;, &quot;maxParticipants&quot;, &quot;startTime&quot;, &quot;mapUrl&quot;, &quot;gpxData&quot;, &quot;elevationGain&quot; }" vertex="1">
+          <mxGeometry height="160" width="130" x="106" as="geometry">
+            <mxRectangle height="160" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-180" parent="6hrPTOaYNBHnvjijD0TF-177" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;201 Created – category object.&lt;/div&gt;&lt;div&gt;400 – bad Request.&lt;/div&gt;&lt;div&gt;403 – not owner.&lt;/div&gt;&lt;div&gt;404 – event not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="170" x="236" as="geometry">
+            <mxRectangle height="160" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-185" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="160" width="406" y="1680" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-186" parent="6hrPTOaYNBHnvjijD0TF-185" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None (public)" vertex="1">
+          <mxGeometry height="160" width="106" as="geometry">
+            <mxRectangle height="160" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-187" parent="6hrPTOaYNBHnvjijD0TF-185" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="160" width="130" x="106" as="geometry">
+            <mxRectangle height="160" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-188" parent="6hrPTOaYNBHnvjijD0TF-185" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK – category with route fields.&lt;/div&gt;&lt;div&gt;404 – not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="170" x="236" as="geometry">
+            <mxRectangle height="160" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-193" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="406" y="1840" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-194" parent="6hrPTOaYNBHnvjijD0TF-193" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0);&quot;&gt;Organiser (owner)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="190" width="106" as="geometry">
+            <mxRectangle height="190" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-195" parent="6hrPTOaYNBHnvjijD0TF-193" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="{ &quot;name&quot;, &quot;distanceKm&quot;, &quot;entryFee&quot;, &quot;maxParticipants&quot;, &quot;startTime&quot;, &quot;mapUrl&quot;, &quot;gpxData&quot;, &quot;elevationGain&quot; } (all optional)" vertex="1">
+          <mxGeometry height="190" width="130" x="106" as="geometry">
+            <mxRectangle height="190" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-196" parent="6hrPTOaYNBHnvjijD0TF-193" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK – updated category.&lt;/div&gt;&lt;div&gt;403 – not owner.&lt;/div&gt;&lt;div&gt;404 – not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="170" x="236" as="geometry">
+            <mxRectangle height="190" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-201" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="406" y="2030" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-202" parent="6hrPTOaYNBHnvjijD0TF-201" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;span style=&quot;caret-color: rgba(0, 0, 0, 0);&quot;&gt;Organiser (owner)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="190" width="106" as="geometry">
+            <mxRectangle height="190" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-203" parent="6hrPTOaYNBHnvjijD0TF-201" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="190" width="130" x="106" as="geometry">
+            <mxRectangle height="190" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-204" parent="6hrPTOaYNBHnvjijD0TF-201" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;204 No Content.&lt;/div&gt;&lt;div&gt;403 – not owner.&lt;/div&gt;&lt;div&gt;404 – not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="170" x="236" as="geometry">
+            <mxRectangle height="190" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-209" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="406" y="2220" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-210" parent="6hrPTOaYNBHnvjijD0TF-209" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Participant" vertex="1">
+          <mxGeometry height="190" width="106" as="geometry">
+            <mxRectangle height="190" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-211" parent="6hrPTOaYNBHnvjijD0TF-209" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="{ event_category_id }" vertex="1">
+          <mxGeometry height="190" width="130" x="106" as="geometry">
+            <mxRectangle height="190" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-212" parent="6hrPTOaYNBHnvjijD0TF-209" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;201 Created – enrolment record.&lt;/div&gt;&lt;div&gt;400 – full/closed/duplicate.&lt;/div&gt;&lt;div&gt;404 – category not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="170" x="236" as="geometry">
+            <mxRectangle height="190" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-217" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="406" y="2410" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-218" parent="6hrPTOaYNBHnvjijD0TF-217" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Participant" vertex="1">
+          <mxGeometry height="190" width="106" as="geometry">
+            <mxRectangle height="190" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-219" parent="6hrPTOaYNBHnvjijD0TF-217" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="190" width="130" x="106" as="geometry">
+            <mxRectangle height="190" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-220" parent="6hrPTOaYNBHnvjijD0TF-217" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK – array of enrolments (with event/category details).&lt;/div&gt;&lt;div&gt;403 Forbidden.&lt;/div&gt;&lt;div&gt;404 Not Found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="170" x="236" as="geometry">
+            <mxRectangle height="190" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-225" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="406" y="2600" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-226" parent="6hrPTOaYNBHnvjijD0TF-225" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Participant" vertex="1">
+          <mxGeometry height="190" width="106" as="geometry">
+            <mxRectangle height="190" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-227" parent="6hrPTOaYNBHnvjijD0TF-225" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="190" width="130" x="106" as="geometry">
+            <mxRectangle height="190" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-228" parent="6hrPTOaYNBHnvjijD0TF-225" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;204 No Content.&lt;/div&gt;&lt;div&gt;403 – not owner.&lt;/div&gt;&lt;div&gt;404 – not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="170" x="236" as="geometry">
+            <mxRectangle height="190" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-233" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="406" y="2790" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-234" parent="6hrPTOaYNBHnvjijD0TF-233" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Organiser&amp;nbsp;" vertex="1">
+          <mxGeometry height="190" width="106" as="geometry">
+            <mxRectangle height="190" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-235" parent="6hrPTOaYNBHnvjijD0TF-233" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="190" width="130" x="106" as="geometry">
+            <mxRectangle height="190" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-236" parent="6hrPTOaYNBHnvjijD0TF-233" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK – array of enrolments (with participant info).&lt;/div&gt;&lt;div&gt;403 – not owner.&lt;/div&gt;&lt;div&gt;404 – event not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="170" x="236" as="geometry">
+            <mxRectangle height="190" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-241" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="406" y="2980" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-242" parent="6hrPTOaYNBHnvjijD0TF-241" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Organiser&amp;nbsp;" vertex="1">
+          <mxGeometry height="190" width="106" as="geometry">
+            <mxRectangle height="190" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-243" parent="6hrPTOaYNBHnvjijD0TF-241" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="{ &quot;finishTimeSeconds&quot;, &quot;position&quot;, &quot;chipTimeSeconds&quot;, &quot;gunTimeSeconds&quot; }" vertex="1">
+          <mxGeometry height="190" width="130" x="106" as="geometry">
+            <mxRectangle height="190" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-244" parent="6hrPTOaYNBHnvjijD0TF-241" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK (updated) or 201 Created – result object.&lt;/div&gt;&lt;div&gt;400 – invalid time.&lt;/div&gt;&lt;div&gt;403 – not owner.&lt;/div&gt;&lt;div&gt;404 – enrolment not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="170" x="236" as="geometry">
+            <mxRectangle height="190" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-249" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="406" y="3170" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-250" parent="6hrPTOaYNBHnvjijD0TF-249" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="Participant" vertex="1">
+          <mxGeometry height="190" width="106" as="geometry">
+            <mxRectangle height="190" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-251" parent="6hrPTOaYNBHnvjijD0TF-249" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="190" width="130" x="106" as="geometry">
+            <mxRectangle height="190" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-252" parent="6hrPTOaYNBHnvjijD0TF-249" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="200 OK – array of results (with event/category names)." vertex="1">
+          <mxGeometry height="190" width="170" x="236" as="geometry">
+            <mxRectangle height="190" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-257" parent="6hrPTOaYNBHnvjijD0TF-96" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1">
+          <mxGeometry height="190" width="406" y="3360" as="geometry" />
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-258" parent="6hrPTOaYNBHnvjijD0TF-257" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None (public)" vertex="1">
+          <mxGeometry height="190" width="106" as="geometry">
+            <mxRectangle height="190" width="106" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-259" parent="6hrPTOaYNBHnvjijD0TF-257" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="None" vertex="1">
+          <mxGeometry height="190" width="130" x="106" as="geometry">
+            <mxRectangle height="190" width="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6hrPTOaYNBHnvjijD0TF-260" parent="6hrPTOaYNBHnvjijD0TF-257" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=16;" value="&lt;div&gt;200 OK – array of results.&lt;/div&gt;&lt;div&gt;404 – event not found.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="170" x="236" as="geometry">
+            <mxRectangle height="190" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
