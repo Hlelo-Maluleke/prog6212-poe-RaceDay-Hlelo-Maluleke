@@ -144,7 +144,12 @@
 --    (1, 6, 'confirmed');  -- Durban 5km Walk (free)
 
 -- Michael (Participant ID 2) enrolments
+--INSERT INTO ENROLMENTS (participantID, categoryID, status) VALUES
+--    (2, 1, 'confirmed'),  -- Soweto 10km
+--    (2, 5, 'confirmed'),  -- CTCT 109km Classic
+--    (2, 7, 'pending');    -- Durban 5km Run (pending approval)
+
+-- Sipho (Participant ID 3) enrolments
 INSERT INTO ENROLMENTS (participantID, categoryID, status) VALUES
-    (2, 1, 'confirmed'),  -- Soweto 10km
-    (2, 5, 'confirmed'),  -- CTCT 109km Classic
-    (2, 7, 'pending');    -- Durban 5km Run (pending approval)
+    (3, 3, 'confirmed'),  -- Soweto Full Marathon
+    (3, 4, 'confirmed');  -- CTCT 40km Fun Ride
