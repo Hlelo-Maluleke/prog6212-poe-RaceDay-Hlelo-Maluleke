@@ -42,16 +42,26 @@
 --    updated_at DATETIME DEFAULT GETDATE()
 --);
 
-CREATE TABLE CATEGORIES (
-    categoryID INT IDENTITY(1,1) PRIMARY KEY,
-    eventID INT NOT NULL REFERENCES events(eventID) ON DELETE CASCADE,
-    name VARCHAR(100) NOT NULL,
+--CREATE TABLE CATEGORIES (
+--    categoryID INT IDENTITY(1,1) PRIMARY KEY,
+--    eventID INT NOT NULL REFERENCES events(eventID) ON DELETE CASCADE,
+--    name VARCHAR(100) NOT NULL,
+--    description TEXT,
+--    distanceKm DECIMAL(5,2) NOT NULL,
+--    entryFee DECIMAL(10,2) DEFAULT 0.00,
+--    maxParticipants INT,
+--    startTime TIME,
+--    created_at DATETIME DEFAULT GETDATE(),
+--    updated_at DATETIME DEFAULT GETDATE(),
+--    CONSTRAINT unique_event_category_name UNIQUE (eventID, name)
+--);
+
+CREATE TABLE ROUTES (
+    routeID INT IDENTITY(1,1) PRIMARY KEY,
+    categoryID INT NOT NULL UNIQUE REFERENCES CATEGORIES(categoryID) ON DELETE CASCADE,
+    mapUrl VARCHAR(255),
+    elevationGain INT,  -- in meters
     description TEXT,
-    distanceKm DECIMAL(5,2) NOT NULL,
-    entryFee DECIMAL(10,2) DEFAULT 0.00,
-    maxParticipants INT,
-    startTime TIME,
     created_at DATETIME DEFAULT GETDATE(),
-    updated_at DATETIME DEFAULT GETDATE(),
-    CONSTRAINT unique_event_category_name UNIQUE (eventID, name)
+    updated_at DATETIME DEFAULT GETDATE()
 );
