@@ -114,7 +114,12 @@
 
 -- 5. CATEGORIES (Categories for each event, with distances)
 -- Soweto Marathon Categories (Event 1)
+--INSERT INTO categories (eventID, name, description, distanceKm, entryFee, maxParticipants, startTime) VALUES
+--    (1, '10km Road Run', 'Short distance category for beginners and fun-runners', 10.00, 150.00, 500, '06:15:00'),
+--    (1, '21km Half Marathon', 'Intermediate distance for competitive runners', 21.10, 250.00, 300, '06:00:00'),
+--    (1, '42km Full Marathon', 'The ultimate challenge for endurance athletes', 42.20, 350.00, 200, '06:00:00');
+
+-- Cape Town Cycle Tour Categories (Event 2)
 INSERT INTO categories (eventID, name, description, distanceKm, entryFee, maxParticipants, startTime) VALUES
-    (1, '10km Road Run', 'Short distance category for beginners and fun-runners', 10.00, 150.00, 500, '06:15:00'),
-    (1, '21km Half Marathon', 'Intermediate distance for competitive runners', 21.10, 250.00, 300, '06:00:00'),
-    (1, '42km Full Marathon', 'The ultimate challenge for endurance athletes', 42.20, 350.00, 200, '06:00:00');
+    (2, '40km Fun Ride', 'Casual cycle for families and beginners', 40.00, 100.00, 1000, '08:00:00'),
+    (2, '109km Classic', 'Full Cape Town Cycle Tour experience', 109.00, 300.00, 1500, '07:30:00');
