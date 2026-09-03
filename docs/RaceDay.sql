@@ -66,13 +66,22 @@
 --    updated_at DATETIME DEFAULT GETDATE()
 --);
 
-CREATE TABLE ENROLMENTS (
-    enrolmentID INT IDENTITY(1,1) PRIMARY KEY,
-    participantID INT NOT NULL REFERENCES PARTICIPANTS(participantID),
-    categoryID INT NOT NULL REFERENCES CATEGORIES(categoryID),
-    enrolmentDate DATETIME DEFAULT GETDATE(),
-    status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'confirmed', 'withdrawn')),
+--CREATE TABLE ENROLMENTS (
+--    enrolmentID INT IDENTITY(1,1) PRIMARY KEY,
+--    participantID INT NOT NULL REFERENCES PARTICIPANTS(participantID),
+--    categoryID INT NOT NULL REFERENCES CATEGORIES(categoryID),
+--    enrolmentDate DATETIME DEFAULT GETDATE(),
+--    status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'confirmed', 'withdrawn')),
+--    created_at DATETIME DEFAULT GETDATE(),
+--    updated_at DATETIME DEFAULT GETDATE(),
+--    CONSTRAINT unique_participant_category UNIQUE (participantID, categoryID)
+--);
+
+CREATE TABLE results (
+    resultID INT IDENTITY(1,1) PRIMARY KEY,
+    enrolmentID INT NOT NULL UNIQUE REFERENCES enrolments(enrolmentID) ON DELETE CASCADE,
+    finishTimeSeconds INT,
+    position INT,
     created_at DATETIME DEFAULT GETDATE(),
-    updated_at DATETIME DEFAULT GETDATE(),
-    CONSTRAINT unique_participant_category UNIQUE (participantID, categoryID)
+    updated_at DATETIME DEFAULT GETDATE()
 );
