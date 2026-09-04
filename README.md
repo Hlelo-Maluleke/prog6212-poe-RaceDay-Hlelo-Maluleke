@@ -53,18 +53,6 @@ Participants are **event entrants** who browse, register for, and take part in e
 
 ---
 
-## Technology Stack
-
-| Layer | Technology |
-| :--- | :--- |
-| **Database** | Microsoft SQL Server (T-SQL) |
-| **Backend** | Node.js / Express.js (REST API) |
-| **Authentication** | JWT (JSON Web Tokens) |
-| **Frontend** | React (or any modern frontend framework) |
-| **Version Control** | Git / GitHub |
-
----
-
 ## Database Schema
 
 The database consists of **8 tables** in a fully normalised structure:
@@ -79,5 +67,9 @@ The database consists of **8 tables** in a fully normalised structure:
 | `routes` | Route information (map URLs, elevation data) – 1-to-1 with `categories`. |
 | `enrolments` | Participant entries into specific categories. |
 | `results` | Race results (finish times, positions) – 1-to-1 with `enrolments`. |
+
+## YouTube Link
+
+https://youtu.be/stf0DsykFvs?si=07_xc1kdMxAhtR5d
 
 <img width="647" height="117" alt="image" src="https://github.com/user-attachments/assets/e9341bc4-ce09-4297-a1ee-4481eb9821e5" />
