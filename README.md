@@ -19,7 +19,7 @@ RaceDay supports two distinct user roles, each with specific permissions and res
 
 ### 1. Organiser
 
-Organisers are **event managers** who create, manage, and oversee events. Organiser accounts are **pre-seeded** by the system administrator and cannot be self-registered.
+Organisers are **event managers** who create, manage, and oversee events. Organiser accounts are **pre-created** by the system administrator and cannot be self-registered.
 
 **Permissions:**
 - Create, update, and delete events
@@ -60,7 +60,7 @@ The database consists of **8 tables** in a fully normalised structure:
 | Table | Description |
 | :--- | :--- |
 | `users` | Base entity – stores login credentials and personal details for all users. |
-| `organisers` | Subtype of `users` – pre-seeded event managers. |
+| `organisers` | Subtype of `users` – pre-created event managers. |
 | `participants` | Subtype of `users` – self-registered event entrants. |
 | `events` | Stores event details (name, date, location, type, status). |
 | `categories` | Event categories (distances, entry fees, capacity limits). |
