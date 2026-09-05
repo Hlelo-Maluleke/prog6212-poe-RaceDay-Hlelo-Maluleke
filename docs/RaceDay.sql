@@ -86,8 +86,8 @@ CREATE TABLE results (
     updated_at DATETIME DEFAULT GETDATE()
 );
 
- SAMPLE DATA
- 1. USERS (Base accounts for all users)
+ --SAMPLE DATA
+ --1. USERS (Base accounts for all users)
 INSERT INTO USERS (email, passwordHash, fullName, phone) VALUES
     ('thabo@runningclub.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Thabo Mokoena', '082 123 4567'),
     ('susan@capetowncycles.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Susan Klein', '083 987 6543'),
@@ -95,75 +95,75 @@ INSERT INTO USERS (email, passwordHash, fullName, phone) VALUES
     ('michael@cyclezone.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Michael Jacobs', '072 444 5678'),
     ('sipho@fitness.co.za', '$2b$12$KIXxWq9XZ5wY2vZ3c4dE5fG6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3', 'Sipho Dlamini', '073 333 9012');
 
- 2. ORGANISERS (Pre-created - only these can create events)
+ --2. ORGANISERS (Pre-created - only these can create events)
 INSERT INTO ORGANISERS (userID, companyName) VALUES
     (1, 'Soweto Running Club'),    -- Thabo
     (2, 'Cape Town Cycle Tours');  -- Susan
 
- 3. PARTICIPANTS (Self-registered users)
+ --3. PARTICIPANTS (Self-registered users)
 INSERT INTO participants (userID, dateOfBirth, idNumber, emergencyContact) VALUES
     (3, '1985-06-15', '8506151234089', 'Sipho Mokoena - 082 111 2222'),  -- Lindiwe
     (4, '1992-11-22', '9211225678012', 'Sarah Jacobs - 083 444 5555'),   -- Michael
     (5, '1998-03-01', '9803019012345', 'Nomsa Dlamini - 076 666 7777');  -- Sipho
 
- 4. EVENTS (3 Events managed by the 2 Organisers)
+ --4. EVENTS (3 Events managed by the 2 Organisers)
 INSERT INTO EVENTS (organiserID, name, description, eventDate, startTime, location, eventType, status) VALUES
     (1, 'Soweto Marathon', 'One of South Africa''s most iconic road races through the heart of Soweto. Includes 10km, 21km, and 42km categories.', '2026-11-15', '06:00:00', 'Soweto, Johannesburg', 'run', 'published'),
     (2, 'Cape Town Cycle Tour', 'The world''s largest timed cycle race. Stunning route along Chapman''s Peak and Cape Peninsula.', '2026-03-08', '07:30:00', 'Cape Town CBD', 'cycle', 'published'),
     (1, 'Durban Community Parkrun', 'Weekly free community walking/running event at Durban Botanic Gardens. Open to all ages and fitness levels.', '2026-10-25', '08:00:00', 'Durban Botanic Gardens', 'walk', 'published');
 
- 5. CATEGORIES (Categories for each event, with distances)
- Soweto Marathon Categories (Event 1)
+ --5. CATEGORIES (Categories for each event, with distances)
+ --Soweto Marathon Categories (Event 1)
 INSERT INTO CATEGORIES (eventID, name, description, distanceKm, entryFee, maxParticipants, startTime) VALUES
     (1, '10km Road Run', 'Short distance category for beginners and fun-runners', 10.00, 150.00, 500, '06:15:00'),
     (1, '21km Half Marathon', 'Intermediate distance for competitive runners', 21.10, 250.00, 300, '06:00:00'),
     (1, '42km Full Marathon', 'The ultimate challenge for endurance athletes', 42.20, 350.00, 200, '06:00:00');
 
- Cape Town Cycle Tour Categories (Event 2)
+ --Cape Town Cycle Tour Categories (Event 2)
 INSERT INTO CATEGORIES (eventID, name, description, distanceKm, entryFee, maxParticipants, startTime) VALUES
     (2, '40km Fun Ride', 'Casual cycle for families and beginners', 40.00, 100.00, 1000, '08:00:00'),
     (2, '109km Classic', 'Full Cape Town Cycle Tour experience', 109.00, 300.00, 1500, '07:30:00');
 
 
- Durban Community Parkrun Categories (Event 3 - FREE event!)
+ --Durban Community Parkrun Categories (Event 3 - FREE event!)
 INSERT INTO CATEGORIES (eventID, name, description, distanceKm, entryFee, maxParticipants, startTime) VALUES
     (3, '5km Community Walk', 'Free family-friendly 5km walk', 5.00, 0.00, 200, '08:00:00'),
     (3, '5km Community Run', 'Free 5km run for fitness enthusiasts', 5.00, 0.00, 150, '08:00:00');
 
- 6. ROUTES (Route information for specific categories)
+ --6. ROUTES (Route information for specific categories)
 INSERT INTO ROUTES (categoryID, mapUrl, elevationGain, description) VALUES
     (2, 'https://maps.example.com/soweto-21km-route', 180, 'Scenic route through Soweto landmarks including Mandela House and Orlando Stadium'),
     (5, 'https://maps.example.com/ctct-109km-route', 850, 'Challenging route with Chapman''s Peak Drive and Constantia climbs'),
     (6, 'https://maps.example.com/durban-5km-route', 25, 'Flat, family-friendly route through Durban Botanic Gardens');
 
- 7. ENROLMENTS (Sample participant entries)
- Lindiwe (Participant ID 1) enrolments
+ --7. ENROLMENTS (Sample participant entries)
+ --Lindiwe (Participant ID 1) enrolments
 INSERT INTO ENROLMENTS (participantID, categoryID, status) VALUES
     (1, 2, 'confirmed'),  -- Soweto Half Marathon
     (1, 5, 'confirmed'),  -- CTCT 109km Classic
     (1, 6, 'confirmed');  -- Durban 5km Walk (free)
 
- Michael (Participant ID 2) enrolments
+ --Michael (Participant ID 2) enrolments
 INSERT INTO ENROLMENTS (participantID, categoryID, status) VALUES
     (2, 1, 'confirmed'),  -- Soweto 10km
     (2, 5, 'confirmed'),  -- CTCT 109km Classic
     (2, 7, 'pending');    -- Durban 5km Run (pending approval)
 
- Sipho (Participant ID 3) enrolments
+ --Sipho (Participant ID 3) enrolments
 INSERT INTO ENROLMENTS (participantID, categoryID, status) VALUES
     (3, 3, 'confirmed'),  -- Soweto Full Marathon
     (3, 4, 'confirmed');  -- CTCT 40km Fun Ride
 
- 8. RESULTS (Sample race results)
- Soweto Half Marathon (enrolmentID 1) results
+ --8. RESULTS (Sample race results)
+ --Soweto Half Marathon (enrolmentID 1) results
 INSERT INTO RESULTS (enrolmentID, finishTimeSeconds, position) VALUES
     (1, 6300, 42);   -- Lindiwe: 1hr 45min, position 42
 
- CTCT 109km Classic (enrolmentID 2) results
+ --CTCT 109km Classic (enrolmentID 2) results
 INSERT INTO RESULTS (enrolmentID, finishTimeSeconds, position) VALUES
     (2, 14520, 156); -- Lindiwe: 4hrs 2min, position 156
 
- Soweto 10km (enrolmentID 4) results
+ --Soweto 10km (enrolmentID 4) results
 INSERT INTO RESULTS (enrolmentID, finishTimeSeconds, position) VALUES
     (4, 3600, 18);   -- Michael: 1hr 0min, position 18
 
