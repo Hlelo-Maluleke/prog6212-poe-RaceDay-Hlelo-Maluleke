@@ -1,0 +1,98 @@
+name: Validate Repository Structure
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  validate-structure:
+    runs-on: ubuntu-latest
+    name: Check Repository Structure
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check if /docs folder exists
+        id: check-docs-folder
+        run: |
+          if [ -d "docs" ]; then
+            echo "docs_exists=true" >> $GITHUB_OUTPUT
+            echo "✓ /docs folder exists"
+          else
+            echo "docs_exists=false" >> $GITHUB_OUTPUT
+            echo "✗ /docs folder does not exist"
+            exit 1
+          fi
+
+      - name: Count files in /docs folder
+        id: count-docs-files
+        run: |
+          if [ -d "docs" ]; then
+            FILE_COUNT=$(find docs -type f | wc -l)
+            echo "file_count=$FILE_COUNT" >> $GITHUB_OUTPUT
+            echo "Found $FILE_COUNT files in /docs folder"
+            
+            if [ "$FILE_COUNT" -lt 3 ]; then
+              echo "✗ FAILED: Minimum 3 files required, found $FILE_COUNT"
+              exit 1
+            else
+              echo "✓ PASSED: Found $FILE_COUNT files (minimum requirement: 3)"
+            fi
+          fi
+
+      - name: List all files in /docs folder
+        if: always()
+        run: |
+          echo "=== Contents of /docs folder ==="
+          if [ -d "docs" ]; then
+            ls -lah docs/
+            echo ""
+            echo "File listing:"
+            find docs -type f -printf '%P\n' | sort
+          else
+            echo "docs/ folder not found"
+          fi
+
+      - name: Validate required project files
+        id: check-required-files
+        run: |
+          MISSING_FILES=()
+          
+          # Check for common project files
+          required_files=(
+            "README.md"
+            ".gitignore"
+          )
+          
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              MISSING_FILES+=("$file")
+            else
+              echo "✓ Found: $file"
+            fi
+          done
+          
+          if [ ${#MISSING_FILES[@]} -gt 0 ]; then
+            echo "⚠ Optional files missing: ${MISSING_FILES[*]}"
+          fi
+
+      - name: Generate structure report
+        if: always()
+        run: |
+          echo "=== Repository Structure Report ===" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Validation Results:**" >> $GITHUB_STEP_SUMMARY
+          echo "- /docs folder exists: ${{ steps.check-docs-folder.outputs.docs_exists }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Files in /docs: ${{ steps.count-docs-files.outputs.file_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Minimum required: 3" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**File Details:**" >> $GITHUB_STEP_SUMMARY
+          if [ -d "docs" ]; then
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            find docs -type f -printf '%P\n' | sort >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
