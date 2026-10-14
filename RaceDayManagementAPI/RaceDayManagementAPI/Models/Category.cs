@@ -1,4 +1,6 @@
-﻿namespace RaceDayManagementAPI.Models
+﻿using Microsoft.Extensions.Logging;
+
+namespace RaceDayManagementAPI.Models
 {
     public class Category
     {

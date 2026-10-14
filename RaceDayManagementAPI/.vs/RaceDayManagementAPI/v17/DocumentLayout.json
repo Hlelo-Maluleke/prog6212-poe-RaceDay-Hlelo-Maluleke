@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Student\\source\\repos\\RaceDayManagementAPI\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{879B08BA-0B8C-40B2-950B-0D8397326048}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\student\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{879B08BA-0B8C-40B2-950B-0D8397326048}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{879B08BA-0B8C-40B2-950B-0D8397326048}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\student\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\models\\enrolment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{879B08BA-0B8C-40B2-950B-0D8397326048}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\models\\enrolment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{879B08BA-0B8C-40B2-950B-0D8397326048}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\student\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{879B08BA-0B8C-40B2-950B-0D8397326048}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +22,46 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Event.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Event.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Models\\Event.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Event.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Models\\Event.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T10:39:58.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Enrolment.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Enrolment.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Models\\Enrolment.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Enrolment.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Models\\Enrolment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T10:38:02.918Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Models\\Category.cs",
+              "ToolTip": "C:\\Users\\Student\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Category.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-14T10:33:45.024Z",
+              "EditorCaption": ""
             }
           ]
         }
