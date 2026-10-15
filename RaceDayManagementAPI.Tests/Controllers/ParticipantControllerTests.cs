@@ -1,0 +1,331 @@
+using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Controllers;
+using RaceDayManagementAPI.Models;
+using RaceDayManagementAPI.Tests.Fixtures;
+using Xunit;
+
+namespace RaceDayManagementAPI.Tests.Controllers
+{
+    public class ParticipantControllerTests : IClassFixture<RaceDayDBFixture>, IClassFixture<JwtServiceFixture>
+    {
+        private readonly RaceDayDBFixture _dbFixture;
+        private readonly JwtServiceFixture _jwtFixture;
+        private readonly ParticipantController _controller;
+
+        public ParticipantControllerTests(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture)
+        {
+            _dbFixture = dbFixture;
+            _jwtFixture = jwtFixture;
+            _controller = new ParticipantController(_jwtFixture.JwtService, _dbFixture.DbContext);
+        }
+
+        #region GetMyProfile Tests
+
+        [Fact(DisplayName = "GetMyProfile_WithValidParticipant_ShouldReturnProfile")]
+        public void GetMyProfile_WithValidParticipant_ShouldReturnProfile()
+        {
+            // Arrange
+            int participantUserId = 3; // Lindiwe is a participant (UserID 3 maps to ParticipantID 1)
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            // Act
+            var result = _controller.GetMyProfile();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var profile = okResult.Value;
+
+            Assert.NotNull(profile);
+            int participantId = ControllerContextHelper.GetAnonymousProperty<int>(profile, "ParticipantID");
+            Assert.Equal(1, participantId); // Lindiwe has ParticipantID 1
+            // DateOfBirth is 1985-06-15 from fixture
+            var dob = ControllerContextHelper.GetAnonymousProperty<DateTime>(profile, "DateOfBirth");
+            Assert.Equal(1985, dob.Year);
+        }
+
+        [Fact(DisplayName = "GetMyProfile_WithNonParticipant_ShouldReturnNotFound")]
+        public void GetMyProfile_WithNonParticipant_ShouldReturnNotFound()
+        {
+            // Arrange
+            int organizerUserId = 1; // Thabo is an organizer, not a participant
+            var claims = _jwtFixture.CreateOrganizerClaims(organizerUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            // Act
+            var result = _controller.GetMyProfile();
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        [Fact(DisplayName = "GetMyProfile_ShouldReturnEmergencyContact")]
+        public void GetMyProfile_ShouldReturnEmergencyContact()
+        {
+            // Arrange
+            int participantUserId = 3;
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            // Act
+            var result = _controller.GetMyProfile();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var profile = okResult.Value;
+            Assert.True(ControllerContextHelper.HasProperty(profile, "EmergencyContact"));
+        }
+
+        [Fact(DisplayName = "GetMyProfile_ShouldReturnUserDetails")]
+        public void GetMyProfile_ShouldReturnUserDetails()
+        {
+            // Arrange
+            int participantUserId = 4;
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            // Act
+            var result = _controller.GetMyProfile();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var profile = okResult.Value;
+            var userInfo = ControllerContextHelper.GetAnonymousProperty<object>(profile, "User");
+
+            Assert.NotNull(userInfo);
+            Assert.True(ControllerContextHelper.HasProperty(userInfo, "Email"));
+            Assert.True(ControllerContextHelper.HasProperty(userInfo, "FullName"));
+            Assert.True(ControllerContextHelper.HasProperty(userInfo, "Phone"));
+        }
+
+        [Fact(DisplayName = "GetMyProfile_ShouldReturnCreatedAt")]
+        public void GetMyProfile_ShouldReturnCreatedAt()
+        {
+            // Arrange
+            int participantUserId = 3;
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            // Act
+            var result = _controller.GetMyProfile();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var profile = okResult.Value;
+            Assert.True(ControllerContextHelper.HasProperty(profile, "CreatedAt"));
+        }
+
+        #endregion
+
+        #region UpdateMyProfile Tests
+
+        [Fact(DisplayName = "UpdateMyProfile_WithValidData_ShouldUpdateSuccessfully")]
+        public void UpdateMyProfile_WithValidData_ShouldUpdateSuccessfully()
+        {
+            // Arrange
+            int participantUserId = 3;
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            var updateRequest = new UpdateParticipantRequest
+            {
+                FullName = "Updated Lindiwe",
+                Phone = "082 555 5555",
+                Email = "lindiwe.updated@runsa.co.za",
+                DateOfBirth = new DateTime(1985, 8, 15),
+                IDNumber = "8508151234089",
+                EmergencyContact = "Updated Contact - 082 999 9999"
+            };
+
+            // Act
+            var result = _controller.UpdateMyProfile(updateRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.NotNull(okResult.Value);
+
+            // Verify user was updated
+            var user = RaceDayDB.Users.FirstOrDefault(u => u.UserID == participantUserId);
+            Assert.Equal("Updated Lindiwe", user?.FullName);
+            Assert.Equal("082 555 5555", user?.Phone);
+            Assert.Equal("lindiwe.updated@runsa.co.za", user?.Email);
+        }
+
+        [Fact(DisplayName = "UpdateMyProfile_WithConflictingEmail_ShouldReturnConflict")]
+        public void UpdateMyProfile_WithConflictingEmail_ShouldReturnConflict()
+        {
+            // Arrange
+            int participantUserId = 3;
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            // Try to update with email that belongs to another user
+            var updateRequest = new UpdateParticipantRequest
+            {
+                Email = "michael@cyclezone.co.za" // This email belongs to user 4
+            };
+
+            // Act
+            var result = _controller.UpdateMyProfile(updateRequest);
+
+            // Assert
+            Assert.IsType<ConflictObjectResult>(result);
+        }
+
+        [Fact(DisplayName = "UpdateMyProfile_WithOwnEmail_ShouldUpdateSuccessfully")]
+        public void UpdateMyProfile_WithOwnEmail_ShouldUpdateSuccessfully()
+        {
+            // Arrange
+            int participantUserId = 3;
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            var currentEmail = "lindiwe@runsa.co.za";
+            var updateRequest = new UpdateParticipantRequest
+            {
+                Email = currentEmail,
+                FullName = "Lindiwe Updated"
+            };
+
+            // Act
+            var result = _controller.UpdateMyProfile(updateRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.NotNull(okResult.Value);
+        }
+
+        [Fact(DisplayName = "UpdateMyProfile_WithPartialData_ShouldUpdateOnlyProvidedFields")]
+        public void UpdateMyProfile_WithPartialData_ShouldUpdateOnlyProvidedFields()
+        {
+            // Arrange
+            int participantUserId = 3;
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            var originalUser = RaceDayDB.Users.First(u => u.UserID == participantUserId);
+            var originalPhone = originalUser.Phone;
+
+            var updateRequest = new UpdateParticipantRequest
+            {
+                FullName = "Lindiwe Only Name"
+                // Leave other fields null/empty
+            };
+
+            // Act
+            var result = _controller.UpdateMyProfile(updateRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var updatedUser = RaceDayDB.Users.First(u => u.UserID == participantUserId);
+            Assert.Equal("Lindiwe Only Name", updatedUser.FullName);
+            Assert.Equal(originalPhone, updatedUser.Phone); // Phone should not change
+        }
+
+        [Fact(DisplayName = "UpdateMyProfile_WithNonExistentParticipant_ShouldReturnNotFound")]
+        public void UpdateMyProfile_WithNonExistentParticipant_ShouldReturnNotFound()
+        {
+            // Arrange
+            int invalidUserId = 999;
+            var claims = _jwtFixture.CreateParticipantClaims(invalidUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            var updateRequest = new UpdateParticipantRequest
+            {
+                FullName = "Non Existent"
+            };
+
+            // Act
+            var result = _controller.UpdateMyProfile(updateRequest);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        [Fact(DisplayName = "UpdateMyProfile_ShouldUpdateTimestamp")]
+        public void UpdateMyProfile_ShouldUpdateTimestamp()
+        {
+            // Arrange
+            int participantUserId = 3;
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            var user = RaceDayDB.Users.First(u => u.UserID == participantUserId);
+            var originalUpdatedAt = user.UpdatedAt;
+
+            System.Threading.Thread.Sleep(100); // Small delay to ensure timestamp changes
+
+            var updateRequest = new UpdateParticipantRequest
+            {
+                FullName = "Updated Lindiwe Timestamp"
+            };
+
+            // Act
+            var result = _controller.UpdateMyProfile(updateRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var updatedUser = RaceDayDB.Users.First(u => u.UserID == participantUserId);
+            Assert.True(updatedUser.UpdatedAt >= originalUpdatedAt);
+        }
+
+        [Fact(DisplayName = "UpdateMyProfile_ShouldUpdateDateOfBirth")]
+        public void UpdateMyProfile_ShouldUpdateDateOfBirth()
+        {
+            // Arrange
+            int participantUserId = 4;
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            var newDateOfBirth = new DateTime(1988, 6, 20);
+            var updateRequest = new UpdateParticipantRequest
+            {
+                DateOfBirth = newDateOfBirth
+            };
+
+            // Act
+            var result = _controller.UpdateMyProfile(updateRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var updatedParticipant = RaceDayDB.Participants.First(p => p.UserID == participantUserId);
+            Assert.Equal(newDateOfBirth, updatedParticipant.DateOfBirth);
+        }
+
+        [Fact(DisplayName = "UpdateMyProfile_ShouldUpdateIDNumber")]
+        public void UpdateMyProfile_ShouldUpdateIDNumber()
+        {
+            // Arrange
+            int participantUserId = 3;
+            var claims = _jwtFixture.CreateParticipantClaims(participantUserId);
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            var newIDNumber = "8506159999999";
+            var updateRequest = new UpdateParticipantRequest
+            {
+                IDNumber = newIDNumber
+            };
+
+            // Act
+            var result = _controller.UpdateMyProfile(updateRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var updatedParticipant = RaceDayDB.Participants.First(p => p.UserID == participantUserId);
+            Assert.Equal(newIDNumber, updatedParticipant.IDNumber);
+        }
+
+        #endregion
+    }
+}
