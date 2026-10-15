@@ -1,0 +1,23 @@
+﻿using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+
+namespace RaceDayManagementAPI.Tests.Fixtures
+{
+    /// <summary>
+    /// Helper for creating authenticated controller contexts
+    /// </summary>
+    public static class ControllerContextHelper
+    {
+        /// <summary>
+        /// Creates a DefaultHttpContext with authenticated user claims
+        /// </summary>
+        public static DefaultHttpContext CreateAuthenticatedHttpContext(ClaimsPrincipal user)
+        {
+            var httpContext = new DefaultHttpContext
+            {
+                User = user
+            };
+            return httpContext;
+        }
+    }
+}

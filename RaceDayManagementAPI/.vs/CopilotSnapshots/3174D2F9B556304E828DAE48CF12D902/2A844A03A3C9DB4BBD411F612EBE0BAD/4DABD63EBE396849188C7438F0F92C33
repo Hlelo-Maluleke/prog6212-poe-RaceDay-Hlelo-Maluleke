@@ -1,0 +1,321 @@
+﻿@RaceDayManagementAPI_HostAddress = http://localhost:5120
+@ContentType = application/json
+
+# ================================================================================
+# RACE DAY MANAGEMENT API - STEP-BY-STEP TESTING GUIDE
+# ================================================================================
+# 
+# DEFAULT CREDENTIALS (seeded in database):
+# Password for ALL users: password123
+#
+# ORGANIZERS:
+#   - thabo@runningclub.co.za (Soweto Running Club)
+#   - susan@capetowncycles.co.za (Cape Town Cycle Tours)
+#
+# PARTICIPANTS:
+#   - lindiwe@runsa.co.za
+#   - michael@cyclezone.co.za
+#   - sipho@fitness.co.za
+#
+# EVENTS SEEDED:
+#   1. Soweto Marathon (Event 1) - Organizer: Thabo
+#   2. Cape Town Cycle Tour (Event 2) - Organizer: Susan
+#   3. Durban Community Parkrun (Event 3) - Organizer: Thabo
+#
+# ================================================================================
+
+# ================================================================================
+# PART 1: PUBLIC ENDPOINTS (NO AUTH REQUIRED)
+# ================================================================================
+
+### 1.1 List all published events
+GET {{RaceDayManagementAPI_HostAddress}}/api/events
+Accept: {{ContentType}}
+
+### 1.2 List only running events
+GET {{RaceDayManagementAPI_HostAddress}}/api/events?type=run
+Accept: {{ContentType}}
+
+### 1.3 List only cycle events
+GET {{RaceDayManagementAPI_HostAddress}}/api/events?type=cycle
+Accept: {{ContentType}}
+
+###
+
+# ================================================================================
+# PART 2: AUTHENTICATION FLOW
+# ================================================================================
+# Follow these steps in order for participant testing:
+# 1. Register a new participant account
+# 2. Login with that account
+# 3. Copy the token from response
+# 4. Use it in the @participantToken variable
+
+### 2.1 REGISTER AS NEW PARTICIPANT
+POST {{RaceDayManagementAPI_HostAddress}}/api/auth/register
+Content-Type: {{ContentType}}
+
+{
+  "email": "testparticipant@example.com",
+  "password": "Test@12345",
+  "fullName": "Test Participant",
+  "phone": "082 000 0000",
+  "dateOfBirth": "1990-05-15",
+  "idNumber": "9005151234567",
+  "emergencyContact": "Emergency Person - 082 111 1111"
+}
+
+### 2.2 LOGIN AS NEW PARTICIPANT (use email from 2.1)
+POST {{RaceDayManagementAPI_HostAddress}}/api/auth/login
+Content-Type: {{ContentType}}
+
+{
+  "email": "testparticipant@example.com",
+  "password": "Test@12345"
+}
+
+###
+
+# Save the token from response above as @participantToken
+@participantToken = YOUR_TOKEN_HERE
+
+### 2.3 LOGIN AS EXISTING PARTICIPANT (Lindiwe)
+POST {{RaceDayManagementAPI_HostAddress}}/api/auth/login
+Content-Type: {{ContentType}}
+
+{
+  "email": "lindiwe@runsa.co.za",
+  "password": "password123"
+}
+
+###
+
+# ================================================================================
+# PART 3: PARTICIPANT WORKFLOW
+# ================================================================================
+# These endpoints require authentication. Replace @participantToken with
+# the JWT token from Part 2
+
+### 3.1 GET MY PARTICIPANT PROFILE
+GET {{RaceDayManagementAPI_HostAddress}}/api/participants/user
+Authorization: Bearer {{participantToken}}
+Accept: {{ContentType}}
+
+### 3.2 VIEW AVAILABLE EVENTS (as participant)
+GET {{RaceDayManagementAPI_HostAddress}}/api/events
+Accept: {{ContentType}}
+
+### 3.3 VIEW CATEGORIES FOR SOWETO MARATHON (Event 1)
+GET {{RaceDayManagementAPI_HostAddress}}/api/events/1
+Accept: {{ContentType}}
+
+###
+
+# ================================================================================
+# PART 4: PARTICIPANT ENROLLMENT WORKFLOW
+# ================================================================================
+# Steps to enroll a participant in an event:
+
+### 4.1 ENROL IN 10KM ROAD RUN (Category 1)
+POST {{RaceDayManagementAPI_HostAddress}}/api/enrolments
+Authorization: Bearer {{participantToken}}
+Content-Type: {{ContentType}}
+
+{
+  "categoryId": 1
+}
+
+### 4.2 VIEW MY ENROLLMENTS
+GET {{RaceDayManagementAPI_HostAddress}}/api/enrolments/my
+Authorization: Bearer {{participantToken}}
+Accept: {{ContentType}}
+
+### 4.3 VIEW ENROLLMENT DETAILS (Example: Enrollment 1)
+GET {{RaceDayManagementAPI_HostAddress}}/api/enrolments/1
+Authorization: Bearer {{participantToken}}
+Accept: {{ContentType}}
+
+### 4.4 ATTEMPT TO ENROLL TWICE (should fail - duplicate check)
+POST {{RaceDayManagementAPI_HostAddress}}/api/enrolments
+Authorization: Bearer {{participantToken}}
+Content-Type: {{ContentType}}
+
+{
+  "categoryId": 1
+}
+
+### 4.5 ENROL IN DIFFERENT CATEGORY (21KM Half Marathon - Category 2)
+POST {{RaceDayManagementAPI_HostAddress}}/api/enrolments
+Authorization: Bearer {{participantToken}}
+Content-Type: {{ContentType}}
+
+{
+  "categoryId": 2
+}
+
+###
+
+# ================================================================================
+# PART 5: ORGANIZER AUTHENTICATION
+# ================================================================================
+
+### 5.1 LOGIN AS ORGANIZER (Thabo - Soweto Running Club)
+POST {{RaceDayManagementAPI_HostAddress}}/api/auth/login
+Content-Type: {{ContentType}}
+
+{
+  "email": "thabo@runningclub.co.za",
+  "password": "password123"
+}
+
+###
+
+# Save the organizer token from response above as @organizerToken
+@organizerToken = YOUR_ORGANIZER_TOKEN_HERE
+
+###
+
+# ================================================================================
+# PART 6: ORGANIZER WORKFLOW
+# ================================================================================
+
+### 6.1 GET MY ORGANIZER PROFILE
+GET {{RaceDayManagementAPI_HostAddress}}/api/organisers/user
+Authorization: Bearer {{organizerToken}}
+Accept: {{ContentType}}
+
+### 6.2 VIEW MY EVENTS (as organizer)
+GET {{RaceDayManagementAPI_HostAddress}}/api/organisers/events
+Authorization: Bearer {{organizerToken}}
+Accept: {{ContentType}}
+
+### 6.3 VIEW EVENT DETAILS (Event 1 - Soweto Marathon)
+GET {{RaceDayManagementAPI_HostAddress}}/api/events/1
+Accept: {{ContentType}}
+
+### 6.4 VIEW ENROLLMENTS FOR MY EVENT
+GET {{RaceDayManagementAPI_HostAddress}}/api/organisers/events/1/enrolments
+Authorization: Bearer {{organizerToken}}
+Accept: {{ContentType}}
+
+###
+
+# ================================================================================
+# PART 7: ORGANIZER EVENT MANAGEMENT
+# ================================================================================
+
+### 7.1 CREATE NEW EVENT (as organizer)
+POST {{RaceDayManagementAPI_HostAddress}}/api/organisers/events
+Authorization: Bearer {{organizerToken}}
+Content-Type: {{ContentType}}
+
+{
+  "name": "New Test Event",
+  "description": "A test event for API testing",
+  "eventDate": "2026-12-15",
+  "startTime": "07:00:00",
+  "location": "Test Location",
+  "eventType": "run",
+  "status": "draft"
+}
+
+### 7.2 CREATE CATEGORY FOR NEW EVENT (Event ID will depend on response from 7.1)
+POST {{RaceDayManagementAPI_HostAddress}}/api/organisers/events/4/categories
+Authorization: Bearer {{organizerToken}}
+Content-Type: {{ContentType}}
+
+{
+  "name": "5km Fun Run",
+  "description": "Easy paced run for beginners",
+  "distanceKm": 5.0,
+  "entryFee": 100.00,
+  "maxParticipants": 300,
+  "startTime": "07:30:00"
+}
+
+### 7.3 PUBLISH EVENT (change status from draft to published)
+PUT {{RaceDayManagementAPI_HostAddress}}/api/organisers/events/4
+Authorization: Bearer {{organizerToken}}
+Content-Type: {{ContentType}}
+
+{
+  "status": "published"
+}
+
+###
+
+# ================================================================================
+# PART 8: RESULTS MANAGEMENT (Organizer)
+# ================================================================================
+
+### 8.1 ADD RESULT FOR PARTICIPANT (Organizer adds race result)
+POST {{RaceDayManagementAPI_HostAddress}}/api/results
+Authorization: Bearer {{organizerToken}}
+Content-Type: {{ContentType}}
+
+{
+  "enrolmentId": 1,
+  "finishTime": "00:45:30",
+  "chipTime": "00:45:28",
+  "position": 1
+}
+
+### 8.2 VIEW RESULTS (as organizer)
+GET {{RaceDayManagementAPI_HostAddress}}/api/results
+Authorization: Bearer {{organizerToken}}
+Accept: {{ContentType}}
+
+###
+
+# ================================================================================
+# PART 9: CROSS-ROLE VERIFICATION
+# ================================================================================
+
+### 9.1 VERIFY PARTICIPANT CANNOT ACCESS ORGANIZER ENDPOINTS
+# This should return 403/Forbidden
+GET {{RaceDayManagementAPI_HostAddress}}/api/organisers/user
+Authorization: Bearer {{participantToken}}
+Accept: {{ContentType}}
+
+### 9.2 VERIFY ORGANIZER CANNOT ENROL AS PARTICIPANT
+# This should return 403/Forbidden
+POST {{RaceDayManagementAPI_HostAddress}}/api/enrolments
+Authorization: Bearer {{organizerToken}}
+Content-Type: {{ContentType}}
+
+{
+  "categoryId": 1
+}
+
+###
+
+# ================================================================================
+# TESTING CHECKLIST
+# ================================================================================
+# 
+# PARTICIPANT FLOW:
+# [ ] Can login with existing participant credentials
+# [ ] Can register new participant account
+# [ ] Can view profile
+# [ ] Can view all published events
+# [ ] Can enrol in event category
+# [ ] Cannot enrol twice in same category
+# [ ] Can view my enrollments
+# [ ] Cannot access organizer endpoints
+#
+# ORGANIZER FLOW:
+# [ ] Can login with organizer credentials
+# [ ] Can view organizer profile
+# [ ] Can view all my events
+# [ ] Can view enrollments for my events
+# [ ] Can create new event
+# [ ] Can create categories for event
+# [ ] Can publish event
+# [ ] Cannot enrol as participant
+#
+# CROSS-ROLE SECURITY:
+# [ ] Participant token cannot access organizer endpoints
+# [ ] Organizer token cannot enrol in events
+# [ ] Unauthenticated requests get 401 errors (except public endpoints)
+#
+# ================================================================================

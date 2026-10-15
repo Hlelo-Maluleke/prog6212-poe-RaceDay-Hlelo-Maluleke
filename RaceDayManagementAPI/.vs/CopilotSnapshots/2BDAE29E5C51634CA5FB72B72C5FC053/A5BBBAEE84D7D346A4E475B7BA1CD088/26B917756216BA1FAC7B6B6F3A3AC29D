@@ -1,0 +1,308 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Controllers;
+using RaceDayManagementAPI.Models;
+using RaceDayManagementAPI.Tests.Fixtures;
+using Xunit;
+
+namespace RaceDayManagementAPI.Tests.Controllers
+{
+    public class AuthControllerTests : IClassFixture<RaceDayDBFixture>, IClassFixture<JwtServiceFixture>
+    {
+        private readonly RaceDayDBFixture _dbFixture;
+        private readonly JwtServiceFixture _jwtFixture;
+        private readonly AuthController _controller;
+
+        public AuthControllerTests(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture)
+        {
+            _dbFixture = dbFixture;
+            _jwtFixture = jwtFixture;
+            _controller = new AuthController(_jwtFixture.JwtService, _dbFixture.DbContext);
+        }
+
+        #region Register Tests
+
+        [Fact(DisplayName = "Register_WithValidData_ShouldReturnCreatedAtAction")]
+        public void Register_WithValidData_ShouldReturnCreatedAtAction()
+        {
+            // Arrange
+            var registerRequest = new RegisterRequest
+            {
+                Email = "newuser@test.com",
+                Password = "Test@12345",
+                FullName = "Test User",
+                Phone = "082 000 0000",
+                DateOfBirth = new DateTime(1990, 5, 15),
+                IDNumber = "9005151234567",
+                EmergencyContact = "Emergency Contact - 082 111 1111"
+            };
+
+            // Act
+            var result = _controller.Register(registerRequest);
+
+            // Assert
+            var createdResult = Assert.IsType<CreatedAtActionResult>(result);
+            Assert.Equal(nameof(AuthController.Register), createdResult.ActionName);
+            Assert.NotNull(createdResult.Value);
+
+            // Verify user was added to database
+            var user = _dbFixture.DbContext.Users.FirstOrDefault(u => u.Email == registerRequest.Email);
+            Assert.NotNull(user);
+            Assert.Equal(registerRequest.FullName, user.FullName);
+            Assert.Equal(registerRequest.Phone, user.Phone);
+
+            // Verify participant was created
+            var participant = _dbFixture.DbContext.Participants.FirstOrDefault(p => p.UserID == user.UserID);
+            Assert.NotNull(participant);
+            Assert.Equal(registerRequest.DateOfBirth, participant.DateOfBirth);
+            Assert.Equal(registerRequest.IDNumber, participant.IDNumber);
+        }
+
+        [Fact(DisplayName = "Register_WithEmptyEmail_ShouldReturnBadRequest")]
+        public void Register_WithEmptyEmail_ShouldReturnBadRequest()
+        {
+            // Arrange
+            var registerRequest = new RegisterRequest
+            {
+                Email = "",
+                Password = "Test@12345",
+                FullName = "Test User",
+                Phone = "082 000 0000"
+            };
+
+            // Act
+            var result = _controller.Register(registerRequest);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.NotNull(badRequestResult.Value);
+        }
+
+        [Fact(DisplayName = "Register_WithEmptyPassword_ShouldReturnBadRequest")]
+        public void Register_WithEmptyPassword_ShouldReturnBadRequest()
+        {
+            // Arrange
+            var registerRequest = new RegisterRequest
+            {
+                Email = "test@test.com",
+                Password = "",
+                FullName = "Test User",
+                Phone = "082 000 0000"
+            };
+
+            // Act
+            var result = _controller.Register(registerRequest);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.NotNull(badRequestResult.Value);
+        }
+
+        [Fact(DisplayName = "Register_WithExistingEmail_ShouldReturnConflict")]
+        public void Register_WithExistingEmail_ShouldReturnConflict()
+        {
+            // Arrange
+            var existingEmail = "lindiwe@runsa.co.za"; // Already in database
+            var registerRequest = new RegisterRequest
+            {
+                Email = existingEmail,
+                Password = "Test@12345",
+                FullName = "New User",
+                Phone = "082 000 0000"
+            };
+
+            // Act
+            var result = _controller.Register(registerRequest);
+
+            // Assert
+            var conflictResult = Assert.IsType<ConflictObjectResult>(result);
+            Assert.NotNull(conflictResult.Value);
+        }
+
+        [Fact(DisplayName = "Register_WithNullFields_ShouldReturnBadRequest")]
+        public void Register_WithNullFields_ShouldReturnBadRequest()
+        {
+            // Arrange
+            var registerRequest = new RegisterRequest
+            {
+                Email = null,
+                Password = "Test@12345",
+                FullName = "Test User",
+                Phone = "082 000 0000"
+            };
+
+            // Act
+            var result = _controller.Register(registerRequest);
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
+
+        [Fact(DisplayName = "Register_ShouldCreateUserWithHashedPassword")]
+        public void Register_ShouldCreateUserWithHashedPassword()
+        {
+            // Arrange
+            var password = "MySecurePassword123";
+            var registerRequest = new RegisterRequest
+            {
+                Email = "secure@test.com",
+                Password = password,
+                FullName = "Secure User",
+                Phone = "082 000 0000"
+            };
+
+            // Act
+            var result = _controller.Register(registerRequest);
+
+            // Assert
+            Assert.IsType<CreatedAtActionResult>(result);
+            var user = _dbFixture.DbContext.Users.FirstOrDefault(u => u.Email == registerRequest.Email);
+            Assert.NotNull(user);
+
+            // Verify password is hashed
+            var expectedHash = RaceDayDB.HashPassword(password);
+            Assert.Equal(expectedHash, user.PasswordHash);
+        }
+
+        #endregion
+
+        #region Login Tests
+
+        [Fact(DisplayName = "Login_WithValidCredentials_ShouldReturnLoginResponse")]
+        public void Login_WithValidCredentials_ShouldReturnLoginResponse()
+        {
+            // Arrange
+            var loginRequest = new LoginRequest
+            {
+                Email = "lindiwe@runsa.co.za",
+                Password = "password123"
+            };
+
+            // Act
+            var result = _controller.Login(loginRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var response = Assert.IsType<LoginResponse>(okResult.Value);
+            Assert.NotNull(response.Token);
+            Assert.Equal("lindiwe@runsa.co.za", response.Email);
+            Assert.True(response.IsParticipant);
+            Assert.False(response.IsOrganiser);
+        }
+
+        [Fact(DisplayName = "Login_WithInvalidEmail_ShouldReturnUnauthorized")]
+        public void Login_WithInvalidEmail_ShouldReturnUnauthorized()
+        {
+            // Arrange
+            var loginRequest = new LoginRequest
+            {
+                Email = "nonexistent@test.com",
+                Password = "password123"
+            };
+
+            // Act
+            var result = _controller.Login(loginRequest);
+
+            // Assert
+            var unauthorizedResult = Assert.IsType<UnauthorizedObjectResult>(result);
+            Assert.NotNull(unauthorizedResult.Value);
+        }
+
+        [Fact(DisplayName = "Login_WithInvalidPassword_ShouldReturnUnauthorized")]
+        public void Login_WithInvalidPassword_ShouldReturnUnauthorized()
+        {
+            // Arrange
+            var loginRequest = new LoginRequest
+            {
+                Email = "lindiwe@runsa.co.za",
+                Password = "wrongpassword"
+            };
+
+            // Act
+            var result = _controller.Login(loginRequest);
+
+            // Assert
+            var unauthorizedResult = Assert.IsType<UnauthorizedObjectResult>(result);
+            Assert.NotNull(unauthorizedResult.Value);
+        }
+
+        [Fact(DisplayName = "Login_AsOrganizer_ShouldSetIsOrganiserTrue")]
+        public void Login_AsOrganizer_ShouldSetIsOrganiserTrue()
+        {
+            // Arrange
+            var loginRequest = new LoginRequest
+            {
+                Email = "thabo@runningclub.co.za",
+                Password = "password123"
+            };
+
+            // Act
+            var result = _controller.Login(loginRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var response = Assert.IsType<LoginResponse>(okResult.Value);
+            Assert.True(response.IsOrganiser);
+            Assert.False(response.IsParticipant);
+        }
+
+        [Fact(DisplayName = "Login_ShouldGenerateJwtToken")]
+        public void Login_ShouldGenerateJwtToken()
+        {
+            // Arrange
+            var loginRequest = new LoginRequest
+            {
+                Email = "lindiwe@runsa.co.za",
+                Password = "password123"
+            };
+
+            // Act
+            var result = _controller.Login(loginRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var response = Assert.IsType<LoginResponse>(okResult.Value);
+            Assert.NotNull(response.Token);
+            // Token should be a valid JWT string (contains dots)
+            Assert.Contains(".", response.Token);
+        }
+
+        [Fact(DisplayName = "Login_ShouldReturnCorrectUserDetails")]
+        public void Login_ShouldReturnCorrectUserDetails()
+        {
+            // Arrange
+            var loginRequest = new LoginRequest
+            {
+                Email = "michael@cyclezone.co.za",
+                Password = "password123"
+            };
+
+            // Act
+            var result = _controller.Login(loginRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var response = Assert.IsType<LoginResponse>(okResult.Value);
+            Assert.Equal("michael@cyclezone.co.za", response.Email);
+            Assert.Equal("Michael Jacobs", response.FullName);
+        }
+
+        [Fact(DisplayName = "Login_WithEmptyEmail_ShouldReturnUnauthorized")]
+        public void Login_WithEmptyEmail_ShouldReturnUnauthorized()
+        {
+            // Arrange
+            var loginRequest = new LoginRequest
+            {
+                Email = "",
+                Password = "password123"
+            };
+
+            // Act
+            var result = _controller.Login(loginRequest);
+
+            // Assert
+            Assert.IsType<UnauthorizedObjectResult>(result);
+        }
+
+        #endregion
+    }
+}

@@ -1,0 +1,73 @@
+﻿using Moq;
+using RaceDayManagementAPI.Services;
+using System.Security.Claims;
+
+namespace RaceDayManagementAPI.Tests.Fixtures
+{
+    /// <summary>
+    /// Fixture for mocking JwtService and creating test claims/principals
+    /// </summary>
+    public class JwtServiceFixture
+    {
+        public Mock<JwtService> MockJwtService { get; set; }
+
+        public JwtServiceFixture()
+        {
+            MockJwtService = new Mock<JwtService>(MockBehavior.Loose);
+        }
+
+        /// <summary>
+        /// Creates a mock ClaimsPrincipal for an authenticated participant
+        /// </summary>
+        public ClaimsPrincipal CreateParticipantClaims(int userId = 3)
+        {
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Email, "lindiwe@runsa.co.za"),
+                new Claim(ClaimTypes.Name, "Lindiwe Nkosi"),
+                new Claim("isParticipant", "true"),
+                new Claim("isOrganiser", "false")
+            };
+
+            var identity = new ClaimsIdentity(claims, "test");
+            return new ClaimsPrincipal(identity);
+        }
+
+        /// <summary>
+        /// Creates a mock ClaimsPrincipal for an authenticated organizer
+        /// </summary>
+        public ClaimsPrincipal CreateOrganizerClaims(int userId = 1)
+        {
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Email, "thabo@runningclub.co.za"),
+                new Claim(ClaimTypes.Name, "Thabo Mokoena"),
+                new Claim("isParticipant", "false"),
+                new Claim("isOrganiser", "true")
+            };
+
+            var identity = new ClaimsIdentity(claims, "test");
+            return new ClaimsPrincipal(identity);
+        }
+
+        /// <summary>
+        /// Generates a mock JWT token string
+        /// </summary>
+        public string GenerateMockToken(int userId, bool isOrganiser = false, bool isParticipant = false)
+        {
+            return $"mock_token_user_{userId}_organiser_{isOrganiser}_participant_{isParticipant}";
+        }
+
+        /// <summary>
+        /// Setup mock to return user ID from claims
+        /// </summary>
+        public void SetupGetUserIdFromToken(int userId)
+        {
+            MockJwtService
+                .Setup(js => js.GetUserIdFromToken(It.IsAny<ClaimsPrincipal>()))
+                .Returns(userId);
+        }
+    }
+}

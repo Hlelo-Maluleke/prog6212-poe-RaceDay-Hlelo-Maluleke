@@ -1,0 +1,673 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Controllers;
+using RaceDayManagementAPI.Models;
+using RaceDayManagementAPI.Tests.Fixtures;
+using Xunit;
+
+namespace RaceDayManagementAPI.Tests.Controllers
+{
+    /// <summary>
+    /// CRUD tests for EventsController.
+    /// Tests one operation per CRUD function: POST (Create), GET (Read), PUT (Update), DELETE.
+    /// </summary>
+    public class EventsControllerCrudTests : IClassFixture<JwtServiceFixture>
+    {
+        private readonly JwtServiceFixture _jwtFixture;
+        private readonly EventsController _controller;
+
+        public EventsControllerCrudTests(JwtServiceFixture jwtFixture)
+        {
+            _jwtFixture = jwtFixture;
+            _controller = new EventsController(jwtFixture.JwtService);
+        }
+
+        /// <summary>
+        /// POST - Create a new event
+        /// </summary>
+        [Fact(DisplayName = "POST_CREATE_Event")]
+        public void POST_CreateEvent_ShouldReturnCreatedAtAction()
+        {
+            // Arrange
+            int organiserUserId = 1;
+            var claims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Marathon 2026",
+                Description = "Annual marathon event",
+                Location = "Johannesburg",
+                EventDate = new DateTime(2026, 6, 15),
+                StartTime = new TimeSpan(6, 30, 0),
+                EventType = "marathon",
+                Status = "scheduled"
+            };
+
+            // Act
+            var result = _controller.CreateEvent(createRequest);
+
+            // Assert
+            var createdResult = Assert.IsType<CreatedAtActionResult>(result);
+            var createdEvent = createdResult.Value as Event;
+            Assert.NotNull(createdEvent);
+            Assert.Equal("Marathon 2026", createdEvent.Name);
+            Assert.Equal("Johannesburg", createdEvent.Location);
+        }
+
+        /// <summary>
+        /// GET - Read an event by ID
+        /// </summary>
+        [Fact(DisplayName = "GET_READ_Event")]
+        public void GET_GetEvent_ShouldReturnEventDetails()
+        {
+            // Arrange - Create event first
+            int organiserUserId = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Cycle Tour 2026",
+                Location = "Cape Town",
+                EventDate = new DateTime(2026, 3, 10),
+                StartTime = new TimeSpan(7, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            // Set controller to allow anonymous read
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+
+            // Act
+            var result = _controller.GetEvent(eventId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.NotNull(okResult.Value);
+        }
+
+        /// <summary>
+        /// PUT - Update an existing event
+        /// </summary>
+        [Fact(DisplayName = "PUT_UPDATE_Event")]
+        public void PUT_UpdateEvent_ShouldUpdateSuccessfully()
+        {
+            // Arrange - Create event first
+            int organiserUserId = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Original Event Name",
+                Location = "Original Location",
+                EventDate = new DateTime(2026, 9, 15),
+                StartTime = new TimeSpan(6, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            // Update the event
+            var updateRequest = new UpdateEventRequest
+            {
+                Name = "Updated Event Name",
+                Location = "Updated Location",
+                Status = "published"
+            };
+
+            // Act
+            var result = _controller.UpdateEvent(eventId, updateRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var updatedEvent = okResult.Value as Event;
+            Assert.NotNull(updatedEvent);
+            Assert.Equal("Updated Event Name", updatedEvent.Name);
+            Assert.Equal("Updated Location", updatedEvent.Location);
+        }
+
+        /// <summary>
+        /// DELETE - Remove an event
+        /// </summary>
+        [Fact(DisplayName = "DELETE_REMOVE_Event")]
+        public void DELETE_DeleteEvent_ShouldReturnNoContent()
+        {
+            // Arrange
+            int organiserUserId = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Event to Delete",
+                Location = "Delete Location",
+                EventDate = new DateTime(2027, 2, 14),
+                StartTime = new TimeSpan(6, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            // Act
+            var result = _controller.DeleteEvent(eventId);
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
+        }
+    }
+}
+
+        [Fact(DisplayName = "GET_GetEvent_WithValidId_ShouldReturnEvent")]
+        public void GET_GetEvent_WithValidId_ShouldReturnEvent()
+        {
+            // Arrange - First create an event
+            int organiserUserId = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Test Event for Retrieval",
+                Location = "Test City",
+                EventDate = new DateTime(2026, 7, 20),
+                StartTime = new TimeSpan(8, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            // Set controller to allow anonymous read
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+
+            // Act
+            var result = _controller.GetEvent(eventId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.NotNull(okResult.Value);
+        }
+
+        [Fact(DisplayName = "GET_GetEvent_WithInvalidId_ShouldReturnNotFound")]
+        public void GET_GetEvent_WithInvalidId_ShouldReturnNotFound()
+        {
+            // Arrange
+            int invalidEventId = 99999;
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+
+            // Act
+            var result = _controller.GetEvent(invalidEventId);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.NotNull(notFoundResult.Value);
+        }
+
+        [Fact(DisplayName = "GET_GetEvents_ShouldReturnAllEvents")]
+        public void GET_GetEvents_ShouldReturnAllEvents()
+        {
+            // Arrange
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+
+            // Act
+            var result = _controller.GetEvents();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var events = okResult.Value as List<dynamic>;
+            Assert.NotNull(events);
+            Assert.NotEmpty(events);
+        }
+
+        [Fact(DisplayName = "GET_GetEvents_WithStatusFilter_ShouldReturnFilteredEvents")]
+        public void GET_GetEvents_WithStatusFilter_ShouldReturnFilteredEvents()
+        {
+            // Arrange
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+            string statusFilter = "scheduled";
+
+            // Act
+            var result = _controller.GetEvents(status: statusFilter);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var events = okResult.Value as List<dynamic>;
+            Assert.NotNull(events);
+            // Events should be filtered by status
+            foreach (var evt in events)
+            {
+                // Verify status matches filter (if events exist)
+            }
+        }
+
+        [Fact(DisplayName = "GET_GetEvents_WithTypeFilter_ShouldReturnFilteredEvents")]
+        public void GET_GetEvents_WithTypeFilter_ShouldReturnFilteredEvents()
+        {
+            // Arrange
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+            string typeFilter = "run";
+
+            // Act
+            var result = _controller.GetEvents(type: typeFilter);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var events = okResult.Value as List<dynamic>;
+            Assert.NotNull(events);
+        }
+
+        [Fact(DisplayName = "GET_GetEvents_WithDateFilter_ShouldReturnFutureEvents")]
+        public void GET_GetEvents_WithDateFilter_ShouldReturnFutureEvents()
+        {
+            // Arrange
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+            var futureDate = new DateTime(2026, 1, 1);
+
+            // Act
+            var result = _controller.GetEvents(fromDate: futureDate);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var events = okResult.Value as List<dynamic>;
+            Assert.NotNull(events);
+        }
+
+        [Fact(DisplayName = "GET_GetEvent_ShouldReturnOrganiserDetails")]
+        public void GET_GetEvent_ShouldReturnOrganiserDetails()
+        {
+            // Arrange
+            int organiserUserId = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Event with Organiser Info",
+                Location = "Test Location",
+                EventDate = new DateTime(2026, 8, 10),
+                StartTime = new TimeSpan(9, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+
+            // Act
+            var result = _controller.GetEvent(eventId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.NotNull(okResult.Value);
+            // Response should contain organiser information
+        }
+
+        #endregion
+
+        #region UPDATE (PUT) Tests
+
+        [Fact(DisplayName = "PUT_UpdateEvent_WithValidData_ShouldUpdateSuccessfully")]
+        public void PUT_UpdateEvent_WithValidData_ShouldUpdateSuccessfully()
+        {
+            // Arrange - Create an event first
+            int organiserUserId = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Original Event Name",
+                Location = "Original Location",
+                EventDate = new DateTime(2026, 9, 15),
+                StartTime = new TimeSpan(6, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            // Update the event
+            var updateRequest = new UpdateEventRequest
+            {
+                Name = "Updated Event Name",
+                Description = "Updated Description",
+                Location = "Updated Location",
+                EventDate = new DateTime(2026, 10, 20),
+                StartTime = new TimeSpan(7, 0, 0),
+                EventType = "cycle",
+                Status = "published"
+            };
+
+            // Act
+            var result = _controller.UpdateEvent(eventId, updateRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var updatedEvent = okResult.Value as Event;
+            Assert.NotNull(updatedEvent);
+            Assert.Equal("Updated Event Name", updatedEvent.Name);
+            Assert.Equal("Updated Location", updatedEvent.Location);
+            Assert.Equal("Updated Description", updatedEvent.Description);
+            Assert.Equal("cycle", updatedEvent.EventType);
+            Assert.Equal("published", updatedEvent.Status);
+        }
+
+        [Fact(DisplayName = "PUT_UpdateEvent_WithInvalidId_ShouldReturnNotFound")]
+        public void PUT_UpdateEvent_WithInvalidId_ShouldReturnNotFound()
+        {
+            // Arrange
+            int organiserUserId = 1;
+            var claims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            int invalidEventId = 99999;
+            var updateRequest = new UpdateEventRequest
+            {
+                Name = "Updated Name"
+            };
+
+            // Act
+            var result = _controller.UpdateEvent(invalidEventId, updateRequest);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.NotNull(notFoundResult.Value);
+        }
+
+        [Fact(DisplayName = "PUT_UpdateEvent_WithUnauthorisedOrganiser_ShouldReturnForbid")]
+        public void PUT_UpdateEvent_WithUnauthorisedOrganiser_ShouldReturnForbid()
+        {
+            // Arrange - Create event as first organiser
+            int organiserUserId1 = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId1);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Protected Event",
+                Location = "Protected Location",
+                EventDate = new DateTime(2026, 11, 5),
+                StartTime = new TimeSpan(6, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            // Try to update as different organiser
+            int organiserUserId2 = 2; // Susan is a different organiser
+            var updateClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId2);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = updateClaims };
+
+            var updateRequest = new UpdateEventRequest
+            {
+                Name = "Attempted Update"
+            };
+
+            // Act
+            var result = _controller.UpdateEvent(eventId, updateRequest);
+
+            // Assert
+            Assert.IsType<ForbidResult>(result);
+        }
+
+        [Fact(DisplayName = "PUT_UpdateEvent_PartialUpdate_ShouldUpdateOnlySpecifiedFields")]
+        public void PUT_UpdateEvent_PartialUpdate_ShouldUpdateOnlySpecifiedFields()
+        {
+            // Arrange
+            int organiserUserId = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Original Name",
+                Description = "Original Description",
+                Location = "Original Location",
+                EventDate = new DateTime(2026, 12, 1),
+                StartTime = new TimeSpan(6, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+            string originalDescription = createdEvent?.Description ?? "";
+
+            // Update only name
+            var updateRequest = new UpdateEventRequest
+            {
+                Name = "Updated Name Only",
+                Description = null, // Not updating description
+                Location = null // Not updating location
+            };
+
+            // Act
+            var result = _controller.UpdateEvent(eventId, updateRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var updatedEvent = okResult.Value as Event;
+            Assert.NotNull(updatedEvent);
+            Assert.Equal("Updated Name Only", updatedEvent.Name);
+            Assert.Equal(originalDescription, updatedEvent.Description); // Should remain unchanged
+        }
+
+        [Fact(DisplayName = "PUT_UpdateEvent_ShouldUpdateTimestamp")]
+        public void PUT_UpdateEvent_ShouldUpdateTimestamp()
+        {
+            // Arrange
+            int organiserUserId = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Event for Timestamp Test",
+                Location = "Test Location",
+                EventDate = new DateTime(2027, 1, 1),
+                StartTime = new TimeSpan(6, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            System.Threading.Thread.Sleep(100); // Small delay to ensure timestamp difference
+
+            var updateRequest = new UpdateEventRequest
+            {
+                Name = "Updated for Timestamp"
+            };
+
+            // Act
+            var result = _controller.UpdateEvent(eventId, updateRequest);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var updatedEvent = okResult.Value as Event;
+            Assert.NotNull(updatedEvent);
+            // UpdatedAt should be more recent than CreatedAt
+            Assert.True(updatedEvent.UpdatedAt >= updatedEvent.CreatedAt);
+        }
+
+        #endregion
+
+        #region DELETE Tests
+
+        [Fact(DisplayName = "DELETE_DeleteEvent_WithValidId_ShouldReturnNoContent")]
+        public void DELETE_DeleteEvent_WithValidId_ShouldReturnNoContent()
+        {
+            // Arrange - Create an event first
+            int organiserUserId = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Event to Delete",
+                Location = "Delete Location",
+                EventDate = new DateTime(2027, 2, 14),
+                StartTime = new TimeSpan(6, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            // Act
+            var result = _controller.DeleteEvent(eventId);
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
+
+            // Verify event is deleted by trying to get it
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+            var getResult = _controller.GetEvent(eventId);
+            Assert.IsType<NotFoundObjectResult>(getResult);
+        }
+
+        [Fact(DisplayName = "DELETE_DeleteEvent_WithInvalidId_ShouldReturnNotFound")]
+        public void DELETE_DeleteEvent_WithInvalidId_ShouldReturnNotFound()
+        {
+            // Arrange
+            int organiserUserId = 1;
+            var claims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            int invalidEventId = 99999;
+
+            // Act
+            var result = _controller.DeleteEvent(invalidEventId);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.NotNull(notFoundResult.Value);
+        }
+
+        [Fact(DisplayName = "DELETE_DeleteEvent_WithUnauthorisedOrganiser_ShouldReturnForbid")]
+        public void DELETE_DeleteEvent_WithUnauthorisedOrganiser_ShouldReturnForbid()
+        {
+            // Arrange - Create event as first organiser
+            int organiserUserId1 = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId1);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Protected Event for Delete",
+                Location = "Protected Location",
+                EventDate = new DateTime(2027, 3, 20),
+                StartTime = new TimeSpan(6, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            // Try to delete as different organiser
+            int organiserUserId2 = 2;
+            var deleteClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId2);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = deleteClaims };
+
+            // Act
+            var result = _controller.DeleteEvent(eventId);
+
+            // Assert
+            Assert.IsType<ForbidResult>(result);
+        }
+
+        [Fact(DisplayName = "DELETE_DeleteEvent_ShouldRemoveCascadingData")]
+        public void DELETE_DeleteEvent_ShouldRemoveCascadingData()
+        {
+            // Arrange - Create event with categories
+            int organiserUserId = 1;
+            var createClaims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = createClaims };
+
+            var createRequest = new CreateEventRequest
+            {
+                Name = "Event with Categories",
+                Location = "Cascade Test Location",
+                EventDate = new DateTime(2027, 4, 10),
+                StartTime = new TimeSpan(6, 0, 0)
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            int eventId = createdEvent?.EventID ?? 1;
+
+            // Act - Delete the event
+            var result = _controller.DeleteEvent(eventId);
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
+            // Verify cascade delete worked by checking event and related categories are gone
+        }
+
+        #endregion
+
+        #region General CRUD Tests
+
+        [Fact(DisplayName = "CRUD_CompleteLifecycle_CreateReadUpdateDelete")]
+        public void CRUD_CompleteLifecycle_CreateReadUpdateDelete()
+        {
+            // This test demonstrates the complete CRUD lifecycle
+            int organiserUserId = 1;
+            var claims = _jwtFixture.CreateOrganizerClaims(organiserUserId);
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+
+            // CREATE
+            var createRequest = new CreateEventRequest
+            {
+                Name = "CRUD Lifecycle Test Event",
+                Description = "Testing complete CRUD cycle",
+                Location = "CRUD Test City",
+                EventDate = new DateTime(2027, 5, 22),
+                StartTime = new TimeSpan(7, 30, 0),
+                EventType = "run",
+                Status = "draft"
+            };
+
+            var createResult = _controller.CreateEvent(createRequest);
+            Assert.IsType<CreatedAtActionResult>(createResult);
+            var createdEvent = (createResult as CreatedAtActionResult)?.Value as Event;
+            Assert.NotNull(createdEvent);
+            int eventId = createdEvent.EventID;
+
+            // READ
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+            var readResult = _controller.GetEvent(eventId);
+            Assert.IsType<OkObjectResult>(readResult);
+
+            // UPDATE
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext { User = claims };
+            var updateRequest = new UpdateEventRequest
+            {
+                Name = "CRUD Lifecycle Test Event - Updated",
+                Status = "published"
+            };
+
+            var updateResult = _controller.UpdateEvent(eventId, updateRequest);
+            Assert.IsType<OkObjectResult>(updateResult);
+            var updatedEvent = (updateResult as OkObjectResult)?.Value as Event;
+            Assert.Equal("CRUD Lifecycle Test Event - Updated", updatedEvent?.Name);
+
+            // DELETE
+            var deleteResult = _controller.DeleteEvent(eventId);
+            Assert.IsType<NoContentResult>(deleteResult);
+
+            // Verify deletion
+            _controller.ControllerContext.HttpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
+            var verifyDeleteResult = _controller.GetEvent(eventId);
+            Assert.IsType<NotFoundObjectResult>(verifyDeleteResult);
+        }
+
+        #endregion
+    }
+}

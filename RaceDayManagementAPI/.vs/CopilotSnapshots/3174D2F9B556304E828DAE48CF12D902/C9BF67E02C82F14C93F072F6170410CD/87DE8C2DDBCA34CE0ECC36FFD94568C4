@@ -1,0 +1,83 @@
+﻿using Microsoft.Extensions.Options;
+using Moq;
+using RaceDayManagementAPI.Models;
+using RaceDayManagementAPI.Services;
+using System.Security.Claims;
+
+namespace RaceDayManagementAPI.Tests.Fixtures
+{
+    /// <summary>
+    /// Fixture for providing JwtService and creating test claims/principals
+    /// </summary>
+    public class JwtServiceFixture
+    {
+        public JwtService JwtService { get; set; }
+
+        public JwtServiceFixture()
+        {
+            // Create real JwtService with test configuration
+            var jwtSettings = new JwtSettings
+            {
+                Secret = "test-secret-key-that-is-long-enough-for-256-bits",
+                Issuer = "test-issuer",
+                Audience = "test-audience",
+                ExpiryMinutes = 60
+            };
+
+            var options = Options.Create(jwtSettings);
+            JwtService = new JwtService(options);
+        }
+
+        /// <summary>
+        /// Creates a mock ClaimsPrincipal for an authenticated participant
+        /// </summary>
+        public ClaimsPrincipal CreateParticipantClaims(int userId = 3)
+        {
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Email, "lindiwe@runsa.co.za"),
+                new Claim(ClaimTypes.Name, "Lindiwe Nkosi"),
+                new Claim("isParticipant", "true"),
+                new Claim("isOrganiser", "false")
+            };
+
+            var identity = new ClaimsIdentity(claims, "test");
+            return new ClaimsPrincipal(identity);
+        }
+
+        /// <summary>
+        /// Creates a mock ClaimsPrincipal for an authenticated organizer
+        /// </summary>
+        public ClaimsPrincipal CreateOrganizerClaims(int userId = 1)
+        {
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Email, "thabo@runningclub.co.za"),
+                new Claim(ClaimTypes.Name, "Thabo Mokoena"),
+                new Claim("isParticipant", "false"),
+                new Claim("isOrganiser", "true")
+            };
+
+            var identity = new ClaimsIdentity(claims, "test");
+            return new ClaimsPrincipal(identity);
+        }
+
+        /// <summary>
+        /// Generates a mock JWT token string
+        /// </summary>
+        public string GenerateMockToken(int userId, bool isOrganiser = false, bool isParticipant = false)
+        {
+            return $"mock_token_user_{userId}_organiser_{isOrganiser}_participant_{isParticipant}";
+        }
+
+        /// <summary>
+        /// Creates a real JWT token using the JwtService
+        /// </summary>
+        public string GenerateRealToken(int userId, string email, string fullName, bool isOrganiser, bool isParticipant)
+        {
+            return JwtService.GenerateToken(userId, email, fullName, isOrganiser, isParticipant);
+        }
+    }
+}

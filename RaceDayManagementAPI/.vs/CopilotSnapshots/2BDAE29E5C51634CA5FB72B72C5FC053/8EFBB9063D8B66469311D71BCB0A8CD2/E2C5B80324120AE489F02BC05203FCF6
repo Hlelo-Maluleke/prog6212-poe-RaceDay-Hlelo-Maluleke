@@ -1,0 +1,132 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Data;
+using RaceDayManagementAPI.Models;
+using RaceDayManagementAPI.Services;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace RaceDayManagementAPI.Controllers
+{
+    [ApiController]
+    [Route("api/auth")]
+    public class AuthController : ControllerBase
+    {
+        private readonly JwtService _jwtService;
+        private readonly RaceDayDbContext _db;
+
+        public AuthController(JwtService jwtService, RaceDayDbContext db)
+        {
+            _jwtService = jwtService;
+            _db = db;
+        }
+
+        private static string HashPassword(string password)
+        {
+            using var sha256 = SHA256.Create();
+            var bytes = Encoding.UTF8.GetBytes(password);
+            var hash = sha256.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
+
+        // 1. REGISTER - Creates a new Participant account only
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] RegisterRequest request)
+        {
+            // Validate
+            if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
+            {
+                return BadRequest(new { message = "Email and password are required." });
+            }
+
+            // Check if email already exists
+            var existingUser = _db.Users.FirstOrDefault(u => u.Email == request.Email);
+            if (existingUser != null)
+            {
+                return Conflict(new { message = "Email already registered." });
+            }
+
+            // Hash password
+            var passwordHash = HashPassword(request.Password);
+
+            // Create User
+            var user = new User
+            {
+                Email = request.Email,
+                PasswordHash = passwordHash,
+                FullName = request.FullName,
+                Phone = request.Phone,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+            _db.Users.Add(user);
+            _db.SaveChanges();
+
+            // Create Participant (automatically - organisers are pre-seeded)
+            var participant = new Participant
+            {
+                UserID = user.UserID,
+                DateOfBirth = request.DateOfBirth,
+                IDNumber = request.IDNumber,
+                EmergencyContact = request.EmergencyContact,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+            _db.Participants.Add(participant);
+            _db.SaveChanges();
+
+            // Return user object (without password)
+            return CreatedAtAction(nameof(Register), new { id = user.UserID }, new
+            {
+                user.UserID,
+                user.Email,
+                user.FullName,
+                user.Phone,
+                user.CreatedAt
+            });
+        }
+
+        // 2. LOGIN - Authenticates user and returns JWT token
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginRequest request)
+        {
+            // Find user by email
+            var user = _db.Users.FirstOrDefault(u => u.Email == request.Email);
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Invalid email or password." });
+            }
+
+            // Verify password
+            var passwordHash = HashPassword(request.Password);
+            if (user.PasswordHash != passwordHash)
+            {
+                return Unauthorized(new { message = "Invalid email or password." });
+            }
+
+            // Check if user is an organiser
+            var isOrganiser = _db.Organisers.Any(o => o.UserID == user.UserID);
+            var isParticipant = _db.Participants.Any(p => p.UserID == user.UserID);
+
+            // Generate JWT token
+            var token = _jwtService.GenerateToken(
+                user.UserID,
+                user.Email,
+                user.FullName,
+                isOrganiser,
+                isParticipant
+            );
+
+            return Ok(new LoginResponse
+            {
+                Token = token,
+                UserID = user.UserID,
+                FullName = user.FullName,
+                Email = user.Email,
+                IsOrganiser = isOrganiser,
+                IsParticipant = isParticipant
+            });
+        }
+    }
+}
+

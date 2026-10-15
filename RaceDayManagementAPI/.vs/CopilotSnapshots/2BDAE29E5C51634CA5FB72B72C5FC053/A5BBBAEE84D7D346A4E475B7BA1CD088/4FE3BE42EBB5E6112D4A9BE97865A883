@@ -1,0 +1,219 @@
+﻿using RaceDayManagementAPI.Models;
+
+namespace RaceDayManagementAPI.Tests.Fixtures
+{
+    /// <summary>
+    /// Fixture for managing RaceDayDB test data and cleanup
+    /// </summary>
+    public class RaceDayDBFixture : IDisposable
+    {
+        public RaceDayDBFixture()
+        {
+            SetupTestData();
+        }
+
+        private void SetupTestData()
+        {
+            // Clear existing data
+            RaceDayDB.Users.Clear();
+            RaceDayDB.Organisers.Clear();
+            RaceDayDB.Participants.Clear();
+            RaceDayDB.Events.Clear();
+            RaceDayDB.Categories.Clear();
+            RaceDayDB.Enrolments.Clear();
+            RaceDayDB.Results.Clear();
+            RaceDayDB.Routes.Clear();
+
+            // Reset IDs
+            RaceDayDB.NextUserID = 1;
+            RaceDayDB.NextOrganiserID = 1;
+            RaceDayDB.NextParticipantID = 1;
+            RaceDayDB.NextEventID = 1;
+            RaceDayDB.NextCategoryID = 1;
+            RaceDayDB.NextEnrolmentID = 1;
+            RaceDayDB.NextResultID = 1;
+            RaceDayDB.NextRouteID = 1;
+
+            // Seed test users
+            var defaultPasswordHash = RaceDayDB.HashPassword("password123");
+
+            // Organizers
+            RaceDayDB.Users.Add(new User
+            {
+                UserID = 1,
+                Email = "thabo@runningclub.co.za",
+                PasswordHash = defaultPasswordHash,
+                FullName = "Thabo Mokoena",
+                Phone = "082 123 4567"
+            });
+
+            RaceDayDB.Users.Add(new User
+            {
+                UserID = 2,
+                Email = "susan@capetowncycles.co.za",
+                PasswordHash = defaultPasswordHash,
+                FullName = "Susan van der Merwe",
+                Phone = "083 987 6543"
+            });
+
+            // Participants
+            RaceDayDB.Users.Add(new User
+            {
+                UserID = 3,
+                Email = "lindiwe@runsa.co.za",
+                PasswordHash = defaultPasswordHash,
+                FullName = "Lindiwe Nkosi",
+                Phone = "076 555 1234"
+            });
+
+            RaceDayDB.Users.Add(new User
+            {
+                UserID = 4,
+                Email = "michael@cyclezone.co.za",
+                PasswordHash = defaultPasswordHash,
+                FullName = "Michael Jacobs",
+                Phone = "072 444 5678"
+            });
+
+            RaceDayDB.Users.Add(new User
+            {
+                UserID = 5,
+                Email = "sipho@fitness.co.za",
+                PasswordHash = defaultPasswordHash,
+                FullName = "Sipho Dlamini",
+                Phone = "073 333 9012"
+            });
+
+            // Update ID counter
+            RaceDayDB.NextUserID = 6;
+
+            // Seed Organisers
+            RaceDayDB.Organisers.Add(new Organiser
+            {
+                OrganiserID = 1,
+                UserID = 1,
+                CompanyName = "Soweto Running Club"
+            });
+
+            RaceDayDB.Organisers.Add(new Organiser
+            {
+                OrganiserID = 2,
+                UserID = 2,
+                CompanyName = "Cape Town Cycle Tours"
+            });
+
+            RaceDayDB.NextOrganiserID = 3;
+
+            // Seed Participants
+            RaceDayDB.Participants.Add(new Participant
+            {
+                ParticipantID = 1,
+                UserID = 3,
+                DateOfBirth = new DateTime(1985, 6, 15),
+                IDNumber = "8506151234089",
+                EmergencyContact = "Sipho Mokoena - 082 111 2222"
+            });
+
+            RaceDayDB.Participants.Add(new Participant
+            {
+                ParticipantID = 2,
+                UserID = 4,
+                DateOfBirth = new DateTime(1992, 11, 22),
+                IDNumber = "9211225678012",
+                EmergencyContact = "Sarah Jacobs - 083 444 5555"
+            });
+
+            RaceDayDB.Participants.Add(new Participant
+            {
+                ParticipantID = 3,
+                UserID = 5,
+                DateOfBirth = new DateTime(1998, 3, 1),
+                IDNumber = "9803019012345",
+                EmergencyContact = "Nomsa Dlamini - 076 666 7777"
+            });
+
+            RaceDayDB.NextParticipantID = 4;
+
+            // Seed Events
+            RaceDayDB.Events.Add(new Event
+            {
+                EventID = 1,
+                OrganiserID = 1,
+                Name = "Soweto Marathon",
+                Description = "A marathon event in Soweto",
+                EventDate = new DateTime(2026, 11, 15),
+                StartTime = new TimeSpan(6, 0, 0),
+                Location = "Soweto, Johannesburg",
+                EventType = "run",
+                Status = "published"
+            });
+
+            RaceDayDB.Events.Add(new Event
+            {
+                EventID = 2,
+                OrganiserID = 2,
+                Name = "Cape Town Cycle Tour",
+                Description = "A cycle tour in Cape Town",
+                EventDate = new DateTime(2026, 3, 8),
+                StartTime = new TimeSpan(7, 30, 0),
+                Location = "Cape Town CBD",
+                EventType = "cycle",
+                Status = "published"
+            });
+
+            RaceDayDB.NextEventID = 3;
+
+            // Seed Categories
+            RaceDayDB.Categories.Add(new Category
+            {
+                CategoryID = 1,
+                EventID = 1,
+                Name = "10km Road Run",
+                Description = "Short distance for beginners",
+                DistanceKm = 10.00m,
+                EntryFee = 150.00m,
+                MaxParticipants = 500,
+                StartTime = new TimeSpan(6, 15, 0)
+            });
+
+            RaceDayDB.Categories.Add(new Category
+            {
+                CategoryID = 2,
+                EventID = 1,
+                Name = "21km Half Marathon",
+                Description = "Intermediate distance",
+                DistanceKm = 21.10m,
+                EntryFee = 250.00m,
+                MaxParticipants = 300,
+                StartTime = new TimeSpan(6, 0, 0)
+            });
+
+            RaceDayDB.Categories.Add(new Category
+            {
+                CategoryID = 3,
+                EventID = 2,
+                Name = "40km Fun Ride",
+                Description = "Casual cycle for families",
+                DistanceKm = 40.00m,
+                EntryFee = 100.00m,
+                MaxParticipants = 1000,
+                StartTime = new TimeSpan(8, 0, 0)
+            });
+
+            RaceDayDB.NextCategoryID = 4;
+        }
+
+        public void Dispose()
+        {
+            // Cleanup after tests
+            RaceDayDB.Users.Clear();
+            RaceDayDB.Organisers.Clear();
+            RaceDayDB.Participants.Clear();
+            RaceDayDB.Events.Clear();
+            RaceDayDB.Categories.Clear();
+            RaceDayDB.Enrolments.Clear();
+            RaceDayDB.Results.Clear();
+            RaceDayDB.Routes.Clear();
+        }
+    }
+}

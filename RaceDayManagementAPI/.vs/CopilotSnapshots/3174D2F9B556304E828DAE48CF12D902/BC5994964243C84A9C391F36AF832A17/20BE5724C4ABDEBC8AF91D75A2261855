@@ -1,0 +1,326 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Controllers;
+using RaceDayManagementAPI.Models;
+using RaceDayManagementAPI.Tests.Fixtures;
+using Xunit;
+
+namespace RaceDayManagementAPI.Tests.Controllers
+{
+    public class AdminControllerTests : IClassFixture<RaceDayDBFixture>, IClassFixture<JwtServiceFixture>
+    {
+        private readonly RaceDayDBFixture _dbFixture;
+        private readonly JwtServiceFixture _jwtFixture;
+        private readonly AdminController _controller;
+
+        public AdminControllerTests(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture)
+        {
+            _dbFixture = dbFixture;
+            _jwtFixture = jwtFixture;
+            _controller = new AdminController(_jwtFixture.JwtService);
+        }
+
+        #region GetAllUsers Tests
+
+        [Fact(DisplayName = "GetAllUsers_ShouldReturnAllUsers")]
+        public void GetAllUsers_ShouldReturnAllUsers()
+        {
+            // Act
+            var result = _controller.GetAllUsers();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var users = okResult.Value as IEnumerable<dynamic>;
+
+            Assert.NotNull(users);
+            // Should have 5 seeded users
+            var userList = users.ToList();
+            Assert.Equal(5, userList.Count);
+        }
+
+        [Fact(DisplayName = "GetAllUsers_ShouldIdentifyOrganizers")]
+        public void GetAllUsers_ShouldIdentifyOrganizers()
+        {
+            // Act
+            var result = _controller.GetAllUsers();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var users = (okResult.Value as IEnumerable<dynamic>)?.ToList();
+
+            Assert.NotNull(users);
+            // First user (UserID=1) should be an organizer
+            var firstUser = users[0];
+            Assert.True(firstUser.IsOrganiser);
+        }
+
+        [Fact(DisplayName = "GetAllUsers_ShouldIdentifyParticipants")]
+        public void GetAllUsers_ShouldIdentifyParticipants()
+        {
+            // Act
+            var result = _controller.GetAllUsers();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var users = Assert.IsType<List<dynamic>>(okResult.Value);
+
+            // Third user (UserID=3) should be a participant
+            var participantUser = users[2];
+            Assert.True(participantUser.IsParticipant);
+        }
+
+        [Fact(DisplayName = "GetAllUsers_ShouldIncludeUserDetails")]
+        public void GetAllUsers_ShouldIncludeUserDetails()
+        {
+            // Act
+            var result = _controller.GetAllUsers();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var users = Assert.IsType<List<dynamic>>(okResult.Value);
+
+            var firstUser = users[0];
+            Assert.NotNull(firstUser.UserID);
+            Assert.NotNull(firstUser.Email);
+            Assert.NotNull(firstUser.FullName);
+            Assert.NotNull(firstUser.Phone);
+        }
+
+        #endregion
+
+        #region GetUserById Tests
+
+        [Fact(DisplayName = "GetUserById_WithValidId_ShouldReturnUser")]
+        public void GetUserById_WithValidId_ShouldReturnUser()
+        {
+            // Act
+            var result = _controller.GetUserById(3);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var userResponse = (dynamic)okResult.Value;
+            Assert.NotNull(userResponse);
+            Assert.Equal(3, userResponse.UserID);
+            Assert.Equal("lindiwe@runsa.co.za", userResponse.Email);
+        }
+
+        [Fact(DisplayName = "GetUserById_WithInvalidId_ShouldReturnNotFound")]
+        public void GetUserById_WithInvalidId_ShouldReturnNotFound()
+        {
+            // Act
+            var result = _controller.GetUserById(999);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.NotNull(notFoundResult.Value);
+        }
+
+        [Fact(DisplayName = "GetUserById_ShouldIncludeOrganiserStatus")]
+        public void GetUserById_ShouldIncludeOrganiserStatus()
+        {
+            // Act
+            var result = _controller.GetUserById(1);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var userResponse = (dynamic)okResult.Value;
+            Assert.True(userResponse.IsOrganiser);
+            Assert.False(userResponse.IsParticipant);
+        }
+
+        [Fact(DisplayName = "GetUserById_ShouldIncludeParticipantStatus")]
+        public void GetUserById_ShouldIncludeParticipantStatus()
+        {
+            // Act
+            var result = _controller.GetUserById(3);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var userResponse = (dynamic)okResult.Value;
+            Assert.True(userResponse.IsParticipant);
+            Assert.False(userResponse.IsOrganiser);
+        }
+
+        [Fact(DisplayName = "GetUserById_ShouldIncludeCreatedAtAndUpdatedAt")]
+        public void GetUserById_ShouldIncludeCreatedAtAndUpdatedAt()
+        {
+            // Act
+            var result = _controller.GetUserById(1);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var userResponse = (dynamic)okResult.Value;
+            Assert.NotNull(userResponse.CreatedAt);
+            Assert.NotNull(userResponse.UpdatedAt);
+        }
+
+        #endregion
+
+        #region CreateOrganiser Tests
+
+        [Fact(DisplayName = "CreateOrganiser_WithValidData_ShouldReturnCreatedAtAction")]
+        public void CreateOrganiser_WithValidData_ShouldReturnCreatedAtAction()
+        {
+            // Arrange
+            var createRequest = new CreateOrganiserRequest
+            {
+                Email = "neworganizer@test.com",
+                Password = "OrgPassword123",
+                FullName = "New Organizer",
+                Phone = "082 999 9999",
+                CompanyName = "Test Events Inc"
+            };
+
+            // Act
+            var result = _controller.CreateOrganiser(createRequest);
+
+            // Assert
+            var createdResult = Assert.IsType<CreatedAtActionResult>(result);
+            Assert.NotNull(createdResult.Value);
+
+            // Verify organizer was created
+            var user = RaceDayDB.Users.FirstOrDefault(u => u.Email == createRequest.Email);
+            Assert.NotNull(user);
+
+            var organizer = RaceDayDB.Organisers.FirstOrDefault(o => o.UserID == user.UserID);
+            Assert.NotNull(organizer);
+            Assert.Equal(createRequest.CompanyName, organizer.CompanyName);
+        }
+
+        [Fact(DisplayName = "CreateOrganiser_WithEmptyEmail_ShouldReturnBadRequest")]
+        public void CreateOrganiser_WithEmptyEmail_ShouldReturnBadRequest()
+        {
+            // Arrange
+            var createRequest = new CreateOrganiserRequest
+            {
+                Email = "",
+                Password = "OrgPassword123",
+                FullName = "New Organizer",
+                Phone = "082 999 9999",
+                CompanyName = "Test Events Inc"
+            };
+
+            // Act
+            var result = _controller.CreateOrganiser(createRequest);
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
+
+        [Fact(DisplayName = "CreateOrganiser_WithEmptyPassword_ShouldReturnBadRequest")]
+        public void CreateOrganiser_WithEmptyPassword_ShouldReturnBadRequest()
+        {
+            // Arrange
+            var createRequest = new CreateOrganiserRequest
+            {
+                Email = "test@test.com",
+                Password = "",
+                FullName = "New Organizer",
+                Phone = "082 999 9999",
+                CompanyName = "Test Events Inc"
+            };
+
+            // Act
+            var result = _controller.CreateOrganiser(createRequest);
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
+
+        [Fact(DisplayName = "CreateOrganiser_WithExistingEmail_ShouldReturnConflict")]
+        public void CreateOrganiser_WithExistingEmail_ShouldReturnConflict()
+        {
+            // Arrange
+            var createRequest = new CreateOrganiserRequest
+            {
+                Email = "thabo@runningclub.co.za", // Already exists
+                Password = "OrgPassword123",
+                FullName = "Another Organizer",
+                Phone = "082 999 9999",
+                CompanyName = "Test Events Inc"
+            };
+
+            // Act
+            var result = _controller.CreateOrganiser(createRequest);
+
+            // Assert
+            Assert.IsType<ConflictObjectResult>(result);
+        }
+
+        [Fact(DisplayName = "CreateOrganiser_ShouldCreateUserWithHashedPassword")]
+        public void CreateOrganiser_ShouldCreateUserWithHashedPassword()
+        {
+            // Arrange
+            var password = "SecureOrgPassword123";
+            var createRequest = new CreateOrganiserRequest
+            {
+                Email = "secure.org@test.com",
+                Password = password,
+                FullName = "Secure Organizer",
+                Phone = "082 999 9999",
+                CompanyName = "Secure Events"
+            };
+
+            // Act
+            var result = _controller.CreateOrganiser(createRequest);
+
+            // Assert
+            Assert.IsType<CreatedAtActionResult>(result);
+            var user = RaceDayDB.Users.FirstOrDefault(u => u.Email == createRequest.Email);
+            Assert.NotNull(user);
+
+            var expectedHash = RaceDayDB.HashPassword(password);
+            Assert.Equal(expectedHash, user.PasswordHash);
+        }
+
+        [Fact(DisplayName = "CreateOrganiser_ShouldAssignNewOrganiserID")]
+        public void CreateOrganiser_ShouldAssignNewOrganiserID()
+        {
+            // Arrange
+            var createRequest = new CreateOrganiserRequest
+            {
+                Email = "org.with.id@test.com",
+                Password = "OrgPassword123",
+                FullName = "Organizer With ID",
+                Phone = "082 999 9999",
+                CompanyName = "ID Events"
+            };
+
+            var initialOrganizerCount = RaceDayDB.Organisers.Count;
+
+            // Act
+            var result = _controller.CreateOrganiser(createRequest);
+
+            // Assert
+            Assert.IsType<CreatedAtActionResult>(result);
+            Assert.Equal(initialOrganizerCount + 1, RaceDayDB.Organisers.Count);
+        }
+
+        [Fact(DisplayName = "CreateOrganiser_ShouldReturnOrganizerDetails")]
+        public void CreateOrganiser_ShouldReturnOrganizerDetails()
+        {
+            // Arrange
+            var createRequest = new CreateOrganiserRequest
+            {
+                Email = "details.org@test.com",
+                Password = "OrgPassword123",
+                FullName = "Details Organizer",
+                Phone = "082 999 9999",
+                CompanyName = "Details Events"
+            };
+
+            // Act
+            var result = _controller.CreateOrganiser(createRequest);
+
+            // Assert
+            var createdResult = Assert.IsType<CreatedAtActionResult>(result);
+            var response = (dynamic)createdResult.Value;
+
+            Assert.NotNull(response.OrganiserID);
+            Assert.Equal("details.org@test.com", response.Email);
+            Assert.Equal("Details Organizer", response.FullName);
+            Assert.Equal("Details Events", response.CompanyName);
+        }
+
+        #endregion
+    }
+}

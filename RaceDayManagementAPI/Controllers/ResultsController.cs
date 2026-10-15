@@ -21,7 +21,7 @@ namespace RaceDayManagementAPI.Controllers
         }
 
         // 1. CAPTURE/UPDATE RESULT (UPSERT)
-        //    →  POST /api/enrolments/{enrolmentId}/results
+        // POST /api/enrolments/{enrolmentId}/results
         [HttpPost("enrolments/{enrolmentId}/results")]
         [Authorize]
         public IActionResult CaptureResult(int enrolmentId, [FromBody] ResultRequest request)
@@ -69,7 +69,7 @@ namespace RaceDayManagementAPI.Controllers
         }
 
         // 2. GET RESULTS FOR EVENT (PUBLIC)
-        //    →  GET /api/events/{eventId}/results
+        // GET /api/events/{eventId}/results
         [HttpGet("events/{eventId}/results")]
         [AllowAnonymous]
         public IActionResult GetEventResults(int eventId)
@@ -123,8 +123,7 @@ namespace RaceDayManagementAPI.Controllers
         }
 
         // 3. GET MY RESULTS (PARTICIPANT)
-        //    →  GET /api/participants/user/results  (already in ParticipantController)
-        //    This is a duplicate alias for convenience: GET /api/results/user
+        // GET /api/participants/user/results  (already in ParticipantController)
         [HttpGet("results/user")]
         [Authorize]
         public IActionResult GetMyResults()
@@ -175,7 +174,7 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(results);
         }
 
-        // 4. GET SINGLE RESULT  →  GET /api/results/{id}
+        // 4. GET SINGLE RESULT -  GET /api/results/{id}
         [HttpGet("results/{id}")]
         [AllowAnonymous]
         public IActionResult GetResult(int id)
