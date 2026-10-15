@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RaceDayManagementAPI.Models;
 using RaceDayManagementAPI.Services;
 
 namespace RaceDayManagementAPI.Controllers
 {
+    /// <summary>
+    /// Categories controller for retrieving event category information.
+    /// Provides endpoints for querying race categories and their routes by ID or event.
+    /// </summary>
     [ApiController]
     [Route("api/categories")]
     public class CategoriesController : ControllerBase

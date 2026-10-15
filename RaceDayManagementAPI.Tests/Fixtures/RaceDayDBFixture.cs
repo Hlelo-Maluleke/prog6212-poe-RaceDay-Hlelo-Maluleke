@@ -4,9 +4,7 @@ using RaceDayManagementAPI.Models;
 
 namespace RaceDayManagementAPI.Tests.Fixtures
 {
-    /// <summary>
-    /// Fixture for managing RaceDayDB test data and cleanup
-    /// </summary>
+    // Fixture for managing RaceDayDB test data and cleanup
     public class RaceDayDBFixture : IDisposable
     {
         public RaceDayDbContext DbContext { get; private set; }

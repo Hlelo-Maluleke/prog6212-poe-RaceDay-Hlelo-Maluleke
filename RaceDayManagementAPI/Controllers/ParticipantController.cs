@@ -6,6 +6,10 @@ using RaceDayManagementAPI.Services;
 
 namespace RaceDayManagementAPI.Controllers
 {
+    /// <summary>
+    /// Participant controller for managing participant profiles, enrolments, and race results.
+    /// Provides endpoints for race participants to view/edit their profile and track their event participation.
+    /// </summary>
     [ApiController]
     [Route("api/participants")]
     [Authorize]
@@ -20,8 +24,21 @@ namespace RaceDayManagementAPI.Controllers
             _db = db;
         }
 
-        // 1. GET OWN PROFILE
+        /// <summary>
+        /// Retrieves the authenticated participant's profile information.
+        /// </summary>
+        /// <remarks>
+        /// Returns detailed participant profile including personal information and emergency contact details.
+        /// Requires authentication and participant role.
+        /// </remarks>
+        /// <returns>Participant profile with ParticipantID, DateOfBirth, IDNumber, EmergencyContact, User details, CreatedAt, and UpdatedAt</returns>
+        /// <response code="200">Participant profile successfully retrieved</response>
+        /// <response code="401">User is not authenticated</response>
+        /// <response code="404">User is not registered as a participant</response>
         [HttpGet("user")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetMyProfile()
         {
             var userId = _jwtService.GetUserIdFromToken(User);
@@ -50,8 +67,24 @@ namespace RaceDayManagementAPI.Controllers
             });
         }
 
-        // 2. UPDATE OWN PROFILE
+        /// <summary>
+        /// Updates the authenticated participant's profile information.
+        /// </summary>
+        /// <remarks>
+        /// Allows a participant to update their personal information and emergency contact details.
+        /// Requires authentication and participant role.
+        /// </remarks>
+        /// <param name="request">Update request containing new participant and contact information</param>
+        /// <returns>Updated participant profile information</returns>
+        /// <response code="200">Profile successfully updated</response>
+        /// <response code="400">Required fields are missing</response>
+        /// <response code="401">User is not authenticated</response>
+        /// <response code="404">Participant profile not found</response>
         [HttpPut("user")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateMyProfile([FromBody] UpdateParticipantRequest request)
         {
             var userId = _jwtService.GetUserIdFromToken(User);
@@ -103,8 +136,19 @@ namespace RaceDayManagementAPI.Controllers
             });
         }
 
-        // 3. GET OWN ENROLMENTS
+        /// <summary>
+        /// Retrieves all race enrolments for the authenticated participant.
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of all events and categories the participant is enrolled in with enrolment status and dates.
+        /// Requires authentication and participant role.
+        /// </remarks>
+        /// <returns>List of enrolments with EnrolmentID, CategoryID, EventID, EventName, CategoryName, EnrolmentDate, and Status</returns>
+        /// <response code="200">Successfully retrieved participant enrolments</response>
+        /// <response code="401">User is not authenticated</response>
         [HttpGet("user/enrolments")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult GetMyEnrolments()
         {
             var userId = _jwtService.GetUserIdFromToken(User);
@@ -120,8 +164,19 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(enrolments);
         }
 
-        // 4. GET OWN RESULTS
+        /// <summary>
+        /// Retrieves all race results for the authenticated participant.
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of all race results and achievements for events the participant has completed.
+        /// Requires authentication and participant role.
+        /// </remarks>
+        /// <returns>List of results with ResultID, EnrolmentID, EventID, EventName, FinishTime, Placement, Status, and CreatedAt</returns>
+        /// <response code="200">Successfully retrieved participant results</response>
+        /// <response code="401">User is not authenticated</response>
         [HttpGet("user/results")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult GetMyResults()
         {
             var userId = _jwtService.GetUserIdFromToken(User);

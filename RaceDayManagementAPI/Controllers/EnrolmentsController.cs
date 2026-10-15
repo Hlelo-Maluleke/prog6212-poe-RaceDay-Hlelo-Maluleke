@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RaceDayManagementAPI.Models;
 using RaceDayManagementAPI.Services;
 
 namespace RaceDayManagementAPI.Controllers
 {
+    /// <summary>
+    /// Enrolments controller for managing participant event enrolments.
+    /// Provides endpoints for participants to enrol in race categories and manage their entries.
+    /// </summary>
     [ApiController]
     [Route("api/enrolments")]
     [Authorize]

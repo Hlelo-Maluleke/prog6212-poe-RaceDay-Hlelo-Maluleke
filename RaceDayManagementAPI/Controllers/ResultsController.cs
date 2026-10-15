@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RaceDayManagementAPI.Models;
 using RaceDayManagementAPI.Services;
 
 namespace RaceDayManagementAPI.Controllers
 {
+    /// <summary>
+    /// Results controller for managing and recording race results.
+    /// Provides endpoints for organisers to capture/update participant results and retrieve result data.
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class ResultsController : ControllerBase

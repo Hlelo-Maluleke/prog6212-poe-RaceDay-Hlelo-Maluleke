@@ -8,6 +8,10 @@ using System.Text;
 
 namespace RaceDayManagementAPI.Controllers
 {
+    /// <summary>
+    /// Authentication controller for user registration and login.
+    /// Handles JWT token generation for authorized API access.
+    /// </summary>
     [ApiController]
     [Route("api/auth")]
     public class AuthController : ControllerBase
@@ -29,8 +33,26 @@ namespace RaceDayManagementAPI.Controllers
             return Convert.ToBase64String(hash);
         }
 
-        // 1. REGISTER - Creates a new Participant account only
+        /// <summary>
+        /// Registers a new participant account.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new user and automatically registers them as a participant.
+        /// Organisers are pre-seeded in the system and can only be created by administrators.
+        /// </remarks>
+        /// <param name="request">Registration request containing email, password, and participant details</param>
+        /// <returns>
+        /// Returns 201 Created with the new user details if registration is successful.
+        /// Returns 400 Bad Request if required fields are missing.
+        /// Returns 409 Conflict if email is already registered.
+        /// </returns>
+        /// <response code="201">User and participant successfully created</response>
+        /// <response code="400">Email and password are required; missing required fields</response>
+        /// <response code="409">Email already registered</response>
         [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult Register([FromBody] RegisterRequest request)
         {
             // Validate
@@ -86,8 +108,23 @@ namespace RaceDayManagementAPI.Controllers
             });
         }
 
-        // 2. LOGIN - Authenticates user and returns JWT token
+        /// <summary>
+        /// Authenticates a user and returns a JWT token for API access.
+        /// </summary>
+        /// <remarks>
+        /// Verifies the provided email and password, then generates a JWT token valid for subsequent API calls.
+        /// The token includes claims for user roles (organiser/participant).
+        /// </remarks>
+        /// <param name="request">Login credentials (email and password)</param>
+        /// <returns>
+        /// Returns 200 OK with JWT token and user details if authentication is successful.
+        /// Returns 401 Unauthorized if email or password is invalid.
+        /// </returns>
+        /// <response code="200">Authentication successful; JWT token returned</response>
+        /// <response code="401">Invalid email or password</response>
         [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Login([FromBody] LoginRequest request)
         {
             // Find user by email

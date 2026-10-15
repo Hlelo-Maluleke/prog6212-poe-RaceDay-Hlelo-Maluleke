@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RaceDayManagementAPI.Models;
 using RaceDayManagementAPI.Services;
 
 namespace RaceDayManagementAPI.Controllers
 {
+    /// <summary>
+    /// Events controller for retrieving and querying race events in the system.
+    /// Provides endpoints for filtering events by status, type, and date.
+    /// </summary>
     [ApiController]
     [Route("api/events")]
     public class EventsController : ControllerBase

@@ -88,3 +88,4 @@ C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI\obj\Debug\
 C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI\obj\Debug\net8.0\RaceDayManagementAPI.genruntimeconfig.cache
 C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI\obj\Debug\net8.0\ref\RaceDayManagementAPI.dll
 C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI\bin\Debug\net8.0\RaceDayManagementAPI.xml

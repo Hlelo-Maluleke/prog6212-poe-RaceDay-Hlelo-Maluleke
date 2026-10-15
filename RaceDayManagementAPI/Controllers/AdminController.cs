@@ -8,6 +8,10 @@ using System.Text;
 
 namespace RaceDayManagementAPI.Controllers
 {
+    /// <summary>
+    /// Administration controller for system-wide user and organiser management.
+    /// Provides endpoints for viewing all users, creating organisers, and managing permissions.
+    /// </summary>
     [ApiController]
     [Route("api/admin")]
     [Authorize]
@@ -30,8 +34,19 @@ namespace RaceDayManagementAPI.Controllers
             return Convert.ToBase64String(hash);
         }
 
-        // 1. LIST ALL USERS (Admin)
+        /// <summary>
+        /// Retrieves a list of all users in the system with their roles.
+        /// </summary>
+        /// <remarks>
+        /// Returns all registered users along with their roles (organiser/participant status).
+        /// Requires authentication.
+        /// </remarks>
+        /// <returns>List of all users with UserID, Email, FullName, Phone, IsOrganiser, IsParticipant, and CreatedAt</returns>
+        /// <response code="200">Successfully retrieved all users</response>
+        /// <response code="401">User is not authenticated</response>
         [HttpGet("users")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult GetAllUsers()
         {
             var users = _db.Users.Select(u => new
@@ -48,8 +63,22 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(users);
         }
 
-        // 2. GET USER BY ID (Admin)
+        /// <summary>
+        /// Retrieves a specific user by ID with detailed information and roles.
+        /// </summary>
+        /// <remarks>
+        /// Returns comprehensive user information including organiser/participant status.
+        /// Requires authentication.
+        /// </remarks>
+        /// <param name="id">The unique identifier of the user</param>
+        /// <returns>User details including UserID, Email, FullName, Phone, IsOrganiser, IsParticipant, timestamps</returns>
+        /// <response code="200">User found and returned</response>
+        /// <response code="401">User is not authenticated</response>
+        /// <response code="404">User with specified ID not found</response>
         [HttpGet("users/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetUserById(int id)
         {
             var user = _db.Users.FirstOrDefault(u => u.UserID == id);
@@ -69,9 +98,23 @@ namespace RaceDayManagementAPI.Controllers
             });
         }
 
-        // 3. CREATE ORGANISER (Admin pre-seeds organisers)
+        /// <summary>
+        /// Creates a new organiser account with associated user record.
+        /// </summary>
+        /// <remarks>
+        /// Registers a new event organiser in the system. This endpoint creates both a User and Organiser record.
+        /// Note: This endpoint allows anonymous access for initial system setup; restrict in production.
+        /// </remarks>
+        /// <param name="request">Organiser creation request with email, password, company name, and contact details</param>
+        /// <returns>Returns 201 Created with the new organiser details if successful</returns>
+        /// <response code="201">Organiser and user successfully created</response>
+        /// <response code="400">Email and password are required; missing required fields</response>
+        /// <response code="409">Email already registered in system</response>
         [HttpPost("organisers")]
-        [AllowAnonymous] // Remove this if you want only admins to access it
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult CreateOrganiser([FromBody] CreateOrganiserRequest request)
         {
             if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))

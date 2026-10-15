@@ -2,6 +2,11 @@
   "openapi": "3.0.1",
   "info": {
     "title": "RaceDay API",
+    "description": "API for managing race events, participant enrolments, and results",
+    "contact": {
+      "name": "RaceDay Support",
+      "email": "support@raceday.co.za"
+    },
     "version": "v1"
   },
   "paths": {
@@ -10,9 +15,31 @@
         "tags": [
           "Admin"
         ],
+        "summary": "Retrieves a list of all users in the system with their roles.",
+        "description": "Returns all registered users along with their roles (organiser/participant status).\r\nRequires authentication.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully retrieved all users"
+          },
+          "401": {
+            "description": "User is not authenticated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -22,10 +49,13 @@
         "tags": [
           "Admin"
         ],
+        "summary": "Retrieves a specific user by ID with detailed information and roles.",
+        "description": "Returns comprehensive user information including organiser/participant status.\r\nRequires authentication.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "The unique identifier of the user",
             "required": true,
             "schema": {
               "type": "integer",
@@ -35,7 +65,47 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User found and returned"
+          },
+          "401": {
+            "description": "User is not authenticated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User with specified ID not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       },
@@ -66,7 +136,10 @@
         "tags": [
           "Admin"
         ],
+        "summary": "Creates a new organiser account with associated user record.",
+        "description": "Registers a new event organiser in the system. This endpoint creates both a User and Organiser record.\r\nNote: This endpoint allows anonymous access for initial system setup; restrict in production.",
         "requestBody": {
+          "description": "Organiser creation request with email, password, company name, and contact details",
           "content": {
             "application/json": {
               "schema": {
@@ -86,8 +159,48 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Organiser and user successfully created"
+          },
+          "400": {
+            "description": "Email and password are required; missing required fields",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Email already registered in system",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -97,7 +210,10 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Registers a new participant account.",
+        "description": "Creates a new user and automatically registers them as a participant.\r\nOrganisers are pre-seeded in the system and can only be created by administrators.",
         "requestBody": {
+          "description": "Registration request containing email, password, and participant details",
           "content": {
             "application/json": {
               "schema": {
@@ -117,8 +233,48 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "User and participant successfully created"
+          },
+          "400": {
+            "description": "Email and password are required; missing required fields",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Email already registered",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -128,7 +284,10 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Authenticates a user and returns a JWT token for API access.",
+        "description": "Verifies the provided email and password, then generates a JWT token valid for subsequent API calls.\r\nThe token includes claims for user roles (organiser/participant).",
         "requestBody": {
+          "description": "Login credentials (email and password)",
           "content": {
             "application/json": {
               "schema": {
@@ -149,7 +308,27 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Authentication successful; JWT token returned"
+          },
+          "401": {
+            "description": "Invalid email or password",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -593,9 +772,51 @@
         "tags": [
           "Organiser"
         ],
+        "summary": "Retrieves the authenticated organiser's profile information.",
+        "description": "Returns detailed organiser profile including company name and associated user details.\r\nRequires authentication and organiser role.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Organiser profile successfully retrieved"
+          },
+          "401": {
+            "description": "User is not authenticated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User is not registered as an organiser",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       },
@@ -603,7 +824,10 @@
         "tags": [
           "Organiser"
         ],
+        "summary": "Updates the authenticated organiser's profile information.",
+        "description": "Allows an organiser to update their company name and contact information.\r\nRequires authentication and organiser role.",
         "requestBody": {
+          "description": "Update request containing new company name and contact details",
           "content": {
             "application/json": {
               "schema": {
@@ -624,7 +848,67 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Profile successfully updated"
+          },
+          "400": {
+            "description": "Company name is required",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User is not authenticated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Organiser profile not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -634,9 +918,31 @@
         "tags": [
           "Organiser"
         ],
+        "summary": "Retrieves all events owned by the authenticated organiser.",
+        "description": "Returns a comprehensive list of events created by the current organiser with their details and associated categories.\r\nRequires authentication and organiser role.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully retrieved organiser's events"
+          },
+          "401": {
+            "description": "User is not authenticated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -646,10 +952,13 @@
         "tags": [
           "Organiser"
         ],
+        "summary": "Retrieves all participant enrolments for a specific event owned by the organiser.",
+        "description": "Returns detailed enrolment data including participant information and enrolment dates for all categories in the event.\r\nOnly organisers who own the event can retrieve its enrolments.\r\nRequires authentication and organiser role.",
         "parameters": [
           {
             "name": "eventId",
             "in": "path",
+            "description": "The unique identifier of the event",
             "required": true,
             "schema": {
               "type": "integer",
@@ -659,7 +968,47 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully retrieved event enrolments"
+          },
+          "401": {
+            "description": "User is not authenticated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found or organiser does not own it",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -669,9 +1018,51 @@
         "tags": [
           "Participant"
         ],
+        "summary": "Retrieves the authenticated participant's profile information.",
+        "description": "Returns detailed participant profile including personal information and emergency contact details.\r\nRequires authentication and participant role.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Participant profile successfully retrieved"
+          },
+          "401": {
+            "description": "User is not authenticated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User is not registered as a participant",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       },
@@ -679,7 +1070,10 @@
         "tags": [
           "Participant"
         ],
+        "summary": "Updates the authenticated participant's profile information.",
+        "description": "Allows a participant to update their personal information and emergency contact details.\r\nRequires authentication and participant role.",
         "requestBody": {
+          "description": "Update request containing new participant and contact information",
           "content": {
             "application/json": {
               "schema": {
@@ -700,7 +1094,67 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Profile successfully updated"
+          },
+          "400": {
+            "description": "Required fields are missing",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "User is not authenticated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Participant profile not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -710,9 +1164,31 @@
         "tags": [
           "Participant"
         ],
+        "summary": "Retrieves all race enrolments for the authenticated participant.",
+        "description": "Returns a list of all events and categories the participant is enrolled in with enrolment status and dates.\r\nRequires authentication and participant role.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully retrieved participant enrolments"
+          },
+          "401": {
+            "description": "User is not authenticated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -722,9 +1198,31 @@
         "tags": [
           "Participant"
         ],
+        "summary": "Retrieves all race results for the authenticated participant.",
+        "description": "Returns a list of all race results and achievements for events the participant has completed.\r\nRequires authentication and participant role.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully retrieved participant results"
+          },
+          "401": {
+            "description": "User is not authenticated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -952,6 +1450,33 @@
           }
         },
         "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
       },
       "RegisterRequest": {
         "type": "object",

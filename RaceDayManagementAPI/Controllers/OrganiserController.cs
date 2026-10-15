@@ -6,6 +6,10 @@ using RaceDayManagementAPI.Services;
 
 namespace RaceDayManagementAPI.Controllers
 {
+    /// <summary>
+    /// Organiser controller for managing organiser profiles, events, and participant enrolments.
+    /// Provides endpoints for event organisers to view/edit their profile and manage their event data.
+    /// </summary>
     [ApiController]
     [Route("api/organisers")]
     [Authorize]
@@ -20,8 +24,21 @@ namespace RaceDayManagementAPI.Controllers
             _db = db;
         }
 
-        // 1. GET OWN PROFILE
+        /// <summary>
+        /// Retrieves the authenticated organiser's profile information.
+        /// </summary>
+        /// <remarks>
+        /// Returns detailed organiser profile including company name and associated user details.
+        /// Requires authentication and organiser role.
+        /// </remarks>
+        /// <returns>Organiser profile with OrganiserID, CompanyName, User details, CreatedAt, and UpdatedAt</returns>
+        /// <response code="200">Organiser profile successfully retrieved</response>
+        /// <response code="401">User is not authenticated</response>
+        /// <response code="404">User is not registered as an organiser</response>
         [HttpGet("user")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetMyProfile()
         {
             var userId = _jwtService.GetUserIdFromToken(User);
@@ -48,8 +65,24 @@ namespace RaceDayManagementAPI.Controllers
             });
         }
 
-        // 2. UPDATE OWN PROFILE
+        /// <summary>
+        /// Updates the authenticated organiser's profile information.
+        /// </summary>
+        /// <remarks>
+        /// Allows an organiser to update their company name and contact information.
+        /// Requires authentication and organiser role.
+        /// </remarks>
+        /// <param name="request">Update request containing new company name and contact details</param>
+        /// <returns>Updated organiser profile information</returns>
+        /// <response code="200">Profile successfully updated</response>
+        /// <response code="400">Company name is required</response>
+        /// <response code="401">User is not authenticated</response>
+        /// <response code="404">Organiser profile not found</response>
         [HttpPut("user")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateMyProfile([FromBody] UpdateOrganiserRequest request)
         {
             var userId = _jwtService.GetUserIdFromToken(User);
@@ -95,8 +128,19 @@ namespace RaceDayManagementAPI.Controllers
             });
         }
 
-        // 3. GET OWN EVENTS
+        /// <summary>
+        /// Retrieves all events owned by the authenticated organiser.
+        /// </summary>
+        /// <remarks>
+        /// Returns a comprehensive list of events created by the current organiser with their details and associated categories.
+        /// Requires authentication and organiser role.
+        /// </remarks>
+        /// <returns>List of events with EventID, EventName, Date, Location, Description, Categories, CreatedAt, and UpdatedAt</returns>
+        /// <response code="200">Successfully retrieved organiser's events</response>
+        /// <response code="401">User is not authenticated</response>
         [HttpGet("user/events")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult GetMyEvents()
         {
             var userId = _jwtService.GetUserIdFromToken(User);
@@ -112,8 +156,23 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(events);
         }
 
-        // 4. GET ENROLMENTS FOR MY EVENT
+        /// <summary>
+        /// Retrieves all participant enrolments for a specific event owned by the organiser.
+        /// </summary>
+        /// <remarks>
+        /// Returns detailed enrolment data including participant information and enrolment dates for all categories in the event.
+        /// Only organisers who own the event can retrieve its enrolments.
+        /// Requires authentication and organiser role.
+        /// </remarks>
+        /// <param name="eventId">The unique identifier of the event</param>
+        /// <returns>List of enrolments with EnrolmentID, ParticipantID, CategoryID, ParticipantName, email, phone, EnrolmentDate, and Status</returns>
+        /// <response code="200">Successfully retrieved event enrolments</response>
+        /// <response code="401">User is not authenticated</response>
+        /// <response code="404">Event not found or organiser does not own it</response>
         [HttpGet("user/events/{eventId}/enrolments")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetEventEnrolments(int eventId)
         {
             var userId = _jwtService.GetUserIdFromToken(User);

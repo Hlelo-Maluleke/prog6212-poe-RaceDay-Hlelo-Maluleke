@@ -47,7 +47,25 @@ builder.Services.AddAuthorization();
 // 4. CONFIGURE SWAGGER
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "RaceDay API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo 
+    { 
+        Title = "RaceDay API", 
+        Version = "v1",
+        Description = "API for managing race events, participant enrolments, and results",
+        Contact = new OpenApiContact
+        {
+            Name = "RaceDay Support",
+            Email = "support@raceday.co.za"
+        }
+    });
+
+    // Include XML documentation
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+    {
+        c.IncludeXmlComments(xmlPath);
+    }
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
