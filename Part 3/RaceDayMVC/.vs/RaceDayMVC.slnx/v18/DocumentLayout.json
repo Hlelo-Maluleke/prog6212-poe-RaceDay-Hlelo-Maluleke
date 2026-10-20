@@ -1,12 +1,71 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\hmalu\\source\\repos\\RaceDayMVC\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{99FD4BC2-517E-4F46-AA1A-B121A0657FA9}|RaceDayMVC\\RaceDayMVC.csproj|c:\\users\\hmalu\\source\\repos\\racedaymvc\\racedaymvc\\services\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99FD4BC2-517E-4F46-AA1A-B121A0657FA9}|RaceDayMVC\\RaceDayMVC.csproj|solutionrelative:racedaymvc\\services\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99FD4BC2-517E-4F46-AA1A-B121A0657FA9}|RaceDayMVC\\RaceDayMVC.csproj|c:\\users\\hmalu\\source\\repos\\racedaymvc\\racedaymvc\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99FD4BC2-517E-4F46-AA1A-B121A0657FA9}|RaceDayMVC\\RaceDayMVC.csproj|solutionrelative:racedaymvc\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99FD4BC2-517E-4F46-AA1A-B121A0657FA9}|RaceDayMVC\\RaceDayMVC.csproj|c:\\users\\hmalu\\source\\repos\\racedaymvc\\racedaymvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99FD4BC2-517E-4F46-AA1A-B121A0657FA9}|RaceDayMVC\\RaceDayMVC.csproj|solutionrelative:racedaymvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayMVC\\RaceDayMVC\\Models\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "RaceDayMVC\\Models\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayMVC\\RaceDayMVC\\Models\\LoginViewModel.cs",
+              "RelativeToolTip": "RaceDayMVC\\Models\\LoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T08:57:28.878Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApiClient.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayMVC\\RaceDayMVC\\Services\\ApiClient.cs",
+              "RelativeDocumentMoniker": "RaceDayMVC\\Services\\ApiClient.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayMVC\\RaceDayMVC\\Services\\ApiClient.cs*",
+              "RelativeToolTip": "RaceDayMVC\\Services\\ApiClient.cs*",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAIAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T08:54:19.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayMVC\\RaceDayMVC\\Program.cs",
+              "RelativeDocumentMoniker": "RaceDayMVC\\Program.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayMVC\\RaceDayMVC\\Program.cs",
+              "RelativeToolTip": "RaceDayMVC\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T08:51:11.443Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
