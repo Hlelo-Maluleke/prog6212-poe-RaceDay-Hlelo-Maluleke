@@ -1,0 +1,103 @@
+﻿@model List<RaceDayMVC.Models.EnrolmentViewModel>
+@{
+    ViewData["Title"] = "My Enrolments";
+}
+
+<div class="container mt-4">
+    <h1 class="fw-bold mb-4">🎫 My Enrolments</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center py-5">
+            <h4>You haven't enrolled in any events yet</h4>
+            <p>Browse upcoming events and start your race journey!</p>
+            <a asp-action="Index" class="btn btn-primary mt-2">Browse Events →</a>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Event</th>
+                            <th>Category</th>
+                            <th>Enrolled On</th>
+                            <th>Status</th>
+                            <th>Result</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var enrolment in Model)
+                        {
+                            var statusClass = enrolment.Status switch
+                            {
+                                "confirmed" => "bg-success",
+                                "pending" => "bg-warning text-dark",
+                                "withdrawn" => "bg-secondary",
+                                _ => "bg-secondary"
+                            };
+
+                            <tr>
+                                <td>
+                                    <strong>@enrolment.Event?.Name</strong>
+                                    <div class="small text-muted">
+                                        📅 @enrolment.Event?.EventDate.ToString("dd MMM yyyy")
+                                    </div>
+                                </td>
+                                <td>
+                                    @enrolment.Category?.Name
+                                    <div class="small text-muted">
+                                        @enrolment.Category?.DistanceKm km
+                                    </div>
+                                </td>
+                                <td>@enrolment.EnrolmentDate.ToString("dd MMM yyyy")</td>
+                                <td>
+                                    <span class="badge @statusClass">@enrolment.Status.ToUpper()</span>
+                                </td>
+                                <td>
+                                    @if (enrolment.Result != null && enrolment.Result.FinishTimeSeconds.HasValue)
+                                    {
+                                        <span class="badge bg-info">
+                                            @FormatTime(enrolment.Result.FinishTimeSeconds.Value)
+                                        </span>
+                                        @if (enrolment.Result.Position.HasValue)
+                                        {
+                                            <div class="small text-muted">Position: @enrolment.Result.Position</div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">Not published</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (enrolment.Event != null)
+                                    {
+                                        <a asp-action="Details" asp-route-id="@enrolment.Event.EventID"
+                                           class="btn btn-sm btn-outline-primary">View Event</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+
+@functions {
+    string FormatTime(int seconds)
+    {
+        var hours = seconds / 3600;
+        var minutes = (seconds % 3600) / 60;
+        var secs = seconds % 60;
+
+        if (hours > 0)
+            return $"{hours}h {minutes}m {secs}s";
+        return $"{minutes}m {secs}s";
+    }
+}
