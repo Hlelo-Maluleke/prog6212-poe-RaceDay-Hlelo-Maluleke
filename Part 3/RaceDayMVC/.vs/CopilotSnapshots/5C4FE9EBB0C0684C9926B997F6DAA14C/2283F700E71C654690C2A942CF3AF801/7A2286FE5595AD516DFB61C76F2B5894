@@ -1,0 +1,153 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using RaceDayMVC.Services;
+using System.Text.Json;
+using RaceDayMVC.Models;
+
+namespace RaceDayMVC.Controllers
+{
+    public class ParticipantController : Controller
+    {
+        private readonly ApiClient _api;
+
+        public ParticipantController(ApiClient api) => _api = api;
+
+        private bool IsParticipant()
+            => HttpContext.Session.GetString("IsParticipant") == "True";
+
+        // GET: /Participant
+        public async Task<IActionResult> Index()
+        {
+            if (!IsParticipant()) return RedirectToAction("Login", "Account");
+
+            try
+            {
+                var response = await _api.GetAsync("api/events");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    // If unauthorized, redirect to login
+                    if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        return RedirectToAction("Login", "Account");
+                    }
+
+                    return View(new List<EventViewModel>());
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+                var events = JsonSerializer.Deserialize<List<EventViewModel>>(json,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                return View(events ?? new List<EventViewModel>());
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if logging is configured
+                return View(new List<EventViewModel>());
+            }
+        }
+
+        // GET: /Participant/Details/5
+        public async Task<IActionResult> Details(int id)
+        {
+            if (!IsParticipant()) return RedirectToAction("Login", "Account");
+
+            var response = await _api.GetAsync($"api/events/{id}");
+            var json = await response.Content.ReadAsStringAsync();
+            var eventDetail = JsonSerializer.Deserialize<EventDetailViewModel>(json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            return View(eventDetail);
+        }
+
+        // POST: /Participant/Enrol
+        [HttpPost]
+        public async Task<IActionResult> Enrol(int categoryId, int eventId)
+        {
+            if (!IsParticipant()) return RedirectToAction("Login", "Account");
+
+            var response = await _api.PostAsync("api/enrolments", new { categoryId });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["Error"] = "Enrolment failed. You may already be enrolled.";
+                return RedirectToAction("Details", new { id = eventId });
+            }
+
+            TempData["Success"] = "Successfully enrolled!";
+            return RedirectToAction("Details", new { id = eventId });
+        }
+
+        // GET: /Participant/MyEnrolments
+        public async Task<IActionResult> MyEnrolments()
+        {
+            if (!IsParticipant()) return RedirectToAction("Login", "Account");
+
+            var response = await _api.GetAsync("api/participants/user/enrolments");
+            var json = await response.Content.ReadAsStringAsync();
+            var enrolments = JsonSerializer.Deserialize<List<EnrolmentViewModel>>(json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            return View(enrolments);
+        }
+
+        // GET: /Participant/MyResults
+        public async Task<IActionResult> MyResults()
+        {
+            if (!IsParticipant()) return RedirectToAction("Login", "Account");
+
+            var response = await _api.GetAsync("api/participants/user/results");
+            var json = await response.Content.ReadAsStringAsync();
+            var results = JsonSerializer.Deserialize<List<ResultViewModel>>(json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            return View(results);
+        }
+
+        // GET: /Participant/Profile
+        public async Task<IActionResult> Profile()
+        {
+            if (!IsParticipant()) return RedirectToAction("Login", "Account");
+
+            var response = await _api.GetAsync("api/participants/user");
+            var json = await response.Content.ReadAsStringAsync();
+            var profile = JsonSerializer.Deserialize<ParticipantProfileViewModel>(json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            return View(profile);
+        }
+
+        // POST: /Participant/Profile
+        [HttpPost]
+        public async Task<IActionResult> Profile(ParticipantProfileViewModel model, IFormFile? profilePicture)
+        {
+            if (!IsParticipant()) return RedirectToAction("Login", "Account");
+
+            // Update profile via API
+            var response = await _api.PutAsync("api/participants/user", new
+            {
+                fullName = model.FullName,
+                phone = model.Phone,
+                email = model.Email,
+                dateOfBirth = model.DateOfBirth,
+                idNumber = model.IDNumber,
+                emergencyContact = model.EmergencyContact
+            });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["Error"] = "Profile update failed.";
+                return View(model);
+            }
+
+            // Profile picture upload – calls API endpoint (Phase 6)
+            if (profilePicture != null && profilePicture.Length > 0)
+            {
+                // To be implemented in Phase 6
+            }
+
+            TempData["Success"] = "Profile updated successfully!";
+            return RedirectToAction("Profile");
+        }
+    }
+}

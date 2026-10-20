@@ -1,0 +1,70 @@
+﻿using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
+
+namespace RaceDayMVC.Services
+{
+    public class ApiClient
+    {
+        private readonly HttpClient _http;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger<ApiClient> _logger;
+
+        public ApiClient(HttpClient http, IHttpContextAccessor httpContextAccessor, ILogger<ApiClient> logger)
+        {
+            _http = http;
+            _httpContextAccessor = httpContextAccessor;
+            _logger = logger;
+
+            // TODO: Replace with your API's HTTPS port from launchSettings.json
+            _http.BaseAddress = new Uri("https://localhost:7065/");
+        }
+
+        private string? GetToken()
+        {
+            return _httpContextAccessor.HttpContext?.Session.GetString("JwtToken");
+        }
+
+        private HttpRequestMessage AttachTokenToRequest(HttpRequestMessage request)
+        {
+            var token = GetToken();
+            if (!string.IsNullOrEmpty(token))
+            {
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+            return request;
+        }
+
+        public async Task<HttpResponseMessage> GetAsync(string url)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            AttachTokenToRequest(request);
+            return await _http.SendAsync(request);
+        }
+
+        public async Task<HttpResponseMessage> PostAsync(string url, object data)
+        {
+            var json = JsonSerializer.Serialize(data);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = content };
+            AttachTokenToRequest(request);
+            return await _http.SendAsync(request);
+        }
+
+        public async Task<HttpResponseMessage> PutAsync(string url, object data)
+        {
+            var json = JsonSerializer.Serialize(data);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Put, url) { Content = content };
+            AttachTokenToRequest(request);
+            return await _http.SendAsync(request);
+        }
+
+        public async Task<HttpResponseMessage> DeleteAsync(string url)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, url);
+            AttachTokenToRequest(request);
+            return await _http.SendAsync(request);
+        }
+    }
+}

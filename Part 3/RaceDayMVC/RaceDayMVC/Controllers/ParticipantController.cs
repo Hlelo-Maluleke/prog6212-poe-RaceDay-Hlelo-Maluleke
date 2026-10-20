@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RaceDayMVC.Models;
 using RaceDayMVC.Services;
 using System.Text.Json;
 
@@ -7,11 +8,15 @@ namespace RaceDayMVC.Controllers
     public class ParticipantController : Controller
     {
         private readonly ApiClient _api;
+        private static readonly JsonSerializerOptions _jsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         public ParticipantController(ApiClient api) => _api = api;
 
         private bool IsParticipant()
-            => HttpContext.Session.GetString("IsParticipant") == "True";
+            => string.Equals(HttpContext.Session.GetString("IsParticipant"), "True", StringComparison.OrdinalIgnoreCase);
 
         // GET: /Participant
         public async Task<IActionResult> Index()
@@ -19,9 +24,16 @@ namespace RaceDayMVC.Controllers
             if (!IsParticipant()) return RedirectToAction("Login", "Account");
 
             var response = await _api.GetAsync("api/events");
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["Error"] = "Unable to load events at this time.";
+                return View(new List<EventViewModel>());
+            }
+
             var json = await response.Content.ReadAsStringAsync();
-            var events = JsonSerializer.Deserialize<List<EventViewModel>>(json,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var events = string.IsNullOrWhiteSpace(json)
+                ? new List<EventViewModel>()
+                : JsonSerializer.Deserialize<List<EventViewModel>>(json, _jsonOptions) ?? new List<EventViewModel>();
 
             return View(events);
         }
@@ -32,9 +44,19 @@ namespace RaceDayMVC.Controllers
             if (!IsParticipant()) return RedirectToAction("Login", "Account");
 
             var response = await _api.GetAsync($"api/events/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["Error"] = "Event not found.";
+                return RedirectToAction(nameof(Index));
+            }
+
             var json = await response.Content.ReadAsStringAsync();
-            var eventDetail = JsonSerializer.Deserialize<EventDetailViewModel>(json,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var eventDetail = JsonSerializer.Deserialize<EventDetailViewModel>(json, _jsonOptions);
+            if (eventDetail == null)
+            {
+                TempData["Error"] = "Unable to load event details.";
+                return RedirectToAction(nameof(Index));
+            }
 
             return View(eventDetail);
         }
@@ -45,16 +67,19 @@ namespace RaceDayMVC.Controllers
         {
             if (!IsParticipant()) return RedirectToAction("Login", "Account");
 
-            var response = await _api.PostAsync("api/enrolments", new { categoryId });
+            var response = await _api.PostAsync("api/enrolments", new { categoryID = categoryId });
 
             if (!response.IsSuccessStatusCode)
             {
-                TempData["Error"] = "Enrolment failed. You may already be enrolled.";
-                return RedirectToAction("Details", new { id = eventId });
+                var errorBody = await response.Content.ReadAsStringAsync();
+                TempData["Error"] = !string.IsNullOrWhiteSpace(errorBody)
+                    ? $"Enrolment failed: {errorBody}"
+                    : "Enrolment failed. You may already be enrolled.";
+                return RedirectToAction(nameof(Details), new { id = eventId });
             }
 
             TempData["Success"] = "Successfully enrolled!";
-            return RedirectToAction("Details", new { id = eventId });
+            return RedirectToAction(nameof(Details), new { id = eventId });
         }
 
         // GET: /Participant/MyEnrolments
@@ -63,9 +88,16 @@ namespace RaceDayMVC.Controllers
             if (!IsParticipant()) return RedirectToAction("Login", "Account");
 
             var response = await _api.GetAsync("api/participants/user/enrolments");
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["Error"] = "Unable to load your enrolments.";
+                return View(new List<EnrolmentViewModel>());
+            }
+
             var json = await response.Content.ReadAsStringAsync();
-            var enrolments = JsonSerializer.Deserialize<List<EnrolmentViewModel>>(json,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var enrolments = string.IsNullOrWhiteSpace(json)
+                ? new List<EnrolmentViewModel>()
+                : JsonSerializer.Deserialize<List<EnrolmentViewModel>>(json, _jsonOptions) ?? new List<EnrolmentViewModel>();
 
             return View(enrolments);
         }
@@ -76,9 +108,16 @@ namespace RaceDayMVC.Controllers
             if (!IsParticipant()) return RedirectToAction("Login", "Account");
 
             var response = await _api.GetAsync("api/participants/user/results");
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["Error"] = "Unable to load your results.";
+                return View(new List<ResultViewModel>());
+            }
+
             var json = await response.Content.ReadAsStringAsync();
-            var results = JsonSerializer.Deserialize<List<ResultViewModel>>(json,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var results = string.IsNullOrWhiteSpace(json)
+                ? new List<ResultViewModel>()
+                : JsonSerializer.Deserialize<List<ResultViewModel>>(json, _jsonOptions) ?? new List<ResultViewModel>();
 
             return View(results);
         }
@@ -89,9 +128,16 @@ namespace RaceDayMVC.Controllers
             if (!IsParticipant()) return RedirectToAction("Login", "Account");
 
             var response = await _api.GetAsync("api/participants/user");
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["Error"] = "Unable to load your profile.";
+                return View(new ParticipantProfileViewModel());
+            }
+
             var json = await response.Content.ReadAsStringAsync();
-            var profile = JsonSerializer.Deserialize<ParticipantProfileViewModel>(json,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var profile = string.IsNullOrWhiteSpace(json)
+                ? new ParticipantProfileViewModel()
+                : JsonSerializer.Deserialize<ParticipantProfileViewModel>(json, _jsonOptions) ?? new ParticipantProfileViewModel();
 
             return View(profile);
         }
@@ -126,7 +172,7 @@ namespace RaceDayMVC.Controllers
             }
 
             TempData["Success"] = "Profile updated successfully!";
-            return RedirectToAction("Profile");
+            return RedirectToAction(nameof(Profile));
         }
     }
 }
