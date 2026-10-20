@@ -1,0 +1,136 @@
+﻿@model List<RaceDayMVC.Models.ResultViewModel>
+@{
+    ViewData["Title"] = "My Results";
+}
+
+<div class="container mt-4">
+    <h1 class="fw-bold mb-4">🏆 My Race History</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center py-5">
+            <h4>No results available yet</h4>
+            <p>Once you complete an event and the organiser captures your result, it will appear here.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card bg-primary text-white shadow-sm">
+                    <div class="card-body text-center">
+                        <h2 class="display-5 fw-bold">@Model.Count</h2>
+                        <p class="mb-0">Completed Races</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success text-white shadow-sm">
+                    <div class="card-body text-center">
+                        <h2 class="display-5 fw-bold">
+                            @Model.Count(r => r.Status == "finished")
+                        </h2>
+                        <p class="mb-0">Finished</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-info text-white shadow-sm">
+                    <div class="card-body text-center">
+                        <h2 class="display-5 fw-bold">
+                            @Model.Select(r => r.Event?.EventID).Distinct().Count()
+                        </h2>
+                        <p class="mb-0">Unique Events</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Event</th>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Finish Time</th>
+                            <th>Position</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var result in Model)
+                        {
+                            <tr>
+                                <td><strong>@result.Event?.Name</strong></td>
+                                <td>@result.Event?.EventDate.ToString("dd MMM yyyy")</td>
+                                <td>
+                                    @result.Category?.Name
+                                    <div class="small text-muted">@result.Category?.DistanceKm km</div>
+                                </td>
+                                <td>
+                                    @if (result.FinishTimeSeconds.HasValue)
+                                    {
+                                        <span class="badge bg-primary fs-6">
+                                            @FormatTime(result.FinishTimeSeconds.Value)
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">—</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (result.Position.HasValue)
+                                    {
+                                        <strong>@FormatPosition(result.Position.Value)</strong>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">—</span>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="badge bg-@(result.Status == "finished" ? "success" : result.Status == "dnf" ? "warning text-dark" : "secondary")">
+                                        @result.Status?.ToUpper()
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+
+@functions {
+    string FormatTime(int seconds)
+    {
+        var hours = seconds / 3600;
+        var minutes = (seconds % 3600) / 60;
+        var secs = seconds % 60;
+
+        if (hours > 0)
+            return $"{hours}h {minutes}m {secs}s";
+        return $"{minutes}m {secs}s";
+    }
+
+    string FormatPosition(int position)
+    {
+        // Wrap the modulo expression in parentheses so it's evaluated BEFORE the switch
+        var suffix = (position % 100) switch
+        {
+            11 or 12 or 13 => "th",
+            _ => (position % 10) switch
+            {
+                1 => "st",
+                2 => "nd",
+                3 => "rd",
+                _ => "th"
+            }
+        };
+        return $"{position}{suffix}";
+    }
+}
