@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RaceDayManagementAPI</name>
+    </assembly>
+    <members>
+        <member name="T:RaceDayManagementAPI.Controllers.AdminController">
+            <summary>
+            Administration controller for system-wide user and organiser management.
+            Provides endpoints for viewing all users, creating organisers, and managing permissions.
+            </summary>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.AdminController.GetAllUsers">
+            <summary>
+            Retrieves a list of all users in the system with their roles.
+            </summary>
+            <remarks>
+            Returns all registered users along with their roles (organiser/participant status).
+            Requires authentication.
+            </remarks>
+            <returns>List of all users with UserID, Email, FullName, Phone, IsOrganiser, IsParticipant, and CreatedAt</returns>
+            <response code="200">Successfully retrieved all users</response>
+            <response code="401">User is not authenticated</response>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.AdminController.GetUserById(System.Int32)">
+            <summary>
+            Retrieves a specific user by ID with detailed information and roles.
+            </summary>
+            <remarks>
+            Returns comprehensive user information including organiser/participant status.
+            Requires authentication.
+            </remarks>
+            <param name="id">The unique identifier of the user</param>
+            <returns>User details including UserID, Email, FullName, Phone, IsOrganiser, IsParticipant, timestamps</returns>
+            <response code="200">User found and returned</response>
+            <response code="401">User is not authenticated</response>
+            <response code="404">User with specified ID not found</response>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.AdminController.CreateOrganiser(RaceDayManagementAPI.Controllers.CreateOrganiserRequest)">
+            <summary>
+            Creates a new organiser account with associated user record.
+            </summary>
+            <remarks>
+            Registers a new event organiser in the system. This endpoint creates both a User and Organiser record.
+            Note: This endpoint allows anonymous access for initial system setup; restrict in production.
+            </remarks>
+            <param name="request">Organiser creation request with email, password, company name, and contact details</param>
+            <returns>Returns 201 Created with the new organiser details if successful</returns>
+            <response code="201">Organiser and user successfully created</response>
+            <response code="400">Email and password are required; missing required fields</response>
+            <response code="409">Email already registered in system</response>
+        </member>
+        <member name="T:RaceDayManagementAPI.Controllers.AuthController">
+            <summary>
+            Authentication controller for user registration and login.
+            Handles JWT token generation for authorized API access.
+            </summary>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.AuthController.Register(RaceDayManagementAPI.Models.RegisterRequest)">
+            <summary>
+            Registers a new participant account.
+            </summary>
+            <remarks>
+            Creates a new user and automatically registers them as a participant.
+            Organisers are pre-seeded in the system and can only be created by administrators.
+            </remarks>
+            <param name="request">Registration request containing email, password, and participant details</param>
+            <returns>
+            Returns 201 Created with the new user details if registration is successful.
+            Returns 400 Bad Request if required fields are missing.
+            Returns 409 Conflict if email is already registered.
+            </returns>
+            <response code="201">User and participant successfully created</response>
+            <response code="400">Email and password are required; missing required fields</response>
+            <response code="409">Email already registered</response>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.AuthController.Login(RaceDayManagementAPI.Models.LoginRequest)">
+            <summary>
+            Authenticates a user and returns a JWT token for API access.
+            </summary>
+            <remarks>
+            Verifies the provided email and password, then generates a JWT token valid for subsequent API calls.
+            The token includes claims for user roles (organiser/participant).
+            </remarks>
+            <param name="request">Login credentials (email and password)</param>
+            <returns>
+            Returns 200 OK with JWT token and user details if authentication is successful.
+            Returns 401 Unauthorized if email or password is invalid.
+            </returns>
+            <response code="200">Authentication successful; JWT token returned</response>
+            <response code="401">Invalid email or password</response>
+        </member>
+        <member name="T:RaceDayManagementAPI.Controllers.CategoriesController">
+            <summary>
+            Categories controller for retrieving event category information.
+            Provides endpoints for querying race categories and their routes by ID or event.
+            </summary>
+        </member>
+        <member name="T:RaceDayManagementAPI.Controllers.EnrolmentsController">
+            <summary>
+            Enrolments controller for managing participant event enrolments.
+            Provides endpoints for participants to enrol in race categories and manage their entries.
+            </summary>
+        </member>
+        <member name="T:RaceDayManagementAPI.Controllers.EventsController">
+            <summary>
+            Events controller for retrieving and querying race events in the system.
+            Provides endpoints for filtering events by status, type, and date.
+            </summary>
+        </member>
+        <member name="T:RaceDayManagementAPI.Controllers.OrganiserController">
+            <summary>
+            Organiser controller for managing organiser profiles, events, and participant enrolments.
+            Provides endpoints for event organisers to view/edit their profile and manage their event data.
+            </summary>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.OrganiserController.GetMyProfile">
+            <summary>
+            Retrieves the authenticated organiser's profile information.
+            </summary>
+            <remarks>
+            Returns detailed organiser profile including company name and associated user details.
+            Requires authentication and organiser role.
+            </remarks>
+            <returns>Organiser profile with OrganiserID, CompanyName, User details, CreatedAt, and UpdatedAt</returns>
+            <response code="200">Organiser profile successfully retrieved</response>
+            <response code="401">User is not authenticated</response>
+            <response code="404">User is not registered as an organiser</response>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.OrganiserController.UpdateMyProfile(RaceDayManagementAPI.Controllers.UpdateOrganiserRequest)">
+            <summary>
+            Updates the authenticated organiser's profile information.
+            </summary>
+            <remarks>
+            Allows an organiser to update their company name and contact information.
+            Requires authentication and organiser role.
+            </remarks>
+            <param name="request">Update request containing new company name and contact details</param>
+            <returns>Updated organiser profile information</returns>
+            <response code="200">Profile successfully updated</response>
+            <response code="400">Company name is required</response>
+            <response code="401">User is not authenticated</response>
+            <response code="404">Organiser profile not found</response>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.OrganiserController.GetMyEvents">
+            <summary>
+            Retrieves all events owned by the authenticated organiser.
+            </summary>
+            <remarks>
+            Returns a comprehensive list of events created by the current organiser with their details and associated categories.
+            Requires authentication and organiser role.
+            </remarks>
+            <returns>List of events with EventID, EventName, Date, Location, Description, Categories, CreatedAt, and UpdatedAt</returns>
+            <response code="200">Successfully retrieved organiser's events</response>
+            <response code="401">User is not authenticated</response>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.OrganiserController.GetEventEnrolments(System.Int32)">
+            <summary>
+            Retrieves all participant enrolments for a specific event owned by the organiser.
+            </summary>
+            <remarks>
+            Returns detailed enrolment data including participant information and enrolment dates for all categories in the event.
+            Only organisers who own the event can retrieve its enrolments.
+            Requires authentication and organiser role.
+            </remarks>
+            <param name="eventId">The unique identifier of the event</param>
+            <returns>List of enrolments with EnrolmentID, ParticipantID, CategoryID, ParticipantName, email, phone, EnrolmentDate, and Status</returns>
+            <response code="200">Successfully retrieved event enrolments</response>
+            <response code="401">User is not authenticated</response>
+            <response code="404">Event not found or organiser does not own it</response>
+        </member>
+        <member name="T:RaceDayManagementAPI.Controllers.ParticipantController">
+            <summary>
+            Participant controller for managing participant profiles, enrolments, and race results.
+            Provides endpoints for race participants to view/edit their profile and track their event participation.
+            </summary>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.ParticipantController.GetMyProfile">
+            <summary>
+            Retrieves the authenticated participant's profile information.
+            </summary>
+            <remarks>
+            Returns detailed participant profile including personal information and emergency contact details.
+            Requires authentication and participant role.
+            </remarks>
+            <returns>Participant profile with ParticipantID, DateOfBirth, IDNumber, EmergencyContact, User details, CreatedAt, and UpdatedAt</returns>
+            <response code="200">Participant profile successfully retrieved</response>
+            <response code="401">User is not authenticated</response>
+            <response code="404">User is not registered as a participant</response>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.ParticipantController.UpdateMyProfile(RaceDayManagementAPI.Controllers.UpdateParticipantRequest)">
+            <summary>
+            Updates the authenticated participant's profile information.
+            </summary>
+            <remarks>
+            Allows a participant to update their personal information and emergency contact details.
+            Requires authentication and participant role.
+            </remarks>
+            <param name="request">Update request containing new participant and contact information</param>
+            <returns>Updated participant profile information</returns>
+            <response code="200">Profile successfully updated</response>
+            <response code="400">Required fields are missing</response>
+            <response code="401">User is not authenticated</response>
+            <response code="404">Participant profile not found</response>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.ParticipantController.GetMyEnrolments">
+            <summary>
+            Retrieves all race enrolments for the authenticated participant.
+            </summary>
+            <remarks>
+            Returns a list of all events and categories the participant is enrolled in with enrolment status and dates.
+            Requires authentication and participant role.
+            </remarks>
+            <returns>List of enrolments with EnrolmentID, CategoryID, EventID, EventName, CategoryName, EnrolmentDate, and Status</returns>
+            <response code="200">Successfully retrieved participant enrolments</response>
+            <response code="401">User is not authenticated</response>
+        </member>
+        <member name="M:RaceDayManagementAPI.Controllers.ParticipantController.GetMyResults">
+            <summary>
+            Retrieves all race results for the authenticated participant.
+            </summary>
+            <remarks>
+            Returns a list of all race results and achievements for events the participant has completed.
+            Requires authentication and participant role.
+            </remarks>
+            <returns>List of results with ResultID, EnrolmentID, EventID, EventName, FinishTime, Placement, Status, and CreatedAt</returns>
+            <response code="200">Successfully retrieved participant results</response>
+            <response code="401">User is not authenticated</response>
+        </member>
+        <member name="T:RaceDayManagementAPI.Controllers.ResultsController">
+            <summary>
+            Results controller for managing and recording race results.
+            Provides endpoints for organisers to capture/update participant results and retrieve result data.
+            </summary>
+        </member>
+    </members>
+</doc>
