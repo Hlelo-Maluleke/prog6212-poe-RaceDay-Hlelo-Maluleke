@@ -1,0 +1,137 @@
+﻿@model RaceDayMVC.Models.EventDetailViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-4">
+    <a asp-action="Index" class="btn btn-outline-secondary mb-3">← Back to Events</a>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            ✅ @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            ⚠️ @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Banner / Hero -->
+    @if (!string.IsNullOrEmpty(Model.BannerUrl))
+    {
+        <img src="@Model.BannerUrl" class="img-fluid rounded mb-4 w-100"
+             style="max-height: 380px; object-fit: cover;" alt="@Model.Name banner" />
+    }
+    else
+    {
+        <div class="rounded mb-4 d-flex align-items-center justify-content-center bg-primary text-white"
+             style="height: 260px; font-size: 5rem;">
+            @(Model.EventType == "run" ? "🏃" : Model.EventType == "walk" ? "🚶" : "🚴")
+        </div>
+    }
+
+    <!-- Event Info -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start flex-wrap">
+                <div>
+                    <h1 class="fw-bold mb-2">@Model.Name</h1>
+                    <span class="badge bg-@(Model.EventType == "run" ? "danger" : Model.EventType == "walk" ? "success" : "info") fs-6">
+                        @Model.EventType.ToUpper()
+                    </span>
+                    <span class="badge bg-@(Model.Status == "published" ? "primary" : "secondary") fs-6 ms-1">
+                        @Model.Status.ToUpper()
+                    </span>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>📅 Date:</strong> @Model.EventDate.ToString("dddd, dd MMMM yyyy")</p>
+                    <p><strong>📍 Location:</strong> @Model.Location</p>
+                </div>
+                <div class="col-md-6">
+                    @if (!string.IsNullOrEmpty(Model.Organiser))
+                    {
+                        <p><strong>👤 Organiser:</strong> @Model.Organiser</p>
+                    }
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+                <hr />
+                <p><strong>About this event:</strong></p>
+                <p class="text-muted">@Model.Description</p>
+            }
+        </div>
+    </div>
+
+    <!-- Categories -->
+    <h3 class="fw-bold mb-3">🏆 Available Categories</h3>
+    @if (!Model.Categories.Any())
+    {
+        <div class="alert alert-info">No categories have been added to this event yet.</div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var cat in Model.Categories)
+            {
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">@cat.Name</h5>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-secondary fs-6">@cat.DistanceKm km</span>
+                                <span class="badge bg-success fs-6">
+                                    @(cat.EntryFee == 0 ? "FREE" : $"R {cat.EntryFee:F2}")
+                                </span>
+                            </div>
+
+                            @if (cat.MaxParticipants.HasValue)
+                            {
+                                <p class="small text-muted mb-2">
+                                    Max participants: @cat.MaxParticipants.Value
+                                </p>
+                            }
+
+                            @if (cat.Route != null)
+                            {
+                                <div class="border rounded p-2 mb-2 small bg-light">
+                                    <strong>🗺️ Route Info</strong>
+                                    @if (cat.Route.ElevationGain.HasValue)
+                                    {
+                                        <div>Elevation gain: @cat.Route.ElevationGain m</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(cat.Route.MapUrl))
+                                    {
+                                        <div>
+                                            <a href="@cat.Route.MapUrl" target="_blank"
+                                               class="btn btn-sm btn-outline-primary mt-1">View Map</a>
+                                        </div>
+                                    }
+                                </div>
+                            }
+
+                            <form asp-action="Enrol" method="post" class="mt-auto">
+                                <input type="hidden" name="categoryId" value="@cat.CategoryID" />
+                                <input type="hidden" name="eventId" value="@Model.EventID" />
+                                <button type="submit" class="btn btn-primary w-100">
+                                    🎫 Enrol in @cat.Name
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
