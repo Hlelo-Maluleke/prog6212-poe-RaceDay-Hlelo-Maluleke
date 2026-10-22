@@ -15,8 +15,6 @@ namespace RaceDayMVC.Services
             _http = http;
             _httpContextAccessor = httpContextAccessor;
             _logger = logger;
-
-            // TODO: Replace with your API's HTTPS port from launchSettings.json
             _http.BaseAddress = new Uri("https://localhost:7065/");
         }
 
