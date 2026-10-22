@@ -1,0 +1,82 @@
+﻿@model RaceDayMVC.Models.CreateEventViewModel
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+<div class="container mt-4">
+    <a asp-action="Index" class="btn btn-outline-secondary mb-3">← Back to Dashboard</a>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">➕ Create New Event</h4>
+        </div>
+        <div class="card-body">
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">⚠️ @ViewBag.Error</div>
+            }
+
+            <form asp-action="CreateEvent" method="post" enctype="multipart/form-data">
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label class="form-label fw-bold">Event Name *</label>
+                        <input asp-for="Name" class="form-control" required
+                               placeholder="e.g. Soweto Marathon" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Event Type *</label>
+                        <select asp-for="EventType" class="form-select" required>
+                            <option value="run">🏃 Run</option>
+                            <option value="walk">🚶 Walk</option>
+                            <option value="cycle">🚴 Cycle</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-bold">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="3"
+                                  placeholder="Describe your event..."></textarea>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Event Date *</label>
+                        <input asp-for="EventDate" type="date" class="form-control" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Start Time</label>
+                        <input asp-for="StartTime" type="time" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Status</label>
+                        <select asp-for="Status" class="form-select">
+                            <option value="draft">Draft (not visible to participants)</option>
+                            <option value="published">Published (open for enrolment)</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-bold">Location *</label>
+                        <input asp-for="Location" class="form-control" required
+                               placeholder="e.g. Soweto, Johannesburg" />
+                    </div>
+
+                    <div class="col-12">
+                        <hr />
+                        <label class="form-label fw-bold">📷 Event Banner Image</label>
+                        <input asp-for="BannerImage" type="file" class="form-control" accept="image/*" />
+                        <div class="form-text">
+                            Upload a banner (JPG or PNG, max 5MB). It will appear on the event detail page.
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            ✅ Create Event
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

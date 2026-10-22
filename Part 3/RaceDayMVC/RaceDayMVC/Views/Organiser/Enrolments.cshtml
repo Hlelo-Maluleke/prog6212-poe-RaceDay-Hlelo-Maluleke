@@ -1,0 +1,105 @@
+﻿@model List<RaceDayMVC.Models.EnrolmentViewModel>
+@{
+    ViewData["Title"] = "Event Enrolments";
+    int eventId = ViewBag.EventId ?? 0;
+}
+
+<div class="container mt-4">
+    <a asp-action="Index" class="btn btn-outline-secondary mb-3">← Back to Dashboard</a>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold">👥 Event Enrolments</h1>
+        <span class="badge bg-primary fs-6">@Model.Count total</span>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center py-5">
+            <h4>No enrolments yet</h4>
+            <p>Participants will appear here once they enrol in your event.</p>
+        </div>
+    }
+    else
+    {
+        <!-- Status Summary -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card bg-success text-white">
+                    <div class="card-body text-center py-3">
+                        <h4 class="mb-0">@Model.Count(e => e.Status == "confirmed")</h4>
+                        <small>Confirmed</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body text-center py-3">
+                        <h4 class="mb-0">@Model.Count(e => e.Status == "pending")</h4>
+                        <small>Pending</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-secondary text-white">
+                    <div class="card-body text-center py-3">
+                        <h4 class="mb-0">@Model.Count(e => e.Status == "withdrawn")</h4>
+                        <small>Withdrawn</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Participant</th>
+                            <th>Contact</th>
+                            <th>Category</th>
+                            <th>Enrolled On</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var enrolment in Model.OrderBy(e => e.Participant?.FullName))
+                        {
+                            var statusClass = enrolment.Status switch
+                            {
+                                "confirmed" => "bg-success",
+                                "pending" => "bg-warning text-dark",
+                                "withdrawn" => "bg-secondary",
+                                _ => "bg-secondary"
+                            };
+
+                            <tr>
+                                <td>
+                                    <strong>@enrolment.Participant?.FullName</strong>
+                                    @if (enrolment.Participant != null)
+                                    {
+                                        <div class="small text-muted">ID: @enrolment.Participant.ParticipantID</div>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="small">📧 @enrolment.Participant?.Email</div>
+                                    @if (!string.IsNullOrEmpty(enrolment.Participant?.Phone))
+                                    {
+                                        <div class="small">📱 @enrolment.Participant.Phone</div>
+                                    }
+                                </td>
+                                <td>
+                                    <strong>@enrolment.Category?.Name</strong>
+                                    <div class="small text-muted">@enrolment.Category?.DistanceKm km</div>
+                                </td>
+                                <td>@enrolment.EnrolmentDate.ToString("dd MMM yyyy")</td>
+                                <td>
+                                    <span class="badge @statusClass">@enrolment.Status.ToUpper()</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

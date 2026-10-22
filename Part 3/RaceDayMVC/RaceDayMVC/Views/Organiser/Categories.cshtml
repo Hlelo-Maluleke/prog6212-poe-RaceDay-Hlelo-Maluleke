@@ -1,0 +1,119 @@
+﻿@model List<RaceDayMVC.Models.CategoryViewModel>
+@{
+    ViewData["Title"] = "Manage Categories";
+    int eventId = ViewBag.EventId ?? 0;
+}
+
+<div class="container mt-4">
+    <a asp-action="Index" class="btn btn-outline-secondary mb-3">← Back to Dashboard</a>
+
+    <h1 class="fw-bold mb-4">🏆 Event Categories</h1>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            ✅ @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            ⚠️ @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row g-4">
+        <!-- Existing Categories -->
+        <div class="col-md-7">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Existing Categories (@Model.Count)</h5>
+                </div>
+                <div class="card-body">
+                    @if (!Model.Any())
+                    {
+                        <div class="alert alert-info mb-0">
+                            No categories yet. Add one using the form on the right.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Distance</th>
+                                        <th>Entry Fee</th>
+                                        <th>Max</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var cat in Model)
+                                    {
+                                        <tr>
+                                            <td><strong>@cat.Name</strong></td>
+                                            <td>
+                                                <span class="badge bg-secondary">@cat.DistanceKm km</span>
+                                            </td>
+                                            <td>
+                                                @if (cat.EntryFee == 0)
+                                                {
+                                                    <span class="badge bg-success">FREE</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-info">R @cat.EntryFee.ToString("F2")</span>
+                                                }
+                                            </td>
+                                            <td>@(cat.MaxParticipants?.ToString() ?? "—")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Category Form -->
+        <div class="col-md-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">➕ Add New Category</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddCategory" asp-route-eventId="@eventId" method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Category Name *</label>
+                            <input name="Name" class="form-control" required
+                                   placeholder="e.g. 10km Road Run" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Distance (km) *</label>
+                            <input name="DistanceKm" type="number" step="0.01" min="0.1"
+                                   class="form-control" required placeholder="10.00" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Entry Fee (R)</label>
+                            <input name="EntryFee" type="number" step="0.01" min="0"
+                                   class="form-control" value="0" />
+                            <div class="form-text">Leave 0 for free events.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Max Participants</label>
+                            <input name="MaxParticipants" type="number" min="1"
+                                   class="form-control" placeholder="e.g. 500" />
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">
+                            ✅ Add Category
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,137 @@
+﻿@model List<RaceDayMVC.Models.OrganiserDashboardViewModel>
+@{
+    ViewData["Title"] = "Organiser Dashboard";
+    var totalEvents = Model.Count;
+    var totalEnrolments = Model.Sum(x => x.TotalEnrolments);
+    var upcomingEvents = Model.Count(x => x.Event.EventDate >= DateTime.Today);
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold">🏢 Organiser Dashboard</h1>
+        <a asp-action="CreateEvent" class="btn btn-primary">
+            ➕ Create New Event
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            ✅ @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            ⚠️ @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Summary Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white shadow-sm">
+                <div class="card-body text-center">
+                    <h2 class="display-5 fw-bold">@totalEvents</h2>
+                    <p class="mb-0">Total Events</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white shadow-sm">
+                <div class="card-body text-center">
+                    <h2 class="display-5 fw-bold">@totalEnrolments</h2>
+                    <p class="mb-0">Total Enrolments</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-warning text-dark shadow-sm">
+                <div class="card-body text-center">
+                    <h2 class="display-5 fw-bold">@upcomingEvents</h2>
+                    <p class="mb-0">Upcoming Events</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Events Table -->
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center py-5">
+            <h4>You haven't created any events yet</h4>
+            <p>Click the "Create New Event" button above to get started.</p>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Event</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Enrolments</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderBy(x => x.Event.EventDate))
+                        {
+                            <tr>
+                                <td>
+                                    <strong>@item.Event.Name</strong>
+                                    <div class="small text-muted">📍 @item.Event.Location</div>
+                                </td>
+                                <td>
+                                    @item.Event.EventDate.ToString("dd MMM yyyy")
+                                    @if (item.Event.StartTime.HasValue)
+                                    {
+                                        <div class="small text-muted">
+                                            🕒 @item.Event.StartTime.Value.ToString(@"hh\:mm")
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="badge bg-@(item.Event.EventType == "run" ? "danger" : item.Event.EventType == "walk" ? "success" : "info")">
+                                        @item.Event.EventType.ToUpper()
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-@(item.Event.Status == "published" ? "primary" : item.Event.Status == "draft" ? "secondary" : "warning text-dark")">
+                                        @item.Event.Status.ToUpper()
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-info fs-6">@item.TotalEnrolments</span>
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a asp-action="EditEvent" asp-route-id="@item.Event.EventID"
+                                           class="btn btn-outline-primary" title="Edit">✏️</a>
+                                        <a asp-action="Categories" asp-route-eventId="@item.Event.EventID"
+                                           class="btn btn-outline-secondary" title="Categories">🏆</a>
+                                        <a asp-action="Enrolments" asp-route-eventId="@item.Event.EventID"
+                                           class="btn btn-outline-info" title="Enrolments">👥</a>
+                                        <a asp-action="CaptureResults" asp-route-eventId="@item.Event.EventID"
+                                           class="btn btn-outline-success" title="Capture Results">📊</a>
+                                        <form asp-action="DeleteEvent" asp-route-id="@item.Event.EventID"
+                                              method="post" class="d-inline"
+                                              onsubmit="return confirm('Delete this event? This cannot be undone.');">
+                                            <button type="submit" class="btn btn-outline-danger" title="Delete">🗑️</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

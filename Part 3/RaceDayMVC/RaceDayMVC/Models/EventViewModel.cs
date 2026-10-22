@@ -6,11 +6,12 @@
         public string Name { get; set; } = "";
         public string? Description { get; set; }
         public DateTime EventDate { get; set; }
+        public TimeSpan? StartTime { get; set; }
         public string Location { get; set; } = "";
         public string EventType { get; set; } = "";
         public string Status { get; set; } = "";
         public string? Organiser { get; set; }
-        public string? BannerUrl { get; set; } // Added in Phase 6
+        public string? BannerUrl { get; set; } 
     }
 
     public class EventDetailViewModel : EventViewModel
@@ -43,6 +44,7 @@
         public EventViewModel? Event { get; set; }
         public CategoryViewModel? Category { get; set; }
         public ResultSummaryViewModel? Result { get; set; }
+        public ParticipantProfileViewModel? Participant { get; set; }
     }
 
     public class ResultViewModel

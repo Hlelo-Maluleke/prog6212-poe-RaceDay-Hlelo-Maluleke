@@ -1,0 +1,89 @@
+﻿@model RaceDayMVC.Models.EventDetailViewModel
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<div class="container mt-4">
+    <a asp-action="Index" class="btn btn-outline-secondary mb-3">← Back to Dashboard</a>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0">✏️ Edit Event: @Model.Name</h4>
+        </div>
+        <div class="card-body">
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">⚠️ @ViewBag.Error</div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.BannerUrl))
+            {
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Current Banner:</label>
+                    <div>
+                        <img src="@Model.BannerUrl" class="img-thumbnail"
+                             style="max-height: 180px;" alt="Event banner" />
+                    </div>
+                </div>
+            }
+
+            <form asp-action="EditEvent" asp-route-id="@Model.EventID"
+                  method="post" enctype="multipart/form-data">
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label class="form-label fw-bold">Event Name *</label>
+                        <input asp-for="Name" class="form-control" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Event Type *</label>
+                        <select asp-for="EventType" class="form-select" required>
+                            <option value="run">🏃 Run</option>
+                            <option value="walk">🚶 Walk</option>
+                            <option value="cycle">🚴 Cycle</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-bold">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Event Date *</label>
+                        <input asp-for="EventDate" type="date" class="form-control" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Start Time</label>
+                        <input asp-for="StartTime" type="time" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Status</label>
+                        <select asp-for="Status" class="form-select">
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-bold">Location *</label>
+                        <input asp-for="Location" class="form-control" required />
+                    </div>
+
+                    <div class="col-12">
+                        <hr />
+                        <label class="form-label fw-bold">📷 Replace Banner Image</label>
+                        <input type="file" name="bannerImage" class="form-control" accept="image/*" />
+                        <div class="form-text">Leave empty to keep the current banner.</div>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-warning">💾 Save Changes</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
