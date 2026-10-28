@@ -342,7 +342,7 @@ namespace RaceDayMVC.Controllers
             return RedirectToAction("CaptureResults", new { eventId });
         }
 
-        // Phase 6: Banner Upload
+        // Banner Upload
         private async Task UploadBanner(int eventId, IFormFile file)
         {
             try

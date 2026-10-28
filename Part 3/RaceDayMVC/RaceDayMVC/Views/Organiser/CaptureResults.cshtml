@@ -40,7 +40,7 @@
             <div class="card-body">
                 <p class="text-muted mb-3">
                     For each participant, enter their finish time and position.
-                    Click <strong>Save</strong> to publish the result.
+                    Click <strong>Save Result</strong> to publish or update the result.
                 </p>
 
                 <div class="table-responsive">
@@ -58,6 +58,7 @@
                         <tbody>
                             @foreach (var enrolment in Model.OrderBy(e => e.Participant?.FullName))
                             {
+                                var currentStatus = enrolment.Result?.Status ?? "finished";
                                 <tr>
                                     <td>
                                         <strong>@enrolment.Participant?.FullName</strong>
@@ -75,19 +76,19 @@
                                                 <input type="number" name="finishTimeSeconds" min="1"
                                                        class="form-control form-control-sm"
                                                        placeholder="e.g. 6300"
-                                                       value="@(enrolment.Result?.FinishTimeSeconds ?? 0)" />
+                                                       value="@(enrolment.Result?.FinishTimeSeconds)" />
                                             </div>
                                             <div class="col-md-2">
                                                 <input type="number" name="position" min="1"
                                                        class="form-control form-control-sm"
                                                        placeholder="e.g. 42"
-                                                       value="@(enrolment.Result?.Position ?? 0)" />
+                                                       value="@(enrolment.Result?.Position)" />
                                             </div>
                                             <div class="col-md-3">
                                                 <select name="status" class="form-select form-select-sm">
-                                                    <option value="finished">✅ Finished</option>
-                                                    <option value="dnf">❌ DNF</option>
-                                                    <option value="dsq">⚠️ DSQ</option>
+                                                    <option value="finished" selected="@(currentStatus == "finished")">✅ Finished</option>
+                                                    <option value="did not finish" selected="@(currentStatus == "dnf")">❌ DNF</option>
+                                                    <option value="disqualified" selected="@(currentStatus == "dsq")">⚠️ DSQ</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
@@ -98,14 +99,20 @@
                                         </form>
                                     </td>
                                 </tr>
-                                @if (enrolment.Result != null && enrolment.Result.FinishTimeSeconds.HasValue)
+                                @if (enrolment.Result != null)
                                 {
                                     <tr class="table-light">
                                         <td colspan="6" class="small">
                                             <strong>Current result:</strong>
-                                            @FormatTime(enrolment.Result.FinishTimeSeconds.Value) —
-                                            Position @enrolment.Result.Position —
-                                            Status: <span class="badge bg-info">@enrolment.Result.FinishTimeSeconds</span>
+                                            @if (enrolment.Result.FinishTimeSeconds.HasValue)
+                                            {
+                                                <text>@FormatTime(enrolment.Result.FinishTimeSeconds.Value) — </text>
+                                            }
+                                            @if (enrolment.Result.Position.HasValue)
+                                            {
+                                                <text>Position @enrolment.Result.Position — </text>
+                                            }
+                                            Status: <span class="badge bg-info">@((enrolment.Result.Status ?? "finished").ToUpper())</span>
                                         </td>
                                     </tr>
                                 }

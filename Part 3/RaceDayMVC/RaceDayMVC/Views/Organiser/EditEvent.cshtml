@@ -29,6 +29,9 @@
 
             <form asp-action="EditEvent" asp-route-id="@Model.EventID"
                   method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="EventID" />
+                <input type="hidden" asp-for="BannerUrl" />
+
                 <div class="row g-3">
                     <div class="col-md-8">
                         <label class="form-label fw-bold">Event Name *</label>
@@ -73,13 +76,13 @@
 
                     <div class="col-12">
                         <hr />
-                        <label class="form-label fw-bold">📷 Replace Banner Image</label>
+                        <label class="form-label fw-bold">Replace Banner Image</label>
                         <input type="file" name="bannerImage" class="form-control" accept="image/*" />
                         <div class="form-text">Leave empty to keep the current banner.</div>
                     </div>
 
                     <div class="col-12 mt-4">
-                        <button type="submit" class="btn btn-warning">💾 Save Changes</button>
+                        <button type="submit" class="btn btn-warning">Save Changes</button>
                         <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
                     </div>
                 </div>

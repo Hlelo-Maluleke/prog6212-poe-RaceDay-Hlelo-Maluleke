@@ -48,13 +48,20 @@
                                         <th>Distance</th>
                                         <th>Entry Fee</th>
                                         <th>Max</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var cat in Model)
                                     {
                                         <tr>
-                                            <td><strong>@cat.Name</strong></td>
+                                            <td>
+                                                <strong>@cat.Name</strong>
+                                                @if (!string.IsNullOrEmpty(cat.Description))
+                                                {
+                                                    <div class="small text-muted">@cat.Description</div>
+                                                }
+                                            </td>
                                             <td>
                                                 <span class="badge bg-secondary">@cat.DistanceKm km</span>
                                             </td>
@@ -69,6 +76,14 @@
                                                 }
                                             </td>
                                             <td>@(cat.MaxParticipants?.ToString() ?? "—")</td>
+                                            <td class="text-end">
+                                                <form asp-action="DeleteCategory" method="post" class="d-inline"
+                                                      onsubmit="return confirm('Delete this category?');">
+                                                    <input type="hidden" name="categoryId" value="@cat.CategoryID" />
+                                                    <input type="hidden" name="eventId" value="@eventId" />
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete Category"></button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -83,7 +98,7 @@
         <div class="col-md-5">
             <div class="card shadow-sm">
                 <div class="card-header bg-success text-white">
-                    <h5 class="mb-0">➕ Add New Category</h5>
+                    <h5 class="mb-0">Add New Category</h5>
                 </div>
                 <div class="card-body">
                     <form asp-action="AddCategory" asp-route-eventId="@eventId" method="post">
@@ -91,6 +106,11 @@
                             <label class="form-label fw-bold">Category Name *</label>
                             <input name="Name" class="form-control" required
                                    placeholder="e.g. 10km Road Run" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <input name="Description" class="form-control"
+                                   placeholder="Optional category description" />
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Distance (km) *</label>
@@ -109,7 +129,7 @@
                                    class="form-control" placeholder="e.g. 500" />
                         </div>
                         <button type="submit" class="btn btn-success w-100">
-                            ✅ Add Category
+                            Add Category
                         </button>
                     </form>
                 </div>

@@ -18,12 +18,12 @@
                     }
                     <form method="post">
                         <div class="mb-3">
-                            <label>FullName</label>
+                            <label>Full Name</label>
                             <input asp-for="FullName" class="form-control" required />
                         </div>
                         <div class="mb-3">
                             <label>Email</label>
-                            <input asp-for="Email" class="form-control" required />
+                            <input asp-for="Email" type="email" class="form-control" required />
                         </div>
                         <div class="mb-3">
                             <label>Password</label>
@@ -34,23 +34,23 @@
                             <input asp-for="Phone" class="form-control" required />
                         </div>
                         <div class="mb-3">
-                            <label>DateOfBirth</label>
-                            <input asp-for="DateOfBirth" class="form-control" required />
+                            <label>Date of Birth</label>
+                            <input asp-for="DateOfBirth" type="date" class="form-control" required />
                         </div>
                         <div class="mb-3">
-                            <label>IDNumber</label>
+                            <label>ID Number</label>
                             <input asp-for="IDNumber" class="form-control" required />
                         </div>
                         <div class="mb-3">
-                            <label>EmergencyContact</label>
+                            <label>Emergency Contact</label>
                             <input asp-for="EmergencyContact" class="form-control" required />
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Register</button>
                     </form>
                     <hr />
                     <p class="text-center">
-                        Don't have an account?
-                        <a asp-action="Register">Register as Participant</a>
+                        Already have an account?
+                        <a asp-action="Login">Login here</a>
                     </p>
                 </div>
             </div>

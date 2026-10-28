@@ -6,6 +6,21 @@
 <div class="container mt-4">
     <h1 class="fw-bold mb-4">🎫 My Enrolments</h1>
 
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            ✅ @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            ⚠️ @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
     @if (!Model.Any())
     {
         <div class="alert alert-info text-center py-5">
@@ -58,12 +73,19 @@
                                     <span class="badge @statusClass">@enrolment.Status.ToUpper()</span>
                                 </td>
                                 <td>
-                                    @if (enrolment.Result != null && enrolment.Result.FinishTimeSeconds.HasValue)
+                                    @if (enrolment.Result != null && (enrolment.Result.FinishTimeSeconds.HasValue || !string.IsNullOrEmpty(enrolment.Result.Status)))
                                     {
-                                        <span class="badge bg-info">
-                                            @FormatTime(enrolment.Result.FinishTimeSeconds.Value)
-                                        </span>
-                                        @if (enrolment.Result.Position.HasValue)
+                                        if (enrolment.Result.FinishTimeSeconds.HasValue)
+                                        {
+                                            <span class="badge bg-info">
+                                                @FormatTime(enrolment.Result.FinishTimeSeconds.Value)
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">@enrolment.Result.Status?.ToUpper()</span>
+                                        }
+                                        if (enrolment.Result.Position.HasValue)
                                         {
                                             <div class="small text-muted">Position: @enrolment.Result.Position</div>
                                         }
@@ -73,11 +95,19 @@
                                         <span class="text-muted small">Not published</span>
                                     }
                                 </td>
-                                <td>
+                                <td class="text-end">
                                     @if (enrolment.Event != null)
                                     {
                                         <a asp-action="Details" asp-route-id="@enrolment.Event.EventID"
                                            class="btn btn-sm btn-outline-primary">View Event</a>
+                                    }
+                                    @if (enrolment.Status != "withdrawn" && enrolment.Result == null)
+                                    {
+                                        <form asp-action="Withdraw" method="post" class="d-inline ms-1"
+                                              onsubmit="return confirm('Withdraw from this event?');">
+                                            <input type="hidden" name="enrolmentId" value="@enrolment.EnrolmentID" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Withdraw</button>
+                                        </form>
                                     }
                                 </td>
                             </tr>
