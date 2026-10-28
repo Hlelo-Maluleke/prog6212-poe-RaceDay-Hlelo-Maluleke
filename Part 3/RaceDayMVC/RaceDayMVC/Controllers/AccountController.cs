@@ -9,6 +9,10 @@ namespace RaceDayMVC.Controllers
     {
         private readonly ApiClient _api;
         private readonly ILogger<AccountController> _logger;
+        private static readonly JsonSerializerOptions _jsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         public AccountController(ApiClient api, ILogger<AccountController> logger)
         {
@@ -20,15 +24,14 @@ namespace RaceDayMVC.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            // If already logged in, redirect to the correct dashboard
             var isLoggedIn = HttpContext.Session.GetString("JwtToken") != null;
 
             if (isLoggedIn)
             {
-                if (HttpContext.Session.GetString("IsOrganiser") == "True")
+                if (string.Equals(HttpContext.Session.GetString("IsOrganiser"), "True", StringComparison.OrdinalIgnoreCase))
                     return RedirectToAction("Index", "Organiser");
 
-                if (HttpContext.Session.GetString("IsParticipant") == "True")
+                if (string.Equals(HttpContext.Session.GetString("IsParticipant"), "True", StringComparison.OrdinalIgnoreCase))
                     return RedirectToAction("Index", "Participant");
             }
 
@@ -38,7 +41,7 @@ namespace RaceDayMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            _logger.LogInformation($"Login attempt for: {model.Email}");
+            _logger.LogInformation("Login attempt for: {Email}", model.Email);
 
             var response = await _api.PostAsync("api/auth/login", new
             {
@@ -48,27 +51,28 @@ namespace RaceDayMVC.Controllers
 
             if (!response.IsSuccessStatusCode)
             {
-                _logger.LogWarning($"Login failed for {model.Email}: {response.StatusCode}");
+                _logger.LogWarning("Login failed for {Email}: {StatusCode}", model.Email, response.StatusCode);
                 ViewBag.Error = "Invalid email or password.";
                 return View(model);
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation($"Login response: {json}");
-
-            var auth = JsonSerializer.Deserialize<AuthResponse>(json,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            if (auth == null)
+            AuthResponse? auth = null;
+            try
             {
-                _logger.LogError("Failed to deserialize auth response");
+                auth = JsonSerializer.Deserialize<AuthResponse>(json, _jsonOptions);
+            }
+            catch (JsonException ex)
+            {
+                _logger.LogError(ex, "Failed to deserialize login response: {Json}", json);
+            }
+
+            if (auth == null || string.IsNullOrEmpty(auth.Token))
+            {
                 ViewBag.Error = "Login failed: Invalid response from server.";
                 return View(model);
             }
 
-            _logger.LogInformation($"Login successful for {auth.Email}. UserID: {auth.UserID}, IsParticipant: {auth.IsParticipant}, IsOrganiser: {auth.IsOrganiser}");
-
-            // Store in session
             HttpContext.Session.SetString("JwtToken", auth.Token);
             HttpContext.Session.SetInt32("UserID", auth.UserID);
             HttpContext.Session.SetString("FullName", auth.FullName);
@@ -76,22 +80,14 @@ namespace RaceDayMVC.Controllers
             HttpContext.Session.SetString("IsOrganiser", auth.IsOrganiser.ToString());
             HttpContext.Session.SetString("IsParticipant", auth.IsParticipant.ToString());
 
-            _logger.LogInformation($"Session data saved. IsParticipant stored as: {auth.IsParticipant.ToString()}");
-
-            // Redirect based on role
             if (auth.IsOrganiser)
-            {
-                _logger.LogInformation($"Redirecting to Organiser dashboard");
                 return RedirectToAction("Index", "Organiser");
-            }
-            if (auth.IsParticipant)
-            {
-                _logger.LogInformation($"Redirecting to Participant dashboard");
-                return RedirectToAction("Index", "Participant");
-            }
 
-            _logger.LogWarning($"User {auth.Email} has no roles assigned");
-            return RedirectToAction("Index", "Home");
+            if (auth.IsParticipant)
+                return RedirectToAction("Index", "Participant");
+
+            ViewBag.Error = "Your account does not have an assigned role.";
+            return View(model);
         }
 
         // GET: /Account/Register
@@ -119,7 +115,7 @@ namespace RaceDayMVC.Controllers
                 return View(model);
             }
 
-            // Auto-login after registration
+            TempData["Success"] = "Registration successful! Please log in.";
             return RedirectToAction("Login");
         }
 

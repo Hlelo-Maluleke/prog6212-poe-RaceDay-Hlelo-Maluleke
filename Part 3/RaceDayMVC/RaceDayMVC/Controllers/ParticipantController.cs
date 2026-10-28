@@ -8,15 +8,36 @@ namespace RaceDayMVC.Controllers
     public class ParticipantController : Controller
     {
         private readonly ApiClient _api;
+        private readonly ILogger<ParticipantController> _logger;
         private static readonly JsonSerializerOptions _jsonOptions = new()
         {
             PropertyNameCaseInsensitive = true
         };
 
-        public ParticipantController(ApiClient api) => _api = api;
+        public ParticipantController(ApiClient api, ILogger<ParticipantController> logger)
+        {
+            _api = api;
+            _logger = logger;
+        }
 
         private bool IsParticipant()
             => string.Equals(HttpContext.Session.GetString("IsParticipant"), "True", StringComparison.OrdinalIgnoreCase);
+
+        private T? DeserializeSafe<T>(string? json)
+        {
+            if (string.IsNullOrWhiteSpace(json))
+                return default;
+
+            try
+            {
+                return JsonSerializer.Deserialize<T>(json, _jsonOptions);
+            }
+            catch (JsonException ex)
+            {
+                _logger.LogError(ex, "JSON deserialization failed for {Type}. Payload: {Payload}", typeof(T).Name, json);
+                return default;
+            }
+        }
 
         // GET: /Participant
         public async Task<IActionResult> Index()
@@ -31,9 +52,12 @@ namespace RaceDayMVC.Controllers
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            var events = string.IsNullOrWhiteSpace(json)
-                ? new List<EventViewModel>()
-                : JsonSerializer.Deserialize<List<EventViewModel>>(json, _jsonOptions) ?? new List<EventViewModel>();
+            var events = DeserializeSafe<List<EventViewModel>>(json) ?? new List<EventViewModel>();
+
+            // Hide draft events from participants
+            events = events
+                .Where(e => !string.Equals(e.Status, "draft", StringComparison.OrdinalIgnoreCase))
+                .ToList();
 
             return View(events);
         }
@@ -51,7 +75,7 @@ namespace RaceDayMVC.Controllers
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            var eventDetail = JsonSerializer.Deserialize<EventDetailViewModel>(json, _jsonOptions);
+            var eventDetail = DeserializeSafe<EventDetailViewModel>(json);
             if (eventDetail == null)
             {
                 TempData["Error"] = "Unable to load event details.";
@@ -82,6 +106,25 @@ namespace RaceDayMVC.Controllers
             return RedirectToAction(nameof(Details), new { id = eventId });
         }
 
+        // POST: /Participant/Withdraw
+        [HttpPost]
+        public async Task<IActionResult> Withdraw(int enrolmentId)
+        {
+            if (!IsParticipant()) return RedirectToAction("Login", "Account");
+
+            var response = await _api.DeleteAsync($"api/enrolments/{enrolmentId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["Error"] = "Failed to withdraw from enrolment.";
+            }
+            else
+            {
+                TempData["Success"] = "You have withdrawn from the event.";
+            }
+
+            return RedirectToAction(nameof(MyEnrolments));
+        }
+
         // GET: /Participant/MyEnrolments
         public async Task<IActionResult> MyEnrolments()
         {
@@ -95,9 +138,7 @@ namespace RaceDayMVC.Controllers
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            var enrolments = string.IsNullOrWhiteSpace(json)
-                ? new List<EnrolmentViewModel>()
-                : JsonSerializer.Deserialize<List<EnrolmentViewModel>>(json, _jsonOptions) ?? new List<EnrolmentViewModel>();
+            var enrolments = DeserializeSafe<List<EnrolmentViewModel>>(json) ?? new List<EnrolmentViewModel>();
 
             return View(enrolments);
         }
@@ -115,9 +156,7 @@ namespace RaceDayMVC.Controllers
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            var results = string.IsNullOrWhiteSpace(json)
-                ? new List<ResultViewModel>()
-                : JsonSerializer.Deserialize<List<ResultViewModel>>(json, _jsonOptions) ?? new List<ResultViewModel>();
+            var results = DeserializeSafe<List<ResultViewModel>>(json) ?? new List<ResultViewModel>();
 
             return View(results);
         }
@@ -135,9 +174,7 @@ namespace RaceDayMVC.Controllers
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            var profile = string.IsNullOrWhiteSpace(json)
-                ? new ParticipantProfileViewModel()
-                : JsonSerializer.Deserialize<ParticipantProfileViewModel>(json, _jsonOptions) ?? new ParticipantProfileViewModel();
+            var profile = DeserializeSafe<ParticipantProfileViewModel>(json) ?? new ParticipantProfileViewModel();
 
             return View(profile);
         }
@@ -148,7 +185,6 @@ namespace RaceDayMVC.Controllers
         {
             if (!IsParticipant()) return RedirectToAction("Login", "Account");
 
-            // Update profile via API
             var response = await _api.PutAsync("api/participants/user", new
             {
                 fullName = model.FullName,
@@ -165,11 +201,10 @@ namespace RaceDayMVC.Controllers
                 return View(model);
             }
 
-            // Profile picture upload – calls API endpoint (Phase 6)
-            if (profilePicture != null && profilePicture.Length > 0)
-            {
-                // To be implemented in Phase 6
-            }
+            if (!string.IsNullOrWhiteSpace(model.FullName))
+                HttpContext.Session.SetString("FullName", model.FullName);
+            if (!string.IsNullOrWhiteSpace(model.Email))
+                HttpContext.Session.SetString("Email", model.Email);
 
             TempData["Success"] = "Profile updated successfully!";
             return RedirectToAction(nameof(Profile));
