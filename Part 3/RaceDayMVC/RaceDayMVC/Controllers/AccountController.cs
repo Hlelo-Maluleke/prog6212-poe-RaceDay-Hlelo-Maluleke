@@ -18,7 +18,22 @@ namespace RaceDayMVC.Controllers
 
         // GET: /Account/Login
         [HttpGet]
-        public IActionResult Login() => View();
+        public IActionResult Login()
+        {
+            // If already logged in, redirect to the correct dashboard
+            var isLoggedIn = HttpContext.Session.GetString("JwtToken") != null;
+
+            if (isLoggedIn)
+            {
+                if (HttpContext.Session.GetString("IsOrganiser") == "True")
+                    return RedirectToAction("Index", "Organiser");
+
+                if (HttpContext.Session.GetString("IsParticipant") == "True")
+                    return RedirectToAction("Index", "Participant");
+            }
+
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -112,6 +127,12 @@ namespace RaceDayMVC.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View();
         }
     }
 }

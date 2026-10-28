@@ -17,6 +17,15 @@ namespace RaceDayMVC.Services
             _logger = logger;
             _http.BaseAddress = new Uri("https://localhost:7065/");
         }
+        private void AttachToken()
+        {
+            var token = _httpContextAccessor.HttpContext?.Session.GetString("JwtToken");
+            if (!string.IsNullOrEmpty(token))
+            {
+                _http.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", token);
+            }
+        }
 
         private string? GetToken()
         {
@@ -85,6 +94,20 @@ namespace RaceDayMVC.Services
             var request = new HttpRequestMessage(HttpMethod.Delete, url);
             AttachTokenToRequest(request);
             return await _http.SendAsync(request);
+        }
+        public async Task<HttpResponseMessage> PostMultipartAsync(string url, IFormFile file, string fieldName = "file")
+        {
+            AttachToken();
+
+            using var content = new MultipartFormDataContent();
+            using var stream = file.OpenReadStream();
+            var fileContent = new StreamContent(stream);
+            fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(
+                file.ContentType ?? "application/octet-stream");
+
+            content.Add(fileContent, fieldName, file.FileName);
+
+            return await _http.PostAsync(url, content);
         }
     }
 }

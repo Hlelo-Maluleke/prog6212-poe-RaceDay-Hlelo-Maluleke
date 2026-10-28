@@ -1,46 +1,144 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@{
+    var isLoggedIn = Context.Session.GetString("JwtToken") != null;
+    var isOrganiser = Context.Session.GetString("IsOrganiser") == "True";
+    var isParticipant = Context.Session.GetString("IsParticipant") == "True";
+    var fullName = Context.Session.GetString("FullName") ?? "";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+
+    string ActiveIf(string controller, string action)
+        => (currentController == controller && currentAction == action) ? "active" : "";
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RaceDayMVC</title>
+    <title>@ViewData["Title"] – RaceDay</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RaceDayMVC.styles.css" asp-append-version="true" />
+    <style>
+            .navbar-brand {
+                font-weight: 700;
+                letter-spacing: 1px;
+            }
+
+            .navbar-nav .nav-link.active {
+                font-weight: 700;
+                border-bottom: 2px solid #fff;
+            }
+
+            .user-chip {
+                background: rgba(255,255,255,0.15);
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.9rem;
+            }
+
+            body {
+                background-color: #f5f7fa;
+            }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RaceDayMVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Account" asp-action="Login">🏁 RaceDay</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav" aria-controls="navbarNav"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        @if (!isLoggedIn)
+                        {
+                            // No additional links for guests
+
+                        }
+                        else if (isParticipant)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @ActiveIf("Participant", "Index")"
+                                   asp-controller="Participant" asp-action="Index">🏃 Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @ActiveIf("Participant", "MyEnrolments")"
+                                   asp-controller="Participant" asp-action="MyEnrolments">🎫 My Enrolments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @ActiveIf("Participant", "MyResults")"
+                                   asp-controller="Participant" asp-action="MyResults">🏆 My Results</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @ActiveIf("Participant", "Profile")"
+                                   asp-controller="Participant" asp-action="Profile">👤 Profile</a>
+                            </li>
+                        }
+                        else if (isOrganiser)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @ActiveIf("Organiser", "Index")"
+                                   asp-controller="Organiser" asp-action="Index">📊 Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @ActiveIf("Organiser", "CreateEvent")"
+                                   asp-controller="Organiser" asp-action="CreateEvent">➕ Create Event</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        @if (!isLoggedIn)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @ActiveIf("Account", "Login")"
+                                   asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @ActiveIf("Account", "Register")"
+                                   asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item d-flex align-items-center me-2">
+                                <span class="user-chip text-white">
+                                    @if (isOrganiser)
+                                    {
+                                        <text>🏢 </text>
+                                    }
+                                    else if (isParticipant)
+                                    {
+
+                                        <text>🏃 </text>
+                                    }
+                                    @fullName
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - RaceDayMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <footer class="border-top footer text-muted mt-5 py-3 bg-white">
+        <div class="container text-center">
+            &copy; @DateTime.Now.Year – RaceDay · Built for the South African sports community 🇿🇦
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -236,10 +236,16 @@ namespace RaceDayMVC.Controllers
             return RedirectToAction("CaptureResults", new { eventId });
         }
 
-        // Placeholder for Phase 6
+        // Phase 6
         private async Task UploadBanner(int eventId, IFormFile file)
         {
-            // Implemented in Phase 6
+            var response = await _api.PostMultipartAsync($"api/events/{eventId}/banner", file, "file");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                // log or set TempData
+                TempData["Error"] = "Banner upload failed.";
+            }
         }
     }
 }
