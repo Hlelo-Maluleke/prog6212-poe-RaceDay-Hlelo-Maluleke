@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Data;
 using RaceDayManagementAPI.Models;
 using RaceDayManagementAPI.Services;
 
@@ -14,10 +15,12 @@ namespace RaceDayManagementAPI.Controllers
     public class ResultsController : ControllerBase
     {
         private readonly JwtService _jwtService;
+        private readonly RaceDayDbContext _db;
 
-        public ResultsController(JwtService jwtService)
+        public ResultsController(JwtService jwtService, RaceDayDbContext db)
         {
             _jwtService = jwtService;
+            _db = db;
         }
 
         // 1. CAPTURE/UPDATE RESULT (UPSERT)
@@ -26,19 +29,19 @@ namespace RaceDayManagementAPI.Controllers
         [Authorize]
         public IActionResult CaptureResult(int enrolmentId, [FromBody] ResultRequest request)
         {
-            var enrolment = RaceDayDB.Enrolments.FirstOrDefault(e => e.EnrolmentID == enrolmentId);
+            var enrolment = _db.Enrolments.FirstOrDefault(e => e.EnrolmentID == enrolmentId);
             if (enrolment == null)
                 return NotFound(new { message = "Enrolment not found." });
 
-            var category = RaceDayDB.Categories.FirstOrDefault(c => c.CategoryID == enrolment.CategoryID);
-            var eventEntity = category != null ? RaceDayDB.Events.FirstOrDefault(e => e.EventID == category.EventID) : null;
-            var organiser = eventEntity != null ? RaceDayDB.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
+            var category = _db.Categories.FirstOrDefault(c => c.CategoryID == enrolment.CategoryID);
+            var eventEntity = category != null ? _db.Events.FirstOrDefault(e => e.EventID == category.EventID) : null;
+            var organiser = eventEntity != null ? _db.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
 
             var userId = _jwtService.GetUserIdFromToken(User);
             if (organiser?.UserID != userId)
                 return Forbid("Only the event organiser can capture results.");
 
-            var existingResult = RaceDayDB.Results.FirstOrDefault(r => r.EnrolmentID == enrolmentId);
+            var existingResult = _db.Results.FirstOrDefault(r => r.EnrolmentID == enrolmentId);
 
             if (existingResult != null)
             {
@@ -46,8 +49,9 @@ namespace RaceDayManagementAPI.Controllers
                 existingResult.FinishTimeSeconds = request.FinishTimeSeconds;
                 existingResult.Position = request.Position;
                 existingResult.Status = request.Status ?? "finished";
-                existingResult.UpdatedAt = DateTime.Now;
+                existingResult.UpdatedAt = DateTime.UtcNow;
 
+                _db.SaveChanges();
                 return Ok(existingResult);
             }
             else
@@ -55,14 +59,16 @@ namespace RaceDayManagementAPI.Controllers
                 // Create
                 var result = new Result
                 {
-                    ResultID = RaceDayDB.NextResultID++,
                     EnrolmentID = enrolmentId,
                     OrganiserID = organiser.OrganiserID,
                     FinishTimeSeconds = request.FinishTimeSeconds,
                     Position = request.Position,
-                    Status = request.Status ?? "finished"
+                    Status = request.Status ?? "finished",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
                 };
-                RaceDayDB.Results.Add(result);
+                _db.Results.Add(result);
+                _db.SaveChanges();
 
                 return CreatedAtAction(nameof(GetEventResults), new { eventId = eventEntity?.EventID }, result);
             }
@@ -74,33 +80,36 @@ namespace RaceDayManagementAPI.Controllers
         [AllowAnonymous]
         public IActionResult GetEventResults(int eventId)
         {
-            var eventExists = RaceDayDB.Events.Any(e => e.EventID == eventId);
+            var eventExists = _db.Events.Any(e => e.EventID == eventId);
             if (!eventExists)
                 return NotFound(new { message = "Event not found." });
 
-            var categoryIds = RaceDayDB.Categories
-                .Where(c => c.EventID == eventId)
-                .Select(c => c.CategoryID)
-                .ToList();
+            var categories = _db.Categories.Where(c => c.EventID == eventId).ToList();
+            var categoryIds = categories.Select(c => c.CategoryID).ToList();
 
-            var enrolmentIds = RaceDayDB.Enrolments
-                .Where(e => categoryIds.Contains(e.CategoryID))
-                .Select(e => e.EnrolmentID)
-                .ToList();
+            var enrolments = _db.Enrolments.Where(e => categoryIds.Contains(e.CategoryID)).ToList();
+            var enrolmentIds = enrolments.Select(e => e.EnrolmentID).ToList();
 
-            var results = RaceDayDB.Results
+            var rawResults = _db.Results
                 .Where(r => enrolmentIds.Contains(r.EnrolmentID))
                 .OrderBy(r => r.Position)
+                .ToList();
+
+            var participants = _db.Participants.ToList();
+            var users = _db.Users.ToList();
+
+            var results = rawResults
                 .Select(r =>
                 {
-                    var enrolment = RaceDayDB.Enrolments.FirstOrDefault(e => e.EnrolmentID == r.EnrolmentID);
-                    var participant = enrolment != null ? RaceDayDB.Participants.FirstOrDefault(p => p.ParticipantID == enrolment.ParticipantID) : null;
-                    var pUser = participant != null ? RaceDayDB.Users.FirstOrDefault(u => u.UserID == participant.UserID) : null;
-                    var category = enrolment != null ? RaceDayDB.Categories.FirstOrDefault(c => c.CategoryID == enrolment.CategoryID) : null;
+                    var enrolment = enrolments.FirstOrDefault(e => e.EnrolmentID == r.EnrolmentID);
+                    var participant = enrolment != null ? participants.FirstOrDefault(p => p.ParticipantID == enrolment.ParticipantID) : null;
+                    var pUser = participant != null ? users.FirstOrDefault(u => u.UserID == participant.UserID) : null;
+                    var category = enrolment != null ? categories.FirstOrDefault(c => c.CategoryID == enrolment.CategoryID) : null;
 
                     return new
                     {
                         r.ResultID,
+                        r.EnrolmentID,
                         r.Position,
                         r.FinishTimeSeconds,
                         r.Status,
@@ -123,33 +132,41 @@ namespace RaceDayManagementAPI.Controllers
         }
 
         // 3. GET MY RESULTS (PARTICIPANT)
-        // GET /api/participants/user/results  (already in ParticipantController)
+        // GET /api/results/user
         [HttpGet("results/user")]
         [Authorize]
         public IActionResult GetMyResults()
         {
             var userId = _jwtService.GetUserIdFromToken(User);
-            var participant = RaceDayDB.Participants.FirstOrDefault(p => p.UserID == userId);
+            var participant = _db.Participants.FirstOrDefault(p => p.UserID == userId);
 
             if (participant == null)
                 return Forbid("Only participants can view their results.");
 
-            var enrolmentIds = RaceDayDB.Enrolments
+            var enrolments = _db.Enrolments
                 .Where(e => e.ParticipantID == participant.ParticipantID)
-                .Select(e => e.EnrolmentID)
                 .ToList();
 
-            var results = RaceDayDB.Results
+            var enrolmentIds = enrolments.Select(e => e.EnrolmentID).ToList();
+
+            var rawResults = _db.Results
                 .Where(r => enrolmentIds.Contains(r.EnrolmentID))
+                .ToList();
+
+            var categories = _db.Categories.ToList();
+            var events = _db.Events.ToList();
+
+            var results = rawResults
                 .Select(r =>
                 {
-                    var enrolment = RaceDayDB.Enrolments.FirstOrDefault(e => e.EnrolmentID == r.EnrolmentID);
-                    var category = enrolment != null ? RaceDayDB.Categories.FirstOrDefault(c => c.CategoryID == enrolment.CategoryID) : null;
-                    var eventEntity = category != null ? RaceDayDB.Events.FirstOrDefault(ev => ev.EventID == category.EventID) : null;
+                    var enrolment = enrolments.FirstOrDefault(e => e.EnrolmentID == r.EnrolmentID);
+                    var category = enrolment != null ? categories.FirstOrDefault(c => c.CategoryID == enrolment.CategoryID) : null;
+                    var eventEntity = category != null ? events.FirstOrDefault(ev => ev.EventID == category.EventID) : null;
 
                     return new
                     {
                         r.ResultID,
+                        r.EnrolmentID,
                         r.Position,
                         r.FinishTimeSeconds,
                         r.Status,
@@ -179,7 +196,7 @@ namespace RaceDayManagementAPI.Controllers
         [AllowAnonymous]
         public IActionResult GetResult(int id)
         {
-            var result = RaceDayDB.Results.FirstOrDefault(r => r.ResultID == id);
+            var result = _db.Results.FirstOrDefault(r => r.ResultID == id);
             if (result == null)
                 return NotFound(new { message = "Result not found." });
 

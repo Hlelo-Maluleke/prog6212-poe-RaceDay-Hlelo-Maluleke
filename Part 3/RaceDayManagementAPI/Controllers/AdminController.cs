@@ -34,16 +34,6 @@ namespace RaceDayManagementAPI.Controllers
             return Convert.ToBase64String(hash);
         }
 
-        /// <summary>
-        /// Retrieves a list of all users in the system with their roles.
-        /// </summary>
-        /// <remarks>
-        /// Returns all registered users along with their roles (organiser/participant status).
-        /// Requires authentication.
-        /// </remarks>
-        /// <returns>List of all users with UserID, Email, FullName, Phone, IsOrganiser, IsParticipant, and CreatedAt</returns>
-        /// <response code="200">Successfully retrieved all users</response>
-        /// <response code="401">User is not authenticated</response>
         [HttpGet("users")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -63,18 +53,6 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(users);
         }
 
-        /// <summary>
-        /// Retrieves a specific user by ID with detailed information and roles.
-        /// </summary>
-        /// <remarks>
-        /// Returns comprehensive user information including organiser/participant status.
-        /// Requires authentication.
-        /// </remarks>
-        /// <param name="id">The unique identifier of the user</param>
-        /// <returns>User details including UserID, Email, FullName, Phone, IsOrganiser, IsParticipant, timestamps</returns>
-        /// <response code="200">User found and returned</response>
-        /// <response code="401">User is not authenticated</response>
-        /// <response code="404">User with specified ID not found</response>
         [HttpGet("users/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -98,18 +76,6 @@ namespace RaceDayManagementAPI.Controllers
             });
         }
 
-        /// <summary>
-        /// Creates a new organiser account with associated user record.
-        /// </summary>
-        /// <remarks>
-        /// Registers a new event organiser in the system. This endpoint creates both a User and Organiser record.
-        /// Note: This endpoint allows anonymous access for initial system setup; restrict in production.
-        /// </remarks>
-        /// <param name="request">Organiser creation request with email, password, company name, and contact details</param>
-        /// <returns>Returns 201 Created with the new organiser details if successful</returns>
-        /// <response code="201">Organiser and user successfully created</response>
-        /// <response code="400">Email and password are required; missing required fields</response>
-        /// <response code="409">Email already registered in system</response>
         [HttpPost("organisers")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -163,14 +129,19 @@ namespace RaceDayManagementAPI.Controllers
         [HttpDelete("users/{id}")]
         public IActionResult DeleteUser(int id)
         {
-            var user = RaceDayDB.Users.FirstOrDefault(u => u.UserID == id);
+            var user = _db.Users.FirstOrDefault(u => u.UserID == id);
             if (user == null)
                 return NotFound(new { message = "User not found." });
 
-            // Remove subtype records
-            RaceDayDB.Organisers.RemoveAll(o => o.UserID == id);
-            RaceDayDB.Participants.RemoveAll(p => p.UserID == id);
-            RaceDayDB.Users.Remove(user);
+            // Remove subtype records using EF Core DbContext instead of static RaceDayDB
+            var organisers = _db.Organisers.Where(o => o.UserID == id).ToList();
+            _db.Organisers.RemoveRange(organisers);
+
+            var participants = _db.Participants.Where(p => p.UserID == id).ToList();
+            _db.Participants.RemoveRange(participants);
+
+            _db.Users.Remove(user);
+            _db.SaveChanges();
 
             return NoContent();
         }

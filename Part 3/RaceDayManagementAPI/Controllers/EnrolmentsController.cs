@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Data;
 using RaceDayManagementAPI.Models;
 using RaceDayManagementAPI.Services;
 
@@ -15,10 +16,12 @@ namespace RaceDayManagementAPI.Controllers
     public class EnrolmentsController : ControllerBase
     {
         private readonly JwtService _jwtService;
+        private readonly RaceDayDbContext _db;
 
-        public EnrolmentsController(JwtService jwtService)
+        public EnrolmentsController(JwtService jwtService, RaceDayDbContext db)
         {
             _jwtService = jwtService;
+            _db = db;
         }
 
         // 1. ENROL IN EVENT  →  POST /api/enrolments
@@ -26,28 +29,35 @@ namespace RaceDayManagementAPI.Controllers
         public IActionResult Enrol([FromBody] EnrolRequest request)
         {
             var userId = _jwtService.GetUserIdFromToken(User);
-            var participant = RaceDayDB.Participants.FirstOrDefault(p => p.UserID == userId);
+            var participant = _db.Participants.FirstOrDefault(p => p.UserID == userId);
 
             if (participant == null)
                 return Forbid("Only participants can enrol in events.");
 
-            var category = RaceDayDB.Categories.FirstOrDefault(c => c.CategoryID == request.CategoryID);
+            var category = _db.Categories.FirstOrDefault(c => c.CategoryID == request.CategoryID);
             if (category == null)
                 return NotFound(new { message = "Category not found." });
 
-            var eventEntity = RaceDayDB.Events.FirstOrDefault(e => e.EventID == category.EventID);
-            if (eventEntity?.Status != "published")
+            var eventEntity = _db.Events.FirstOrDefault(e => e.EventID == category.EventID);
+            if (eventEntity == null)
+                return NotFound(new { message = "Event not found." });
+
+            if (string.Equals(eventEntity.Status, "draft", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(eventEntity.Status, "cancelled", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(eventEntity.Status, "completed", StringComparison.OrdinalIgnoreCase))
+            {
                 return BadRequest(new { message = "This event is not open for enrolment." });
+            }
 
             // Capacity check
-            var activeCount = RaceDayDB.Enrolments.Count(e =>
+            var activeCount = _db.Enrolments.Count(e =>
                 e.CategoryID == request.CategoryID && e.Status != "withdrawn");
 
             if (category.MaxParticipants.HasValue && activeCount >= category.MaxParticipants)
                 return BadRequest(new { message = "This category is full." });
 
             // Duplicate check
-            var existing = RaceDayDB.Enrolments.FirstOrDefault(e =>
+            var existing = _db.Enrolments.FirstOrDefault(e =>
                 e.ParticipantID == participant.ParticipantID &&
                 e.CategoryID == request.CategoryID &&
                 e.Status != "withdrawn");
@@ -57,14 +67,16 @@ namespace RaceDayManagementAPI.Controllers
 
             var enrolment = new Enrolment
             {
-                EnrolmentID = RaceDayDB.NextEnrolmentID++,
                 ParticipantID = participant.ParticipantID,
                 CategoryID = request.CategoryID,
-                EnrolmentDate = DateTime.Now,
-                Status = "pending"
+                EnrolmentDate = DateTime.UtcNow,
+                Status = "confirmed",
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
             };
 
-            RaceDayDB.Enrolments.Add(enrolment);
+            _db.Enrolments.Add(enrolment);
+            _db.SaveChanges();
 
             return CreatedAtAction(nameof(GetEnrolment), new { id = enrolment.EnrolmentID }, new
             {
@@ -93,17 +105,17 @@ namespace RaceDayManagementAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetEnrolment(int id)
         {
-            var enrolment = RaceDayDB.Enrolments.FirstOrDefault(e => e.EnrolmentID == id);
+            var enrolment = _db.Enrolments.FirstOrDefault(e => e.EnrolmentID == id);
             if (enrolment == null)
                 return NotFound(new { message = "Enrolment not found." });
 
             var userId = _jwtService.GetUserIdFromToken(User);
 
             // Authorisation: participant who owns it OR organiser who owns the event
-            var participant = RaceDayDB.Participants.FirstOrDefault(p => p.ParticipantID == enrolment.ParticipantID);
-            var category = RaceDayDB.Categories.FirstOrDefault(c => c.CategoryID == enrolment.CategoryID);
-            var eventEntity = category != null ? RaceDayDB.Events.FirstOrDefault(ev => ev.EventID == category.EventID) : null;
-            var organiser = eventEntity != null ? RaceDayDB.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
+            var participant = _db.Participants.FirstOrDefault(p => p.ParticipantID == enrolment.ParticipantID);
+            var category = _db.Categories.FirstOrDefault(c => c.CategoryID == enrolment.CategoryID);
+            var eventEntity = category != null ? _db.Events.FirstOrDefault(ev => ev.EventID == category.EventID) : null;
+            var organiser = eventEntity != null ? _db.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
 
             bool isOwner = participant?.UserID == userId;
             bool isEventOrganiser = organiser?.UserID == userId;
@@ -139,12 +151,12 @@ namespace RaceDayManagementAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult WithdrawEnrolment(int id)
         {
-            var enrolment = RaceDayDB.Enrolments.FirstOrDefault(e => e.EnrolmentID == id);
+            var enrolment = _db.Enrolments.FirstOrDefault(e => e.EnrolmentID == id);
             if (enrolment == null)
                 return NotFound(new { message = "Enrolment not found." });
 
             var userId = _jwtService.GetUserIdFromToken(User);
-            var participant = RaceDayDB.Participants.FirstOrDefault(p => p.ParticipantID == enrolment.ParticipantID);
+            var participant = _db.Participants.FirstOrDefault(p => p.ParticipantID == enrolment.ParticipantID);
 
             if (participant?.UserID != userId)
                 return Forbid("Only the participant can withdraw this enrolment.");
@@ -154,7 +166,8 @@ namespace RaceDayManagementAPI.Controllers
 
             // Soft delete – update status
             enrolment.Status = "withdrawn";
-            enrolment.UpdatedAt = DateTime.Now;
+            enrolment.UpdatedAt = DateTime.UtcNow;
+            _db.SaveChanges();
 
             return NoContent();
         }

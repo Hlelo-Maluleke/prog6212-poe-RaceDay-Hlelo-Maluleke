@@ -499,6 +499,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RaceDayManagementAPI.Controllers.EventsController",
+    "Method": "UploadBanner",
+    "RelativePath": "api/events/{id}/banner",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RaceDayManagementAPI.Controllers.OrganiserController",
     "Method": "GetMyProfile",
     "RelativePath": "api/organisers/user",

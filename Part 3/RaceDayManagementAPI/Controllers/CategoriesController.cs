@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Data;
 using RaceDayManagementAPI.Models;
 using RaceDayManagementAPI.Services;
 
@@ -14,10 +15,12 @@ namespace RaceDayManagementAPI.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly JwtService _jwtService;
+        private readonly RaceDayDbContext _db;
 
-        public CategoriesController(JwtService jwtService)
+        public CategoriesController(JwtService jwtService, RaceDayDbContext db)
         {
             _jwtService = jwtService;
+            _db = db;
         }
 
         // 1. GET CATEGORY BY ID  →  GET /api/categories/{id}
@@ -25,11 +28,11 @@ namespace RaceDayManagementAPI.Controllers
         [AllowAnonymous]
         public IActionResult GetCategory(int id)
         {
-            var category = RaceDayDB.Categories.FirstOrDefault(c => c.CategoryID == id);
+            var category = _db.Categories.FirstOrDefault(c => c.CategoryID == id);
             if (category == null)
                 return NotFound(new { message = "Category not found." });
 
-            var route = RaceDayDB.Routes.FirstOrDefault(r => r.CategoryID == id);
+            var route = _db.Routes.FirstOrDefault(r => r.CategoryID == id);
 
             return Ok(new
             {
@@ -43,23 +46,26 @@ namespace RaceDayManagementAPI.Controllers
                 category.StartTime,
                 Route = route == null ? null : new
                 {
+                    route.RouteID,
+                    route.CategoryID,
                     route.MapUrl,
                     route.ElevationGain,
                     route.Description
                 }
             });
         }
+
         // 2. UPDATE CATEGORY  →  PUT /api/categories/{id}
         [HttpPut("{id}")]
         [Authorize]
         public IActionResult UpdateCategory(int id, [FromBody] UpdateCategoryRequest request)
         {
-            var category = RaceDayDB.Categories.FirstOrDefault(c => c.CategoryID == id);
+            var category = _db.Categories.FirstOrDefault(c => c.CategoryID == id);
             if (category == null)
                 return NotFound(new { message = "Category not found." });
 
-            var eventEntity = RaceDayDB.Events.FirstOrDefault(e => e.EventID == category.EventID);
-            var organiser = eventEntity != null ? RaceDayDB.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
+            var eventEntity = _db.Events.FirstOrDefault(e => e.EventID == category.EventID);
+            var organiser = eventEntity != null ? _db.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
 
             var userId = _jwtService.GetUserIdFromToken(User);
             if (organiser?.UserID != userId)
@@ -78,7 +84,9 @@ namespace RaceDayManagementAPI.Controllers
             if (request.StartTime.HasValue)
                 category.StartTime = request.StartTime;
 
-            category.UpdatedAt = DateTime.Now;
+            category.UpdatedAt = DateTime.UtcNow;
+            _db.SaveChanges();
+
             return Ok(category);
         }
 
@@ -87,24 +95,26 @@ namespace RaceDayManagementAPI.Controllers
         [Authorize]
         public IActionResult DeleteCategory(int id)
         {
-            var category = RaceDayDB.Categories.FirstOrDefault(c => c.CategoryID == id);
+            var category = _db.Categories.FirstOrDefault(c => c.CategoryID == id);
             if (category == null)
                 return NotFound(new { message = "Category not found." });
 
-            var eventEntity = RaceDayDB.Events.FirstOrDefault(e => e.EventID == category.EventID);
-            var organiser = eventEntity != null ? RaceDayDB.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
+            var eventEntity = _db.Events.FirstOrDefault(e => e.EventID == category.EventID);
+            var organiser = eventEntity != null ? _db.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
 
             var userId = _jwtService.GetUserIdFromToken(User);
             if (organiser?.UserID != userId)
                 return Forbid("Only the event owner can delete this category.");
 
             // Prevent deletion if there are active enrolments
-            var hasEnrolments = RaceDayDB.Enrolments.Any(e => e.CategoryID == id && e.Status != "withdrawn");
+            var hasEnrolments = _db.Enrolments.Any(e => e.CategoryID == id && e.Status != "withdrawn");
             if (hasEnrolments)
                 return Conflict(new { message = "Cannot delete category with active enrolments." });
 
-            RaceDayDB.Routes.RemoveAll(r => r.CategoryID == id);
-            RaceDayDB.Categories.Remove(category);
+            var routes = _db.Routes.Where(r => r.CategoryID == id).ToList();
+            _db.Routes.RemoveRange(routes);
+            _db.Categories.Remove(category);
+            _db.SaveChanges();
 
             return NoContent();
         }
@@ -114,11 +124,11 @@ namespace RaceDayManagementAPI.Controllers
         [AllowAnonymous]
         public IActionResult GetRoute(int id)
         {
-            var categoryExists = RaceDayDB.Categories.Any(c => c.CategoryID == id);
+            var categoryExists = _db.Categories.Any(c => c.CategoryID == id);
             if (!categoryExists)
                 return NotFound(new { message = "Category not found." });
 
-            var route = RaceDayDB.Routes.FirstOrDefault(r => r.CategoryID == id);
+            var route = _db.Routes.FirstOrDefault(r => r.CategoryID == id);
             if (route == null)
                 return NotFound(new { message = "No route information available for this category." });
 
@@ -139,39 +149,43 @@ namespace RaceDayManagementAPI.Controllers
         [Authorize]
         public IActionResult UpsertRoute(int id, [FromBody] RouteRequest request)
         {
-            var category = RaceDayDB.Categories.FirstOrDefault(c => c.CategoryID == id);
+            var category = _db.Categories.FirstOrDefault(c => c.CategoryID == id);
             if (category == null)
                 return NotFound(new { message = "Category not found." });
 
-            var eventEntity = RaceDayDB.Events.FirstOrDefault(e => e.EventID == category.EventID);
-            var organiser = eventEntity != null ? RaceDayDB.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
+            var eventEntity = _db.Events.FirstOrDefault(e => e.EventID == category.EventID);
+            var organiser = eventEntity != null ? _db.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
 
             var userId = _jwtService.GetUserIdFromToken(User);
             if (organiser?.UserID != userId)
                 return Forbid("Only the event owner can manage route information.");
 
-            var existingRoute = RaceDayDB.Routes.FirstOrDefault(r => r.CategoryID == id);
+            var existingRoute = _db.Routes.FirstOrDefault(r => r.CategoryID == id);
 
             if (existingRoute != null)
             {
                 existingRoute.MapUrl = request.MapUrl ?? existingRoute.MapUrl;
                 existingRoute.ElevationGain = request.ElevationGain ?? existingRoute.ElevationGain;
                 existingRoute.Description = request.Description ?? existingRoute.Description;
-                existingRoute.UpdatedAt = DateTime.Now;
+                existingRoute.UpdatedAt = DateTime.UtcNow;
 
+                _db.SaveChanges();
                 return Ok(existingRoute);
             }
             else
             {
                 var newRoute = new RaceDayManagementAPI.Models.Route
                 {
-                    RouteID = RaceDayDB.NextRouteID++,
                     CategoryID = id,
                     MapUrl = request.MapUrl,
                     ElevationGain = request.ElevationGain,
-                    Description = request.Description
+                    Description = request.Description,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
                 };
-                RaceDayDB.Routes.Add(newRoute);
+                _db.Routes.Add(newRoute);
+                _db.SaveChanges();
+
                 return CreatedAtAction(nameof(GetRoute), new { id }, newRoute);
             }
         }

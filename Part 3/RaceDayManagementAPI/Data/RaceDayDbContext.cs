@@ -33,9 +33,9 @@ namespace RaceDayManagementAPI.Data
                 new User
                 {
                     UserID = 1,
-                    Email = "thabo@runningclub.co.za",
+                    Email = "micheal@runningclub.co.za",
                     PasswordHash = defaultPasswordHash,
-                    FullName = "Thabo Mokoena",
+                    FullName = "Micheal Nkoane",
                     Phone = "082 123 4567",
                     CreatedAt = new DateTime(2026, 1, 1),
                     UpdatedAt = new DateTime(2026, 1, 1)

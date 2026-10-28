@@ -6,11 +6,17 @@ using RaceDayManagementAPI.Data;
 using RaceDayManagementAPI.Models;
 using RaceDayManagementAPI.Services;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
-builder.Services.AddControllers();
+// 1. ADD CONTROLLERS WITH JSON CYCLE PROTECTION
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });
 builder.Services.AddEndpointsApiExplorer();
 
 // SQL Server
@@ -47,9 +53,9 @@ builder.Services.AddAuthorization();
 // 4. CONFIGURE SWAGGER
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo 
-    { 
-        Title = "RaceDay API", 
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "RaceDay API",
         Version = "v1",
         Description = "API for managing race events, participant enrolments, and results",
         Contact = new OpenApiContact
@@ -59,7 +65,6 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 
-    // Include XML documentation
     var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     if (File.Exists(xmlPath))
@@ -92,17 +97,32 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// 5. REGISTER CUSTOM SERVICES
+// 5. REGISTER CUSTOM SERVICES (Register both IBlobService and BlobService)
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddSingleton<JwtService>();
+builder.Services.AddSingleton<BlobService>();
+builder.Services.AddSingleton<IBlobService>(sp => sp.GetRequiredService<BlobService>());
 
 var app = builder.Build();
 
-// 6. ENSURE DATABASE IS CREATED AND SEEDED
+// 6. ENSURE DATABASE IS CREATED AND SCHEMA IS UP TO DATE
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<RaceDayDbContext>();
     dbContext.Database.EnsureCreated();
+
+    try
+    {
+        dbContext.Database.ExecuteSqlRaw(@"
+            IF COL_LENGTH('Events', 'BannerUrl') IS NULL
+            BEGIN
+                ALTER TABLE Events ADD BannerUrl NVARCHAR(MAX) NULL;
+            END");
+    }
+    catch
+    {
+        // Ignore if using InMemory provider in tests
+    }
 }
 
 // 7. CONFIGURE PIPELINE
@@ -113,6 +133,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

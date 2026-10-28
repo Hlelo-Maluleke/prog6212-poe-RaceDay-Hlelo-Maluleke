@@ -27,14 +27,6 @@ namespace RaceDayManagementAPI.Controllers
         /// <summary>
         /// Retrieves the authenticated organiser's profile information.
         /// </summary>
-        /// <remarks>
-        /// Returns detailed organiser profile including company name and associated user details.
-        /// Requires authentication and organiser role.
-        /// </remarks>
-        /// <returns>Organiser profile with OrganiserID, CompanyName, User details, CreatedAt, and UpdatedAt</returns>
-        /// <response code="200">Organiser profile successfully retrieved</response>
-        /// <response code="401">User is not authenticated</response>
-        /// <response code="404">User is not registered as an organiser</response>
         [HttpGet("user")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -53,6 +45,10 @@ namespace RaceDayManagementAPI.Controllers
             {
                 organiser.OrganiserID,
                 organiser.CompanyName,
+                UserID = user?.UserID ?? userId,
+                FullName = user?.FullName,
+                Email = user?.Email,
+                Phone = user?.Phone,
                 User = new
                 {
                     user?.UserID,
@@ -68,16 +64,6 @@ namespace RaceDayManagementAPI.Controllers
         /// <summary>
         /// Updates the authenticated organiser's profile information.
         /// </summary>
-        /// <remarks>
-        /// Allows an organiser to update their company name and contact information.
-        /// Requires authentication and organiser role.
-        /// </remarks>
-        /// <param name="request">Update request containing new company name and contact details</param>
-        /// <returns>Updated organiser profile information</returns>
-        /// <response code="200">Profile successfully updated</response>
-        /// <response code="400">Company name is required</response>
-        /// <response code="401">User is not authenticated</response>
-        /// <response code="404">Organiser profile not found</response>
         [HttpPut("user")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -117,6 +103,10 @@ namespace RaceDayManagementAPI.Controllers
             {
                 organiser.OrganiserID,
                 organiser.CompanyName,
+                user.UserID,
+                user.FullName,
+                user.Email,
+                user.Phone,
                 User = new
                 {
                     user.UserID,
@@ -129,15 +119,8 @@ namespace RaceDayManagementAPI.Controllers
         }
 
         /// <summary>
-        /// Retrieves all events owned by the authenticated organiser.
+        /// Retrieves all events owned by the authenticated organiser, including categories.
         /// </summary>
-        /// <remarks>
-        /// Returns a comprehensive list of events created by the current organiser with their details and associated categories.
-        /// Requires authentication and organiser role.
-        /// </remarks>
-        /// <returns>List of events with EventID, EventName, Date, Location, Description, Categories, CreatedAt, and UpdatedAt</returns>
-        /// <response code="200">Successfully retrieved organiser's events</response>
-        /// <response code="401">User is not authenticated</response>
         [HttpGet("user/events")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -149,9 +132,42 @@ namespace RaceDayManagementAPI.Controllers
             if (organiser == null)
                 return NotFound(new { message = "Organiser not found." });
 
-            var events = _db.Events
+            var organiserEvents = _db.Events
                 .Where(e => e.OrganiserID == organiser.OrganiserID)
                 .ToList();
+
+            var categories = _db.Categories.ToList();
+
+            var events = organiserEvents.Select(e => new
+            {
+                e.EventID,
+                e.OrganiserID,
+                e.Name,
+                EventName = e.Name,
+                e.Description,
+                e.EventDate,
+                e.StartTime,
+                e.Location,
+                e.EventType,
+                e.Status,
+                e.CreatedAt,
+                e.UpdatedAt,
+                Categories = categories
+                    .Where(c => c.EventID == e.EventID)
+                    .Select(c => new
+                    {
+                        c.CategoryID,
+                        c.EventID,
+                        c.Name,
+                        CategoryName = c.Name,
+                        c.Description,
+                        c.DistanceKm,
+                        c.EntryFee,
+                        c.MaxParticipants,
+                        c.StartTime
+                    })
+                    .ToList()
+            }).ToList();
 
             return Ok(events);
         }
@@ -159,16 +175,6 @@ namespace RaceDayManagementAPI.Controllers
         /// <summary>
         /// Retrieves all participant enrolments for a specific event owned by the organiser.
         /// </summary>
-        /// <remarks>
-        /// Returns detailed enrolment data including participant information and enrolment dates for all categories in the event.
-        /// Only organisers who own the event can retrieve its enrolments.
-        /// Requires authentication and organiser role.
-        /// </remarks>
-        /// <param name="eventId">The unique identifier of the event</param>
-        /// <returns>List of enrolments with EnrolmentID, ParticipantID, CategoryID, ParticipantName, email, phone, EnrolmentDate, and Status</returns>
-        /// <response code="200">Successfully retrieved event enrolments</response>
-        /// <response code="401">User is not authenticated</response>
-        /// <response code="404">Event not found or organiser does not own it</response>
         [HttpGet("user/events/{eventId}/enrolments")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -187,14 +193,52 @@ namespace RaceDayManagementAPI.Controllers
             if (eventEntity == null)
                 return NotFound(new { message = "Event not found or you do not own it." });
 
-            var categoryIds = _db.Categories
+            var categories = _db.Categories
                 .Where(c => c.EventID == eventId)
-                .Select(c => c.CategoryID)
                 .ToList();
 
-            var enrolments = _db.Enrolments
+            var categoryIds = categories.Select(c => c.CategoryID).ToList();
+
+            var rawEnrolments = _db.Enrolments
                 .Where(e => categoryIds.Contains(e.CategoryID))
                 .ToList();
+
+            var participants = _db.Participants.ToList();
+            var users = _db.Users.ToList();
+
+            var enrolments = rawEnrolments.Select(e =>
+            {
+                var participant = participants.FirstOrDefault(p => p.ParticipantID == e.ParticipantID);
+                var pUser = participant != null ? users.FirstOrDefault(u => u.UserID == participant.UserID) : null;
+                var category = categories.FirstOrDefault(c => c.CategoryID == e.CategoryID);
+
+                return new
+                {
+                    e.EnrolmentID,
+                    e.ParticipantID,
+                    e.CategoryID,
+                    e.EnrolmentDate,
+                    e.Status,
+                    ParticipantName = pUser?.FullName ?? string.Empty,
+                    Email = pUser?.Email ?? string.Empty,
+                    Phone = pUser?.Phone ?? string.Empty,
+                    CategoryName = category?.Name ?? string.Empty,
+                    Participant = participant == null ? null : new
+                    {
+                        participant.ParticipantID,
+                        FullName = pUser?.FullName,
+                        Email = pUser?.Email,
+                        Phone = pUser?.Phone
+                    },
+                    Category = category == null ? null : new
+                    {
+                        category.CategoryID,
+                        category.Name,
+                        category.DistanceKm,
+                        category.EntryFee
+                    }
+                };
+            }).ToList();
 
             return Ok(enrolments);
         }

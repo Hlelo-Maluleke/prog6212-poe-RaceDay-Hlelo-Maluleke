@@ -15,14 +15,12 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Retrieves a list of all users in the system with their roles.",
-        "description": "Returns all registered users along with their roles (organiser/participant status).\r\nRequires authentication.",
         "responses": {
           "200": {
-            "description": "Successfully retrieved all users"
+            "description": "OK"
           },
           "401": {
-            "description": "User is not authenticated",
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
@@ -49,13 +47,10 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Retrieves a specific user by ID with detailed information and roles.",
-        "description": "Returns comprehensive user information including organiser/participant status.\r\nRequires authentication.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The unique identifier of the user",
             "required": true,
             "schema": {
               "type": "integer",
@@ -65,10 +60,10 @@
         ],
         "responses": {
           "200": {
-            "description": "User found and returned"
+            "description": "OK"
           },
           "401": {
-            "description": "User is not authenticated",
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
@@ -88,7 +83,7 @@
             }
           },
           "404": {
-            "description": "User with specified ID not found",
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -136,10 +131,7 @@
         "tags": [
           "Admin"
         ],
-        "summary": "Creates a new organiser account with associated user record.",
-        "description": "Registers a new event organiser in the system. This endpoint creates both a User and Organiser record.\r\nNote: This endpoint allows anonymous access for initial system setup; restrict in production.",
         "requestBody": {
-          "description": "Organiser creation request with email, password, company name, and contact details",
           "content": {
             "application/json": {
               "schema": {
@@ -160,10 +152,10 @@
         },
         "responses": {
           "201": {
-            "description": "Organiser and user successfully created"
+            "description": "Created"
           },
           "400": {
-            "description": "Email and password are required; missing required fields",
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -183,7 +175,7 @@
             }
           },
           "409": {
-            "description": "Email already registered in system",
+            "description": "Conflict",
             "content": {
               "text/plain": {
                 "schema": {
@@ -704,6 +696,49 @@
         }
       }
     },
+    "/api/events/{id}/banner": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/events/{eventId}/categories": {
       "get": {
         "tags": [
@@ -773,13 +808,12 @@
           "Organiser"
         ],
         "summary": "Retrieves the authenticated organiser's profile information.",
-        "description": "Returns detailed organiser profile including company name and associated user details.\r\nRequires authentication and organiser role.",
         "responses": {
           "200": {
-            "description": "Organiser profile successfully retrieved"
+            "description": "OK"
           },
           "401": {
-            "description": "User is not authenticated",
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
@@ -799,7 +833,7 @@
             }
           },
           "404": {
-            "description": "User is not registered as an organiser",
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -825,9 +859,7 @@
           "Organiser"
         ],
         "summary": "Updates the authenticated organiser's profile information.",
-        "description": "Allows an organiser to update their company name and contact information.\r\nRequires authentication and organiser role.",
         "requestBody": {
-          "description": "Update request containing new company name and contact details",
           "content": {
             "application/json": {
               "schema": {
@@ -848,10 +880,10 @@
         },
         "responses": {
           "200": {
-            "description": "Profile successfully updated"
+            "description": "OK"
           },
           "400": {
-            "description": "Company name is required",
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -871,7 +903,7 @@
             }
           },
           "401": {
-            "description": "User is not authenticated",
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
@@ -891,7 +923,7 @@
             }
           },
           "404": {
-            "description": "Organiser profile not found",
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -918,14 +950,13 @@
         "tags": [
           "Organiser"
         ],
-        "summary": "Retrieves all events owned by the authenticated organiser.",
-        "description": "Returns a comprehensive list of events created by the current organiser with their details and associated categories.\r\nRequires authentication and organiser role.",
+        "summary": "Retrieves all events owned by the authenticated organiser, including categories.",
         "responses": {
           "200": {
-            "description": "Successfully retrieved organiser's events"
+            "description": "OK"
           },
           "401": {
-            "description": "User is not authenticated",
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
@@ -953,12 +984,10 @@
           "Organiser"
         ],
         "summary": "Retrieves all participant enrolments for a specific event owned by the organiser.",
-        "description": "Returns detailed enrolment data including participant information and enrolment dates for all categories in the event.\r\nOnly organisers who own the event can retrieve its enrolments.\r\nRequires authentication and organiser role.",
         "parameters": [
           {
             "name": "eventId",
             "in": "path",
-            "description": "The unique identifier of the event",
             "required": true,
             "schema": {
               "type": "integer",
@@ -968,10 +997,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved event enrolments"
+            "description": "OK"
           },
           "401": {
-            "description": "User is not authenticated",
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
@@ -991,7 +1020,7 @@
             }
           },
           "404": {
-            "description": "Event not found or organiser does not own it",
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1019,13 +1048,12 @@
           "Participant"
         ],
         "summary": "Retrieves the authenticated participant's profile information.",
-        "description": "Returns detailed participant profile including personal information and emergency contact details.\r\nRequires authentication and participant role.",
         "responses": {
           "200": {
-            "description": "Participant profile successfully retrieved"
+            "description": "OK"
           },
           "401": {
-            "description": "User is not authenticated",
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1045,7 +1073,7 @@
             }
           },
           "404": {
-            "description": "User is not registered as a participant",
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1071,9 +1099,7 @@
           "Participant"
         ],
         "summary": "Updates the authenticated participant's profile information.",
-        "description": "Allows a participant to update their personal information and emergency contact details.\r\nRequires authentication and participant role.",
         "requestBody": {
-          "description": "Update request containing new participant and contact information",
           "content": {
             "application/json": {
               "schema": {
@@ -1094,10 +1120,10 @@
         },
         "responses": {
           "200": {
-            "description": "Profile successfully updated"
+            "description": "OK"
           },
           "400": {
-            "description": "Required fields are missing",
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1117,7 +1143,7 @@
             }
           },
           "401": {
-            "description": "User is not authenticated",
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1137,7 +1163,7 @@
             }
           },
           "404": {
-            "description": "Participant profile not found",
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1164,14 +1190,13 @@
         "tags": [
           "Participant"
         ],
-        "summary": "Retrieves all race enrolments for the authenticated participant.",
-        "description": "Returns a list of all events and categories the participant is enrolled in with enrolment status and dates.\r\nRequires authentication and participant role.",
+        "summary": "Retrieves all race enrolments for the authenticated participant, including Event and Category details.",
         "responses": {
           "200": {
-            "description": "Successfully retrieved participant enrolments"
+            "description": "OK"
           },
           "401": {
-            "description": "User is not authenticated",
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1198,14 +1223,13 @@
         "tags": [
           "Participant"
         ],
-        "summary": "Retrieves all race results for the authenticated participant.",
-        "description": "Returns a list of all race results and achievements for events the participant has completed.\r\nRequires authentication and participant role.",
+        "summary": "Retrieves all race results for the authenticated participant, including Event and Category details.",
         "responses": {
           "200": {
-            "description": "Successfully retrieved participant results"
+            "description": "OK"
           },
           "401": {
-            "description": "User is not authenticated",
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {

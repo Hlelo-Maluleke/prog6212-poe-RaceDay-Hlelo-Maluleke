@@ -27,14 +27,6 @@ namespace RaceDayManagementAPI.Controllers
         /// <summary>
         /// Retrieves the authenticated participant's profile information.
         /// </summary>
-        /// <remarks>
-        /// Returns detailed participant profile including personal information and emergency contact details.
-        /// Requires authentication and participant role.
-        /// </remarks>
-        /// <returns>Participant profile with ParticipantID, DateOfBirth, IDNumber, EmergencyContact, User details, CreatedAt, and UpdatedAt</returns>
-        /// <response code="200">Participant profile successfully retrieved</response>
-        /// <response code="401">User is not authenticated</response>
-        /// <response code="404">User is not registered as a participant</response>
         [HttpGet("user")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -52,6 +44,10 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(new
             {
                 participant.ParticipantID,
+                UserID = user?.UserID ?? userId,
+                FullName = user?.FullName,
+                Email = user?.Email,
+                Phone = user?.Phone,
                 participant.DateOfBirth,
                 participant.IDNumber,
                 participant.EmergencyContact,
@@ -70,16 +66,6 @@ namespace RaceDayManagementAPI.Controllers
         /// <summary>
         /// Updates the authenticated participant's profile information.
         /// </summary>
-        /// <remarks>
-        /// Allows a participant to update their personal information and emergency contact details.
-        /// Requires authentication and participant role.
-        /// </remarks>
-        /// <param name="request">Update request containing new participant and contact information</param>
-        /// <returns>Updated participant profile information</returns>
-        /// <response code="200">Profile successfully updated</response>
-        /// <response code="400">Required fields are missing</response>
-        /// <response code="401">User is not authenticated</response>
-        /// <response code="404">Participant profile not found</response>
         [HttpPut("user")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -122,6 +108,10 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(new
             {
                 participant.ParticipantID,
+                user.UserID,
+                user.FullName,
+                user.Email,
+                user.Phone,
                 participant.DateOfBirth,
                 participant.IDNumber,
                 participant.EmergencyContact,
@@ -137,15 +127,8 @@ namespace RaceDayManagementAPI.Controllers
         }
 
         /// <summary>
-        /// Retrieves all race enrolments for the authenticated participant.
+        /// Retrieves all race enrolments for the authenticated participant, including Event and Category details.
         /// </summary>
-        /// <remarks>
-        /// Returns a list of all events and categories the participant is enrolled in with enrolment status and dates.
-        /// Requires authentication and participant role.
-        /// </remarks>
-        /// <returns>List of enrolments with EnrolmentID, CategoryID, EventID, EventName, CategoryName, EnrolmentDate, and Status</returns>
-        /// <response code="200">Successfully retrieved participant enrolments</response>
-        /// <response code="401">User is not authenticated</response>
         [HttpGet("user/enrolments")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -157,23 +140,59 @@ namespace RaceDayManagementAPI.Controllers
             if (participant == null)
                 return NotFound(new { message = "Participant not found." });
 
-            var enrolments = _db.Enrolments
+            var participantEnrolments = _db.Enrolments
                 .Where(e => e.ParticipantID == participant.ParticipantID)
                 .ToList();
+
+            var categories = _db.Categories.ToList();
+            var events = _db.Events.ToList();
+
+            var enrolments = participantEnrolments.Select(e =>
+            {
+                var category = categories.FirstOrDefault(c => c.CategoryID == e.CategoryID);
+                var eventEntity = category != null ? events.FirstOrDefault(ev => ev.EventID == category.EventID) : null;
+
+                return new
+                {
+                    e.EnrolmentID,
+                    e.ParticipantID,
+                    e.CategoryID,
+                    e.EnrolmentDate,
+                    e.Status,
+                    EventID = eventEntity?.EventID ?? 0,
+                    EventName = eventEntity?.Name ?? string.Empty,
+                    EventDate = eventEntity?.EventDate,
+                    Location = eventEntity?.Location ?? string.Empty,
+                    CategoryName = category?.Name ?? string.Empty,
+                    DistanceKm = category?.DistanceKm ?? 0,
+                    EntryFee = category?.EntryFee ?? 0,
+                    Event = eventEntity == null ? null : new
+                    {
+                        eventEntity.EventID,
+                        eventEntity.Name,
+                        EventName = eventEntity.Name,
+                        eventEntity.EventDate,
+                        eventEntity.Location,
+                        eventEntity.EventType,
+                        eventEntity.Status
+                    },
+                    Category = category == null ? null : new
+                    {
+                        category.CategoryID,
+                        category.Name,
+                        CategoryName = category.Name,
+                        category.DistanceKm,
+                        category.EntryFee
+                    }
+                };
+            }).ToList();
 
             return Ok(enrolments);
         }
 
         /// <summary>
-        /// Retrieves all race results for the authenticated participant.
+        /// Retrieves all race results for the authenticated participant, including Event and Category details.
         /// </summary>
-        /// <remarks>
-        /// Returns a list of all race results and achievements for events the participant has completed.
-        /// Requires authentication and participant role.
-        /// </remarks>
-        /// <returns>List of results with ResultID, EnrolmentID, EventID, EventName, FinishTime, Placement, Status, and CreatedAt</returns>
-        /// <response code="200">Successfully retrieved participant results</response>
-        /// <response code="401">User is not authenticated</response>
         [HttpGet("user/results")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -185,14 +204,63 @@ namespace RaceDayManagementAPI.Controllers
             if (participant == null)
                 return NotFound(new { message = "Participant not found." });
 
-            var enrolmentIds = _db.Enrolments
+            var participantEnrolments = _db.Enrolments
                 .Where(e => e.ParticipantID == participant.ParticipantID)
-                .Select(e => e.EnrolmentID)
                 .ToList();
 
-            var results = _db.Results
+            var enrolmentIds = participantEnrolments.Select(e => e.EnrolmentID).ToList();
+
+            var rawResults = _db.Results
                 .Where(r => enrolmentIds.Contains(r.EnrolmentID))
                 .ToList();
+
+            var categories = _db.Categories.ToList();
+            var events = _db.Events.ToList();
+
+            var results = rawResults.Select(r =>
+            {
+                var enrolment = participantEnrolments.FirstOrDefault(e => e.EnrolmentID == r.EnrolmentID);
+                var category = enrolment != null ? categories.FirstOrDefault(c => c.CategoryID == enrolment.CategoryID) : null;
+                var eventEntity = category != null ? events.FirstOrDefault(ev => ev.EventID == category.EventID) : null;
+
+                var formattedTime = r.FinishTimeSeconds.HasValue
+                    ? TimeSpan.FromSeconds(r.FinishTimeSeconds.Value).ToString(@"hh\:mm\:ss")
+                    : null;
+
+                return new
+                {
+                    r.ResultID,
+                    r.EnrolmentID,
+                    r.Position,
+                    Placement = r.Position,
+                    r.FinishTimeSeconds,
+                    FinishTime = formattedTime,
+                    r.Status,
+                    r.CreatedAt,
+                    EventID = eventEntity?.EventID ?? 0,
+                    EventName = eventEntity?.Name ?? string.Empty,
+                    EventDate = eventEntity?.EventDate,
+                    Location = eventEntity?.Location ?? string.Empty,
+                    CategoryID = category?.CategoryID ?? 0,
+                    CategoryName = category?.Name ?? string.Empty,
+                    DistanceKm = category?.DistanceKm ?? 0,
+                    Event = eventEntity == null ? null : new
+                    {
+                        eventEntity.EventID,
+                        eventEntity.Name,
+                        EventName = eventEntity.Name,
+                        eventEntity.EventDate,
+                        eventEntity.Location
+                    },
+                    Category = category == null ? null : new
+                    {
+                        category.CategoryID,
+                        category.Name,
+                        CategoryName = category.Name,
+                        category.DistanceKm
+                    }
+                };
+            }).ToList();
 
             return Ok(results);
         }
