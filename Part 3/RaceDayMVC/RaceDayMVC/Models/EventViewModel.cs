@@ -11,7 +11,7 @@
         public string EventType { get; set; } = "";
         public string Status { get; set; } = "";
         public string? Organiser { get; set; }
-        public string? BannerUrl { get; set; } 
+        public string? BannerUrl { get; set; }
     }
 
     public class EventDetailViewModel : EventViewModel
@@ -22,10 +22,13 @@
     public class CategoryViewModel
     {
         public int CategoryID { get; set; }
+        public int EventID { get; set; }
         public string Name { get; set; } = "";
+        public string? Description { get; set; }
         public decimal DistanceKm { get; set; }
         public decimal EntryFee { get; set; }
         public int? MaxParticipants { get; set; }
+        public TimeSpan? StartTime { get; set; }
         public RouteViewModel? Route { get; set; }
     }
 
@@ -59,8 +62,10 @@
 
     public class ResultSummaryViewModel
     {
+        public int ResultID { get; set; }
         public int? FinishTimeSeconds { get; set; }
         public int? Position { get; set; }
+        public string? Status { get; set; }
     }
 
     public class ParticipantProfileViewModel
