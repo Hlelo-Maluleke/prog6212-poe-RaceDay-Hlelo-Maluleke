@@ -69,11 +69,11 @@ namespace RaceDayManagementAPI.Controllers
 
             var userId = _jwtService.GetUserIdFromToken(User);
             if (organiser?.UserID != userId)
-                return Forbid("Only the event owner can update this category.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only the event owner can update this category." });
 
             if (!string.IsNullOrEmpty(request.Name))
                 category.Name = request.Name;
-            if (!string.IsNullOrEmpty(request.Description))
+            if (request.Description != null)
                 category.Description = request.Description;
             if (request.DistanceKm.HasValue)
                 category.DistanceKm = request.DistanceKm.Value;
@@ -104,12 +104,19 @@ namespace RaceDayManagementAPI.Controllers
 
             var userId = _jwtService.GetUserIdFromToken(User);
             if (organiser?.UserID != userId)
-                return Forbid("Only the event owner can delete this category.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only the event owner can delete this category." });
 
-            // Prevent deletion if there are active enrolments
             var hasEnrolments = _db.Enrolments.Any(e => e.CategoryID == id && e.Status != "withdrawn");
             if (hasEnrolments)
                 return Conflict(new { message = "Cannot delete category with active enrolments." });
+
+            var withdrawnEnrolments = _db.Enrolments.Where(e => e.CategoryID == id).ToList();
+            foreach (var enrolment in withdrawnEnrolments)
+            {
+                var results = _db.Results.Where(r => r.EnrolmentID == enrolment.EnrolmentID).ToList();
+                _db.Results.RemoveRange(results);
+            }
+            _db.Enrolments.RemoveRange(withdrawnEnrolments);
 
             var routes = _db.Routes.Where(r => r.CategoryID == id).ToList();
             _db.Routes.RemoveRange(routes);
@@ -158,7 +165,7 @@ namespace RaceDayManagementAPI.Controllers
 
             var userId = _jwtService.GetUserIdFromToken(User);
             if (organiser?.UserID != userId)
-                return Forbid("Only the event owner can manage route information.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only the event owner can manage route information." });
 
             var existingRoute = _db.Routes.FirstOrDefault(r => r.CategoryID == id);
 
@@ -191,7 +198,6 @@ namespace RaceDayManagementAPI.Controllers
         }
     }
 
-    // Request Models
     public class UpdateCategoryRequest
     {
         public string? Name { get; set; }

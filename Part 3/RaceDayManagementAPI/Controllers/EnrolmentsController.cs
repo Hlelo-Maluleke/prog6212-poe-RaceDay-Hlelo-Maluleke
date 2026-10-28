@@ -32,7 +32,7 @@ namespace RaceDayManagementAPI.Controllers
             var participant = _db.Participants.FirstOrDefault(p => p.UserID == userId);
 
             if (participant == null)
-                return Forbid("Only participants can enrol in events.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only participants can enrol in events." });
 
             var category = _db.Categories.FirstOrDefault(c => c.CategoryID == request.CategoryID);
             if (category == null)
@@ -59,23 +59,33 @@ namespace RaceDayManagementAPI.Controllers
             // Duplicate check
             var existing = _db.Enrolments.FirstOrDefault(e =>
                 e.ParticipantID == participant.ParticipantID &&
-                e.CategoryID == request.CategoryID &&
-                e.Status != "withdrawn");
+                e.CategoryID == request.CategoryID);
 
-            if (existing != null)
+            if (existing != null && existing.Status != "withdrawn")
                 return Conflict(new { message = "You are already enrolled in this category." });
 
-            var enrolment = new Enrolment
+            Enrolment enrolment;
+            if (existing != null && existing.Status == "withdrawn")
             {
-                ParticipantID = participant.ParticipantID,
-                CategoryID = request.CategoryID,
-                EnrolmentDate = DateTime.UtcNow,
-                Status = "confirmed",
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
-            };
+                existing.Status = "confirmed";
+                existing.EnrolmentDate = DateTime.UtcNow;
+                existing.UpdatedAt = DateTime.UtcNow;
+                enrolment = existing;
+            }
+            else
+            {
+                enrolment = new Enrolment
+                {
+                    ParticipantID = participant.ParticipantID,
+                    CategoryID = request.CategoryID,
+                    EnrolmentDate = DateTime.UtcNow,
+                    Status = "confirmed",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
+                _db.Enrolments.Add(enrolment);
+            }
 
-            _db.Enrolments.Add(enrolment);
             _db.SaveChanges();
 
             return CreatedAtAction(nameof(GetEnrolment), new { id = enrolment.EnrolmentID }, new
@@ -111,7 +121,6 @@ namespace RaceDayManagementAPI.Controllers
 
             var userId = _jwtService.GetUserIdFromToken(User);
 
-            // Authorisation: participant who owns it OR organiser who owns the event
             var participant = _db.Participants.FirstOrDefault(p => p.ParticipantID == enrolment.ParticipantID);
             var category = _db.Categories.FirstOrDefault(c => c.CategoryID == enrolment.CategoryID);
             var eventEntity = category != null ? _db.Events.FirstOrDefault(ev => ev.EventID == category.EventID) : null;
@@ -121,7 +130,7 @@ namespace RaceDayManagementAPI.Controllers
             bool isEventOrganiser = organiser?.UserID == userId;
 
             if (!isOwner && !isEventOrganiser)
-                return Forbid("You do not have access to this enrolment.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "You do not have access to this enrolment." });
 
             return Ok(new
             {
@@ -159,12 +168,11 @@ namespace RaceDayManagementAPI.Controllers
             var participant = _db.Participants.FirstOrDefault(p => p.ParticipantID == enrolment.ParticipantID);
 
             if (participant?.UserID != userId)
-                return Forbid("Only the participant can withdraw this enrolment.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only the participant can withdraw this enrolment." });
 
             if (enrolment.Status == "withdrawn")
                 return BadRequest(new { message = "This enrolment is already withdrawn." });
 
-            // Soft delete – update status
             enrolment.Status = "withdrawn";
             enrolment.UpdatedAt = DateTime.UtcNow;
             _db.SaveChanges();
@@ -173,7 +181,6 @@ namespace RaceDayManagementAPI.Controllers
         }
     }
 
-    // Request Models
     public class EnrolRequest
     {
         public int CategoryID { get; set; }

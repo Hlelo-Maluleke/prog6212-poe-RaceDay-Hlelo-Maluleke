@@ -80,7 +80,6 @@ namespace RaceDayManagementAPI.Controllers
             if (user == null || participant == null)
                 return NotFound(new { message = "Participant not found." });
 
-            // Update User fields
             if (!string.IsNullOrEmpty(request.FullName))
                 user.FullName = request.FullName;
             if (!string.IsNullOrEmpty(request.Phone))
@@ -94,7 +93,6 @@ namespace RaceDayManagementAPI.Controllers
             }
             user.UpdatedAt = DateTime.UtcNow;
 
-            // Update Participant fields
             if (request.DateOfBirth.HasValue)
                 participant.DateOfBirth = request.DateOfBirth;
             if (!string.IsNullOrEmpty(request.IDNumber))
@@ -127,7 +125,7 @@ namespace RaceDayManagementAPI.Controllers
         }
 
         /// <summary>
-        /// Retrieves all race enrolments for the authenticated participant, including Event and Category details.
+        /// Retrieves all race enrolments for the authenticated participant, including Event, Category, and Result details.
         /// </summary>
         [HttpGet("user/enrolments")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -144,6 +142,11 @@ namespace RaceDayManagementAPI.Controllers
                 .Where(e => e.ParticipantID == participant.ParticipantID)
                 .ToList();
 
+            var enrolmentIds = participantEnrolments.Select(e => e.EnrolmentID).ToList();
+            var results = _db.Results
+                .Where(r => enrolmentIds.Contains(r.EnrolmentID))
+                .ToList();
+
             var categories = _db.Categories.ToList();
             var events = _db.Events.ToList();
 
@@ -151,6 +154,7 @@ namespace RaceDayManagementAPI.Controllers
             {
                 var category = categories.FirstOrDefault(c => c.CategoryID == e.CategoryID);
                 var eventEntity = category != null ? events.FirstOrDefault(ev => ev.EventID == category.EventID) : null;
+                var result = results.FirstOrDefault(r => r.EnrolmentID == e.EnrolmentID);
 
                 return new
                 {
@@ -174,7 +178,8 @@ namespace RaceDayManagementAPI.Controllers
                         eventEntity.EventDate,
                         eventEntity.Location,
                         eventEntity.EventType,
-                        eventEntity.Status
+                        eventEntity.Status,
+                        eventEntity.BannerUrl
                     },
                     Category = category == null ? null : new
                     {
@@ -183,6 +188,14 @@ namespace RaceDayManagementAPI.Controllers
                         CategoryName = category.Name,
                         category.DistanceKm,
                         category.EntryFee
+                    },
+                    Result = result == null ? null : new
+                    {
+                        result.ResultID,
+                        result.EnrolmentID,
+                        result.Position,
+                        result.FinishTimeSeconds,
+                        result.Status
                     }
                 };
             }).ToList();
