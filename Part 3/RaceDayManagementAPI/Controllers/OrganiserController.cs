@@ -78,7 +78,6 @@ namespace RaceDayManagementAPI.Controllers
             if (user == null || organiser == null)
                 return NotFound(new { message = "Organiser not found." });
 
-            // Update User fields
             if (!string.IsNullOrEmpty(request.FullName))
                 user.FullName = request.FullName;
             if (!string.IsNullOrEmpty(request.Phone))
@@ -92,7 +91,6 @@ namespace RaceDayManagementAPI.Controllers
             }
             user.UpdatedAt = DateTime.UtcNow;
 
-            // Update Organiser fields
             if (!string.IsNullOrEmpty(request.CompanyName))
                 organiser.CompanyName = request.CompanyName;
             organiser.UpdatedAt = DateTime.UtcNow;
@@ -150,6 +148,7 @@ namespace RaceDayManagementAPI.Controllers
                 e.Location,
                 e.EventType,
                 e.Status,
+                e.BannerUrl,
                 e.CreatedAt,
                 e.UpdatedAt,
                 Categories = categories
@@ -173,7 +172,7 @@ namespace RaceDayManagementAPI.Controllers
         }
 
         /// <summary>
-        /// Retrieves all participant enrolments for a specific event owned by the organiser.
+        /// Retrieves all participant enrolments for a specific event owned by the organiser, including captured results.
         /// </summary>
         [HttpGet("user/events/{eventId}/enrolments")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -203,6 +202,11 @@ namespace RaceDayManagementAPI.Controllers
                 .Where(e => categoryIds.Contains(e.CategoryID))
                 .ToList();
 
+            var enrolmentIds = rawEnrolments.Select(e => e.EnrolmentID).ToList();
+            var results = _db.Results
+                .Where(r => enrolmentIds.Contains(r.EnrolmentID))
+                .ToList();
+
             var participants = _db.Participants.ToList();
             var users = _db.Users.ToList();
 
@@ -211,6 +215,7 @@ namespace RaceDayManagementAPI.Controllers
                 var participant = participants.FirstOrDefault(p => p.ParticipantID == e.ParticipantID);
                 var pUser = participant != null ? users.FirstOrDefault(u => u.UserID == participant.UserID) : null;
                 var category = categories.FirstOrDefault(c => c.CategoryID == e.CategoryID);
+                var result = results.FirstOrDefault(r => r.EnrolmentID == e.EnrolmentID);
 
                 return new
                 {
@@ -226,9 +231,10 @@ namespace RaceDayManagementAPI.Controllers
                     Participant = participant == null ? null : new
                     {
                         participant.ParticipantID,
-                        FullName = pUser?.FullName,
-                        Email = pUser?.Email,
-                        Phone = pUser?.Phone
+                        UserID = participant.UserID,
+                        FullName = pUser?.FullName ?? string.Empty,
+                        Email = pUser?.Email ?? string.Empty,
+                        Phone = pUser?.Phone ?? string.Empty
                     },
                     Category = category == null ? null : new
                     {
@@ -236,6 +242,14 @@ namespace RaceDayManagementAPI.Controllers
                         category.Name,
                         category.DistanceKm,
                         category.EntryFee
+                    },
+                    Result = result == null ? null : new
+                    {
+                        result.ResultID,
+                        result.EnrolmentID,
+                        result.Position,
+                        result.FinishTimeSeconds,
+                        result.Status
                     }
                 };
             }).ToList();
