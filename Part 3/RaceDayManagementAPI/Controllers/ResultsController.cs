@@ -23,8 +23,7 @@ namespace RaceDayManagementAPI.Controllers
             _db = db;
         }
 
-        // 1. CAPTURE/UPDATE RESULT (UPSERT)
-        // POST /api/enrolments/{enrolmentId}/results
+        // 1. CAPTURE/UPDATE RESULT (UPSERT)  →  POST /api/enrolments/{enrolmentId}/results
         [HttpPost("enrolments/{enrolmentId}/results")]
         [Authorize]
         public IActionResult CaptureResult(int enrolmentId, [FromBody] ResultRequest request)
@@ -38,17 +37,16 @@ namespace RaceDayManagementAPI.Controllers
             var organiser = eventEntity != null ? _db.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID) : null;
 
             var userId = _jwtService.GetUserIdFromToken(User);
-            if (organiser?.UserID != userId)
-                return Forbid("Only the event organiser can capture results.");
+            if (organiser == null || organiser.UserID != userId)
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only the event organiser can capture results." });
 
             var existingResult = _db.Results.FirstOrDefault(r => r.EnrolmentID == enrolmentId);
 
             if (existingResult != null)
             {
-                // Update
                 existingResult.FinishTimeSeconds = request.FinishTimeSeconds;
                 existingResult.Position = request.Position;
-                existingResult.Status = request.Status ?? "finished";
+                existingResult.Status = string.IsNullOrWhiteSpace(request.Status) ? "finished" : request.Status;
                 existingResult.UpdatedAt = DateTime.UtcNow;
 
                 _db.SaveChanges();
@@ -56,14 +54,13 @@ namespace RaceDayManagementAPI.Controllers
             }
             else
             {
-                // Create
                 var result = new Result
                 {
                     EnrolmentID = enrolmentId,
                     OrganiserID = organiser.OrganiserID,
                     FinishTimeSeconds = request.FinishTimeSeconds,
                     Position = request.Position,
-                    Status = request.Status ?? "finished",
+                    Status = string.IsNullOrWhiteSpace(request.Status) ? "finished" : request.Status,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
@@ -74,8 +71,7 @@ namespace RaceDayManagementAPI.Controllers
             }
         }
 
-        // 2. GET RESULTS FOR EVENT (PUBLIC)
-        // GET /api/events/{eventId}/results
+        // 2. GET RESULTS FOR EVENT (PUBLIC)  →  GET /api/events/{eventId}/results
         [HttpGet("events/{eventId}/results")]
         [AllowAnonymous]
         public IActionResult GetEventResults(int eventId)
@@ -92,7 +88,7 @@ namespace RaceDayManagementAPI.Controllers
 
             var rawResults = _db.Results
                 .Where(r => enrolmentIds.Contains(r.EnrolmentID))
-                .OrderBy(r => r.Position)
+                .OrderBy(r => r.Position ?? int.MaxValue)
                 .ToList();
 
             var participants = _db.Participants.ToList();
@@ -131,8 +127,7 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(results);
         }
 
-        // 3. GET MY RESULTS (PARTICIPANT)
-        // GET /api/results/user
+        // 3. GET MY RESULTS (PARTICIPANT)  →  GET /api/results/user
         [HttpGet("results/user")]
         [Authorize]
         public IActionResult GetMyResults()
@@ -141,7 +136,7 @@ namespace RaceDayManagementAPI.Controllers
             var participant = _db.Participants.FirstOrDefault(p => p.UserID == userId);
 
             if (participant == null)
-                return Forbid("Only participants can view their results.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only participants can view their results." });
 
             var enrolments = _db.Enrolments
                 .Where(e => e.ParticipantID == participant.ParticipantID)
@@ -191,7 +186,7 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(results);
         }
 
-        // 4. GET SINGLE RESULT -  GET /api/results/{id}
+        // 4. GET SINGLE RESULT  →  GET /api/results/{id}
         [HttpGet("results/{id}")]
         [AllowAnonymous]
         public IActionResult GetResult(int id)
@@ -204,7 +199,6 @@ namespace RaceDayManagementAPI.Controllers
         }
     }
 
-    // Request Models
     public class ResultRequest
     {
         public int? FinishTimeSeconds { get; set; }
