@@ -231,7 +231,7 @@ namespace RaceDayManagementAPI.Tests.Controllers
             // Arrange
             var loginRequest = new LoginRequest
             {
-                Email = "thabo@runningclub.co.za",
+                Email = "micheal@runningclub.co.za",
                 Password = "password123"
             };
 
