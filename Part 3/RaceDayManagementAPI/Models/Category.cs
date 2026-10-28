@@ -1,4 +1,6 @@
-﻿namespace RaceDayManagementAPI.Models
+﻿using System.Text.Json.Serialization;
+
+namespace RaceDayManagementAPI.Models
 {
     public class Category
     {
@@ -14,8 +16,10 @@
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         // Navigation properties
+        [JsonIgnore]
         public Event? Event { get; set; }
         public Route? Route { get; set; }
+        [JsonIgnore]
         public List<Enrolment> Enrolments { get; set; } = new List<Enrolment>();
     }
 }
