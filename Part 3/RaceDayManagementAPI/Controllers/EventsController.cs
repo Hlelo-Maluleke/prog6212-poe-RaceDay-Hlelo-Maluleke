@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RaceDayManagementAPI.Data;
 using RaceDayManagementAPI.Models;
 using RaceDayManagementAPI.Services;
-using Microsoft.EntityFrameworkCore;
-using Azure.Storage.Blobs;
 
 namespace RaceDayManagementAPI.Controllers
 {
@@ -67,6 +66,7 @@ namespace RaceDayManagementAPI.Controllers
                     e.Location,
                     e.EventType,
                     e.Status,
+                    e.BannerUrl,
                     e.OrganiserID,
                     Organiser = user?.FullName,
                     OrganiserName = user?.FullName,
@@ -145,6 +145,7 @@ namespace RaceDayManagementAPI.Controllers
                 eventEntity.Location,
                 eventEntity.EventType,
                 eventEntity.Status,
+                eventEntity.BannerUrl,
                 eventEntity.OrganiserID,
                 Organiser = user?.FullName,
                 OrganiserName = user?.FullName,
@@ -162,9 +163,9 @@ namespace RaceDayManagementAPI.Controllers
             var organiser = _db.Organisers.FirstOrDefault(o => o.UserID == userId);
 
             if (organiser == null)
-                return Forbid("Only organisers can create events.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only organisers can create events." });
 
-            if (string.IsNullOrEmpty(request.Name) || string.IsNullOrEmpty(request.Location))
+            if (request == null || string.IsNullOrWhiteSpace(request.Name) || string.IsNullOrWhiteSpace(request.Location))
                 return BadRequest(new { message = "Name and location are required." });
 
             var newEvent = new Event
@@ -193,27 +194,36 @@ namespace RaceDayManagementAPI.Controllers
         public async Task<IActionResult> UploadBanner(int id, IFormFile file)
         {
             var eventEntity = await _db.Events.FindAsync(id);
-            if (eventEntity == null) return NotFound();
+            if (eventEntity == null)
+                return NotFound(new { message = "Event not found." });
 
             var userId = _jwtService.GetUserIdFromToken(User);
             var organiser = await _db.Organisers
                 .FirstOrDefaultAsync(o => o.OrganiserID == eventEntity.OrganiserID);
 
-            if (organiser?.UserID != userId) return Forbid();
+            if (organiser?.UserID != userId)
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only the event owner can upload a banner." });
 
             if (file == null || file.Length == 0)
-                return BadRequest("No file uploaded.");
+                return BadRequest(new { message = "No file uploaded." });
 
             var fileName = $"event-{id}-{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
             var url = await _blobService.UploadAsync(file, fileName);
 
+            // If local fallback URL was returned, prefix with current request base URL so MVC can render it directly
+            if (url.StartsWith("/") && HttpContext?.Request != null && !string.IsNullOrEmpty(HttpContext.Request.Host.Value))
+            {
+                url = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}{url}";
+            }
+
             eventEntity.BannerUrl = url;
+            eventEntity.UpdatedAt = DateTime.UtcNow;
             await _db.SaveChangesAsync();
 
             return Ok(new { bannerUrl = url });
         }
 
-        // 4. UPDATE EVENT  →  PUT /api/events/{id}
+        // 5. UPDATE EVENT  →  PUT /api/events/{id}
         [HttpPut("{id}")]
         [Authorize]
         public IActionResult UpdateEvent(int id, [FromBody] UpdateEventRequest request)
@@ -225,11 +235,11 @@ namespace RaceDayManagementAPI.Controllers
             var userId = _jwtService.GetUserIdFromToken(User);
             var organiser = _db.Organisers.FirstOrDefault(o => o.OrganiserID == eventToUpdate.OrganiserID);
             if (organiser?.UserID != userId)
-                return Forbid("Only the event owner can update this event.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only the event owner can update this event." });
 
             if (!string.IsNullOrEmpty(request.Name))
                 eventToUpdate.Name = request.Name;
-            if (!string.IsNullOrEmpty(request.Description))
+            if (request.Description != null)
                 eventToUpdate.Description = request.Description;
             if (request.EventDate.HasValue)
                 eventToUpdate.EventDate = request.EventDate.Value;
@@ -248,7 +258,7 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(eventToUpdate);
         }
 
-        // 5. DELETE EVENT  →  DELETE /api/events/{id}
+        // 6. DELETE EVENT  →  DELETE /api/events/{id}
         [HttpDelete("{id}")]
         [Authorize]
         public IActionResult DeleteEvent(int id)
@@ -260,7 +270,7 @@ namespace RaceDayManagementAPI.Controllers
             var userId = _jwtService.GetUserIdFromToken(User);
             var organiser = _db.Organisers.FirstOrDefault(o => o.OrganiserID == eventToDelete.OrganiserID);
             if (organiser?.UserID != userId)
-                return Forbid("Only the event owner can delete this event.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only the event owner can delete this event." });
 
             var categoriesToDelete = _db.Categories.Where(c => c.EventID == id).ToList();
             foreach (var category in categoriesToDelete)
@@ -284,7 +294,7 @@ namespace RaceDayManagementAPI.Controllers
             return NoContent();
         }
 
-        // 6. LIST CATEGORIES FOR EVENT  →  GET /api/events/{eventId}/categories
+        // 7. LIST CATEGORIES FOR EVENT  →  GET /api/events/{eventId}/categories
         [HttpGet("{eventId}/categories")]
         [AllowAnonymous]
         public IActionResult GetCategories(int eventId)
@@ -326,7 +336,7 @@ namespace RaceDayManagementAPI.Controllers
             return Ok(categories);
         }
 
-        // 7. CREATE CATEGORY  →  POST /api/events/{eventId}/categories
+        // 8. CREATE CATEGORY  →  POST /api/events/{eventId}/categories
         [HttpPost("{eventId}/categories")]
         [Authorize]
         public IActionResult CreateCategory(int eventId, [FromBody] CreateCategoryRequest request)
@@ -338,9 +348,9 @@ namespace RaceDayManagementAPI.Controllers
             var userId = _jwtService.GetUserIdFromToken(User);
             var organiser = _db.Organisers.FirstOrDefault(o => o.OrganiserID == eventEntity.OrganiserID);
             if (organiser?.UserID != userId)
-                return Forbid("Only the event owner can add categories.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = "Only the event owner can add categories." });
 
-            if (string.IsNullOrEmpty(request.Name) || request.DistanceKm <= 0)
+            if (request == null || string.IsNullOrWhiteSpace(request.Name) || request.DistanceKm <= 0)
                 return BadRequest(new { message = "Name and distance are required." });
 
             var existingCategory = _db.Categories.FirstOrDefault(c => c.EventID == eventId && c.Name == request.Name);
