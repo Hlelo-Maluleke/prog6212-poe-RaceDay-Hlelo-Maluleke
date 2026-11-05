@@ -9,7 +9,7 @@ namespace RaceDayManagementAPI.Models
         public int OrganiserID { get; set; }
         public int? Position { get; set; }
         public int? FinishTimeSeconds { get; set; }
-        public string? Status { get; set; } // finished, dnf(did not finish), dsq(did not start)
+        public string? Status { get; set; } // finished, dnf(did not finish), dsq(Disqualified)
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 

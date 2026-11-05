@@ -17,6 +17,7 @@ namespace RaceDayManagementAPI.Models
         public Participant? Participant { get; set; }
         [JsonIgnore]
         public Category? Category { get; set; }
+        [JsonIgnore]
         public Result? Result { get; set; }
     }
 }

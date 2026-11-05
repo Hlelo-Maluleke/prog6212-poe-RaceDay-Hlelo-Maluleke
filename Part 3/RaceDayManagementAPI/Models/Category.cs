@@ -18,6 +18,7 @@ namespace RaceDayManagementAPI.Models
         // Navigation properties
         [JsonIgnore]
         public Event? Event { get; set; }
+        [JsonIgnore]
         public Route? Route { get; set; }
         [JsonIgnore]
         public List<Enrolment> Enrolments { get; set; } = new List<Enrolment>();

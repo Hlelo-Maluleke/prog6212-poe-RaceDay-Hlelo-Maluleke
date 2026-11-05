@@ -1348,5 +1348,5 @@
     }
   },
   "type": "object",
-  "SourceSegments": "C:\\Users\\hmalu\\.nuget\\packages\\system.clientmodel\\1.14.0\\ConfigurationSchema.json;C:\\Users\\hmalu\\.nuget\\packages\\azure.core\\1.60.0\\ConfigurationSchema.json"
+  "SourceSegments": "C:\\Users\\Student\\.nuget\\packages\\system.clientmodel\\1.14.0\\ConfigurationSchema.json;C:\\Users\\Student\\.nuget\\packages\\azure.core\\1.60.0\\ConfigurationSchema.json"
 }

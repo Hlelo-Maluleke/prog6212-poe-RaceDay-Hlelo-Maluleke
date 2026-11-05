@@ -207,20 +207,22 @@ namespace RaceDayManagementAPI.Controllers
             if (file == null || file.Length == 0)
                 return BadRequest(new { message = "No file uploaded." });
 
-            var fileName = $"event-{id}-{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-            var url = await _blobService.UploadAsync(file, fileName);
-
-            // If local fallback URL was returned, prefix with current request base URL so MVC can render it directly
-            if (url.StartsWith("/") && HttpContext?.Request != null && !string.IsNullOrEmpty(HttpContext.Request.Host.Value))
+            try
             {
-                url = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}{url}";
+                var fileName = $"event-{id}-{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                var url = await _blobService.UploadAsync(file, fileName);
+
+                eventEntity.BannerUrl = url;
+                eventEntity.UpdatedAt = DateTime.UtcNow;
+                await _db.SaveChangesAsync();
+
+                return Ok(new { bannerUrl = url });
             }
-
-            eventEntity.BannerUrl = url;
-            eventEntity.UpdatedAt = DateTime.UtcNow;
-            await _db.SaveChangesAsync();
-
-            return Ok(new { bannerUrl = url });
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, 
+                    new { message = "Failed to upload banner.", error = ex.Message });
+            }
         }
 
         // 5. UPDATE EVENT  →  PUT /api/events/{id}

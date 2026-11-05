@@ -20,35 +20,11 @@
             <summary>
             Registers a new participant account.
             </summary>
-            <remarks>
-            Creates a new user and automatically registers them as a participant.
-            Organisers are pre-seeded in the system and can only be created by administrators.
-            </remarks>
-            <param name="request">Registration request containing email, password, and participant details</param>
-            <returns>
-            Returns 201 Created with the new user details if registration is successful.
-            Returns 400 Bad Request if required fields are missing.
-            Returns 409 Conflict if email is already registered.
-            </returns>
-            <response code="201">User and participant successfully created</response>
-            <response code="400">Email and password are required; missing required fields</response>
-            <response code="409">Email already registered</response>
         </member>
         <member name="M:RaceDayManagementAPI.Controllers.AuthController.Login(RaceDayManagementAPI.Models.LoginRequest)">
             <summary>
             Authenticates a user and returns a JWT token for API access.
             </summary>
-            <remarks>
-            Verifies the provided email and password, then generates a JWT token valid for subsequent API calls.
-            The token includes claims for user roles (organiser/participant).
-            </remarks>
-            <param name="request">Login credentials (email and password)</param>
-            <returns>
-            Returns 200 OK with JWT token and user details if authentication is successful.
-            Returns 401 Unauthorized if email or password is invalid.
-            </returns>
-            <response code="200">Authentication successful; JWT token returned</response>
-            <response code="401">Invalid email or password</response>
         </member>
         <member name="T:RaceDayManagementAPI.Controllers.CategoriesController">
             <summary>
@@ -91,7 +67,7 @@
         </member>
         <member name="M:RaceDayManagementAPI.Controllers.OrganiserController.GetEventEnrolments(System.Int32)">
             <summary>
-            Retrieves all participant enrolments for a specific event owned by the organiser.
+            Retrieves all participant enrolments for a specific event owned by the organiser, including captured results.
             </summary>
         </member>
         <member name="T:RaceDayManagementAPI.Controllers.ParticipantController">
@@ -112,7 +88,7 @@
         </member>
         <member name="M:RaceDayManagementAPI.Controllers.ParticipantController.GetMyEnrolments">
             <summary>
-            Retrieves all race enrolments for the authenticated participant, including Event and Category details.
+            Retrieves all race enrolments for the authenticated participant, including Event, Category, and Result details.
             </summary>
         </member>
         <member name="M:RaceDayManagementAPI.Controllers.ParticipantController.GetMyResults">
