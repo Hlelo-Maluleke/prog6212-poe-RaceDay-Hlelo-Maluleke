@@ -1,6 +1,10 @@
 ﻿@model List<RaceDayMVC.Models.EventViewModel>
+@inject IConfiguration Configuration
 @{
     ViewData["Title"] = "Upcoming Events";
+    var apiBaseUrl = Configuration["ApiSettings:BaseUrl"] ?? "http://localhost:5120";
+    if (!apiBaseUrl.EndsWith("/"))
+        apiBaseUrl += "/";
 }
 
 <div class="container mt-4">
@@ -58,10 +62,19 @@
                      data-type="@ev.EventType.ToLower()"
                      data-date="@ev.EventDate.ToString("yyyy-MM-dd")">
                     <div class="card h-100 shadow-sm border-0 event-hover">
-                        @if (!string.IsNullOrEmpty(ev.BannerUrl))
+                        @{
+                            string bannerUrl = string.Empty;
+                            if (!string.IsNullOrEmpty(ev.BannerUrl))
+                            {
+                                bannerUrl = ev.BannerUrl.StartsWith("http") 
+                                    ? ev.BannerUrl 
+                                    : apiBaseUrl.TrimEnd('/') + (ev.BannerUrl.StartsWith("/") ? "" : "/") + ev.BannerUrl;
+                            }
+                        }
+                        @if (!string.IsNullOrEmpty(bannerUrl))
                         {
-                            <img src="@ev.BannerUrl" class="card-img-top" alt="@ev.Name banner"
-                                 style="height: 180px; object-fit: cover;" />
+                            <img src="@bannerUrl" class="card-img-top event-banner" alt="@ev.Name banner"
+                                 style="height: 180px; object-fit: cover;" data-event-type="@ev.EventType" />
                         }
                         else
                         {
@@ -125,6 +138,15 @@
         const dateFilter = document.getElementById('dateFilter');
         const cards = document.querySelectorAll('.event-card');
         const noResults = document.getElementById('noResults');
+
+        // Handle banner image load errors
+        document.querySelectorAll('.event-banner').forEach(img => {
+            img.addEventListener('error', function() {
+                const eventType = this.dataset.eventType;
+                const emoji = eventType === 'run' ? '🏃' : eventType === 'walk' ? '🚶' : '🚴';
+                this.outerHTML = `<div class="card-img-top d-flex align-items-center justify-content-center bg-primary text-white" style="height: 180px; font-size: 4rem;">${emoji}</div>`;
+            });
+        });
 
         function applyFilters() {
             const search = searchBox.value.toLowerCase().trim();
