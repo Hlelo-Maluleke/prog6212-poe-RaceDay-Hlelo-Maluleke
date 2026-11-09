@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Student\\Documents\\RaceDayMVC\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{60A2ED6B-1D5C-F537-45C2-88EFBFC93BC5}|RaceDayMVC\\RaceDayMVC.csproj|c:\\users\\student\\documents\\racedaymvc\\racedaymvc\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{60A2ED6B-1D5C-F537-45C2-88EFBFC93BC5}|RaceDayMVC\\RaceDayMVC.csproj|solutionrelative:racedaymvc\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60A2ED6B-1D5C-F537-45C2-88EFBFC93BC5}|RaceDayMVC\\RaceDayMVC.csproj|c:\\users\\student\\documents\\racedaymvc\\racedaymvc\\views\\participant\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{60A2ED6B-1D5C-F537-45C2-88EFBFC93BC5}|RaceDayMVC\\RaceDayMVC.csproj|solutionrelative:racedaymvc\\views\\participant\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60A2ED6B-1D5C-F537-45C2-88EFBFC93BC5}|RaceDayMVC\\RaceDayMVC.csproj|c:\\users\\student\\documents\\racedaymvc\\racedaymvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{60A2ED6B-1D5C-F537-45C2-88EFBFC93BC5}|RaceDayMVC\\RaceDayMVC.csproj|solutionrelative:racedaymvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\Student\\Documents\\RaceDayMVC\\RaceDayMVC\\Dockerfile",
+              "RelativeDocumentMoniker": "RaceDayMVC\\Dockerfile",
+              "ToolTip": "C:\\Users\\Student\\Documents\\RaceDayMVC\\RaceDayMVC\\Dockerfile",
+              "RelativeToolTip": "RaceDayMVC\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-11-05T16:40:45.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Student\\Documents\\RaceDayMVC\\RaceDayMVC\\Views\\Participant\\Index.cshtml",
+              "RelativeDocumentMoniker": "RaceDayMVC\\Views\\Participant\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Student\\Documents\\RaceDayMVC\\RaceDayMVC\\Views\\Participant\\Index.cshtml",
+              "RelativeToolTip": "RaceDayMVC\\Views\\Participant\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-11-05T16:26:14.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Student\\Documents\\RaceDayMVC\\RaceDayMVC\\appsettings.json",
+              "RelativeDocumentMoniker": "RaceDayMVC\\appsettings.json",
+              "ToolTip": "C:\\Users\\Student\\Documents\\RaceDayMVC\\RaceDayMVC\\appsettings.json",
+              "RelativeToolTip": "RaceDayMVC\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAMzMzMzP7vwwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-11-02T19:16:14.367Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

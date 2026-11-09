@@ -20,6 +20,7 @@ namespace RaceDayManagementAPI.Models
         // Navigation properties
         [JsonIgnore]
         public Organiser? Organiser { get; set; }
+        [JsonIgnore]
         public List<Category> Categories { get; set; } = new List<Category>();
     }
 }

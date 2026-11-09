@@ -71,17 +71,30 @@ namespace RaceDayManagementAPI.Services
             }
 
             // Local fallback so banner upload works even without live Azure credentials
-            var webRoot = _env.WebRootPath ?? Path.Combine(_env.ContentRootPath, "wwwroot");
-            var uploadsFolder = Path.Combine(webRoot, "uploads", "banners");
-            Directory.CreateDirectory(uploadsFolder);
-
-            var filePath = Path.Combine(uploadsFolder, fileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            try
             {
-                await file.CopyToAsync(fileStream);
-            }
+                var webRoot = _env.WebRootPath ?? Path.Combine(_env.ContentRootPath, "wwwroot");
+                var uploadsFolder = Path.Combine(webRoot, "uploads", "banners");
+                
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
 
-            return $"/uploads/banners/{fileName}";
+                var filePath = Path.Combine(uploadsFolder, fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+
+                _logger.LogInformation("Banner {FileName} successfully saved locally to {FilePath}", fileName, filePath);
+                return $"/uploads/banners/{fileName}";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to save banner {FileName} locally.", fileName);
+                throw;
+            }
         }
 
         public async Task DeleteAsync(string fileName)
