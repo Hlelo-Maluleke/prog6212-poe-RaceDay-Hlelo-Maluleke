@@ -1,0 +1,150 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Models;
+using RaceDayManagementAPI.Services;
+
+namespace RaceDayManagementAPI.Controllers
+{
+    [ApiController]
+    [Route("api/participants")]
+    [Authorize]
+    public class ParticipantController : ControllerBase
+    {
+        private readonly JwtService _jwtService;
+
+        public ParticipantController(JwtService jwtService)
+        {
+            _jwtService = jwtService;
+        }
+
+        // 1. GET OWN PROFILE
+        [HttpGet("user")]
+        public IActionResult GetMyProfile()
+        {
+            var userId = _jwtService.GetUserIdFromToken(User);
+            var participant = RaceDayDB.Participants.FirstOrDefault(p => p.UserID == userId);
+
+            if (participant == null)
+                return NotFound(new { message = "You are not registered as a participant." });
+
+            var user = RaceDayDB.Users.FirstOrDefault(u => u.UserID == userId);
+
+            return Ok(new
+            {
+                participant.ParticipantID,
+                participant.DateOfBirth,
+                participant.IDNumber,
+                participant.EmergencyContact,
+                User = new
+                {
+                    user?.UserID,
+                    user?.Email,
+                    user?.FullName,
+                    user?.Phone
+                },
+                participant.CreatedAt,
+                participant.UpdatedAt
+            });
+        }
+
+        // 2. UPDATE OWN PROFILE
+        [HttpPut("user")]
+        public IActionResult UpdateMyProfile([FromBody] UpdateParticipantRequest request)
+        {
+            var userId = _jwtService.GetUserIdFromToken(User);
+            var user = RaceDayDB.Users.FirstOrDefault(u => u.UserID == userId);
+            var participant = RaceDayDB.Participants.FirstOrDefault(p => p.UserID == userId);
+
+            if (user == null || participant == null)
+                return NotFound(new { message = "Participant not found." });
+
+            // Update User fields
+            if (!string.IsNullOrEmpty(request.FullName))
+                user.FullName = request.FullName;
+            if (!string.IsNullOrEmpty(request.Phone))
+                user.Phone = request.Phone;
+            if (!string.IsNullOrEmpty(request.Email))
+            {
+                var existing = RaceDayDB.Users.FirstOrDefault(u => u.Email == request.Email && u.UserID != userId);
+                if (existing != null)
+                    return Conflict(new { message = "Email already in use." });
+                user.Email = request.Email;
+            }
+            user.UpdatedAt = DateTime.Now;
+
+            // Update Participant fields
+            if (request.DateOfBirth.HasValue)
+                participant.DateOfBirth = request.DateOfBirth;
+            if (!string.IsNullOrEmpty(request.IDNumber))
+                participant.IDNumber = request.IDNumber;
+            if (!string.IsNullOrEmpty(request.EmergencyContact))
+                participant.EmergencyContact = request.EmergencyContact;
+            participant.UpdatedAt = DateTime.Now;
+
+            return Ok(new
+            {
+                participant.ParticipantID,
+                participant.DateOfBirth,
+                participant.IDNumber,
+                participant.EmergencyContact,
+                User = new
+                {
+                    user.UserID,
+                    user.Email,
+                    user.FullName,
+                    user.Phone
+                },
+                participant.UpdatedAt
+            });
+        }
+
+        // 3. GET OWN ENROLMENTS
+        [HttpGet("user/enrolments")]
+        public IActionResult GetMyEnrolments()
+        {
+            var userId = _jwtService.GetUserIdFromToken(User);
+            var participant = RaceDayDB.Participants.FirstOrDefault(p => p.UserID == userId);
+
+            if (participant == null)
+                return NotFound(new { message = "Participant not found." });
+
+            var enrolments = RaceDayDB.Enrolments
+                .Where(e => e.ParticipantID == participant.ParticipantID)
+                .ToList();
+
+            return Ok(enrolments);
+        }
+
+        // 4. GET OWN RESULTS
+        [HttpGet("user/results")]
+        public IActionResult GetMyResults()
+        {
+            var userId = _jwtService.GetUserIdFromToken(User);
+            var participant = RaceDayDB.Participants.FirstOrDefault(p => p.UserID == userId);
+
+            if (participant == null)
+                return NotFound(new { message = "Participant not found." });
+
+            var enrolmentIds = RaceDayDB.Enrolments
+                .Where(e => e.ParticipantID == participant.ParticipantID)
+                .Select(e => e.EnrolmentID)
+                .ToList();
+
+            var results = RaceDayDB.Results
+                .Where(r => enrolmentIds.Contains(r.EnrolmentID))
+                .ToList();
+
+            return Ok(results);
+        }
+    }
+
+    public class UpdateParticipantRequest
+    {
+        public string? FullName { get; set; }
+        public string? Phone { get; set; }
+        public string? Email { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public string? IDNumber { get; set; }
+        public string? EmergencyContact { get; set; }
+    }
+}

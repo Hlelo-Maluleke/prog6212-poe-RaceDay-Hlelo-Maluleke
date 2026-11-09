@@ -1,0 +1,169 @@
+﻿Test run completed. Ran 56 test(s). 48 Passed, 8 Failed 
+GetMyProfile_WithValidParticipant_ShouldReturnProfile Passed
+GetUserById_ShouldIncludeOrganiserStatus Passed
+GetUserById_WithValidId_ShouldReturnUser Passed
+CreateOrganiser_WithValidData_ShouldReturnCreatedAtAction Passed
+Login_ShouldGenerateJwtToken Passed
+GetUserById_WithInvalidId_ShouldReturnNotFound Passed
+Register_WithExistingEmail_ShouldReturnConflict Passed
+UpdateMyProfile_WithOwnEmail_ShouldUpdateSuccessfully Passed
+Register_WithValidData_ShouldReturnCreatedAtAction Passed
+Login_ShouldReturnCorrectUserDetails Passed
+UpdateMyProfile_WithConflictingEmail_ShouldReturnConflict Passed
+UpdateMyProfile_ShouldUpdateTimestamp Passed
+GetAllUsers_ShouldIdentifyOrganizers Passed
+GetMyProfile_WithNonParticipant_ShouldReturnNotFound Passed
+UpdateMyProfile_WithNonExistentParticipant_ShouldReturnNotFound Passed
+Register_WithEmptyPassword_ShouldReturnBadRequest Passed
+GetUserById_ShouldIncludeCreatedAtAndUpdatedAt Passed
+Register_WithNullFields_ShouldReturnBadRequest Passed
+UpdateMyProfile_WithConflictingEmail_ShouldReturnConflict Passed
+CreateOrganiser_WithEmptyPassword_ShouldReturnBadRequest Passed
+UpdateMyProfile_ShouldReturnUpdatedProfile Passed
+GetMyProfile_WithValidOrganiser_ShouldReturnProfile Failed | Error: Assert.Equal() Failure: Strings differ
+Expected: "Soweto Running Club"
+Actual:   "Soweto Running Club - Updated"
+                              ↑ (pos 19) | StackTrace:    at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_WithValidOrganiser_ShouldReturnProfile() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 44
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+UpdateMyProfile_ShouldUpdateUserTimestamp Passed
+GetAllUsers_ShouldIncludeUserDetails Passed
+GetMyProfile_ShouldReturnCompanyName Failed | Error: Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'CompanyName' | StackTrace:    at CallSite.Target(Closure, CallSite, Object)
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_ShouldReturnCompanyName() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 78
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+CreateOrganiser_WithExistingEmail_ShouldReturnConflict Passed
+CreateOrganiser_ShouldReturnOrganizerDetails Failed | Error: Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'OrganiserID' | StackTrace:    at CallSite.Target(Closure, CallSite, Object)
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests.CreateOrganiser_ShouldReturnOrganizerDetails() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 328
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+UpdateMyProfile_ShouldUpdateCompanyName Passed
+Register_ShouldCreateUserWithHashedPassword Passed
+Register_WithEmptyEmail_ShouldReturnBadRequest Passed
+UpdateMyProfile_WithPartialData_ShouldUpdateOnlyProvidedFields Passed
+GetMyProfile_ShouldReturnUserDetails Failed | Error: Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'User' | StackTrace:    at CallSite.Target(Closure, CallSite, Object)
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests.GetMyProfile_ShouldReturnUserDetails() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 95
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+Login_WithInvalidEmail_ShouldReturnUnauthorized Passed
+GetUserById_ShouldIncludeParticipantStatus Passed
+GetMyProfile_WithNonOrganiser_ShouldReturnNotFound Passed
+UpdateMyProfile_WithPartialData_ShouldUpdateOnlyProvidedFields Passed
+UpdateMyProfile_WithOwnEmail_ShouldUpdateSuccessfully Passed
+GetAllUsers_ShouldIdentifyParticipants Passed
+UpdateMyProfile_ShouldUpdateOrganiserTimestamp Passed
+UpdateMyProfile_WithNonExistentOrganiser_ShouldReturnNotFound Passed
+GetAllUsers_ShouldReturnAllUsers Passed
+GetMyProfile_ShouldReturnCreatedAtAndUpdatedAt Failed | Error: Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'CreatedAt' | StackTrace:    at CallSite.Target(Closure, CallSite, Object)
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_ShouldReturnCreatedAtAndUpdatedAt() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 119
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+Login_WithInvalidPassword_ShouldReturnUnauthorized Passed
+UpdateMyProfile_WithValidData_ShouldUpdateSuccessfully Passed
+GetMyProfile_ShouldReturnEmergencyContact Failed | Error: Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'EmergencyContact' | StackTrace:    at CallSite.Target(Closure, CallSite, Object)
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests.GetMyProfile_ShouldReturnEmergencyContact() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 77
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+GetMyProfile_ShouldReturnCreatedAt Failed | Error: Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'CreatedAt' | StackTrace:    at CallSite.Target(Closure, CallSite, Object)
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests.GetMyProfile_ShouldReturnCreatedAt() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 118
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+CreateOrganiser_ShouldAssignNewOrganiserID Passed
+Login_WithEmptyEmail_ShouldReturnUnauthorized Passed
+UpdateMyProfile_ShouldUpdateIDNumber Passed
+UpdateMyProfile_WithValidData_ShouldUpdateSuccessfully Passed
+UpdateMyProfile_ShouldUpdateDateOfBirth Passed
+CreateOrganiser_ShouldCreateUserWithHashedPassword Passed
+Login_WithValidCredentials_ShouldReturnLoginResponse Passed
+GetMyProfile_ShouldReturnUserDetails Failed | Error: Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'User' | StackTrace:    at CallSite.Target(Closure, CallSite, Object)
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_ShouldReturnUserDetails() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 96
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+CreateOrganiser_WithEmptyEmail_ShouldReturnBadRequest Passed
+Login_AsOrganizer_ShouldSetIsOrganiserTrue Passed
+
+Test Output:
+[Informational] Building Test Projects
+[Informational] Starting test discovery for requested test run
+[Informational] ========== Starting test discovery ==========
+[Informational] [xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.3.1+6b60a9e56a (64-bit .NET 8.0.31)
+[Informational] [xUnit.net 00:00:00.30]   Discovering: RaceDayManagementAPI.Tests
+[Informational] [xUnit.net 00:00:00.42]   Discovered:  RaceDayManagementAPI.Tests
+[Informational] ========== Test discovery finished: 56 Tests found in 2 sec ==========
+[Informational] ========== Starting test run ==========
+[Informational] [xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.3.1+6b60a9e56a (64-bit .NET 8.0.31)
+[Informational] [xUnit.net 00:00:00.26]   Starting:    RaceDayManagementAPI.Tests
+[Error] [xUnit.net 00:00:00.73]     GetMyProfile_ShouldReturnUserDetails [FAIL]
+[Informational] [xUnit.net 00:00:00.73]       Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'User'
+[Informational] [xUnit.net 00:00:00.73]       Stack Trace:
+[Informational] [xUnit.net 00:00:00.73]            at CallSite.Target(Closure, CallSite, Object)
+[Informational] [xUnit.net 00:00:00.74]            at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+[Informational] [xUnit.net 00:00:00.74]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs(96,0): at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_ShouldReturnUserDetails()
+[Informational] [xUnit.net 00:00:00.74]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:00.74]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:00.76]     GetMyProfile_ShouldReturnCompanyName [FAIL]
+[Informational] [xUnit.net 00:00:00.76]       Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'CompanyName'
+[Informational] [xUnit.net 00:00:00.76]       Stack Trace:
+[Informational] [xUnit.net 00:00:00.76]            at CallSite.Target(Closure, CallSite, Object)
+[Informational] [xUnit.net 00:00:00.76]            at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+[Informational] [xUnit.net 00:00:00.76]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs(78,0): at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_ShouldReturnCompanyName()
+[Informational] [xUnit.net 00:00:00.76]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:00.76]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:00.79]     GetMyProfile_WithValidOrganiser_ShouldReturnProfile [FAIL]
+[Informational] [xUnit.net 00:00:00.80]       Assert.Equal() Failure: Strings differ
+[Informational] [xUnit.net 00:00:00.80]       Expected: "Soweto Running Club"
+[Informational] [xUnit.net 00:00:00.80]       Actual:   "Soweto Running Club - Updated"
+[Informational] [xUnit.net 00:00:00.80]                                     ↑ (pos 19)
+[Informational] [xUnit.net 00:00:00.80]       Stack Trace:
+[Informational] [xUnit.net 00:00:00.80]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs(44,0): at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_WithValidOrganiser_ShouldReturnProfile()
+[Informational] [xUnit.net 00:00:00.80]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:00.80]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:00.93]     GetMyProfile_ShouldReturnCreatedAtAndUpdatedAt [FAIL]
+[Informational] [xUnit.net 00:00:00.93]       Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'CreatedAt'
+[Informational] [xUnit.net 00:00:00.93]       Stack Trace:
+[Informational] [xUnit.net 00:00:00.93]            at CallSite.Target(Closure, CallSite, Object)
+[Informational] [xUnit.net 00:00:00.93]            at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+[Informational] [xUnit.net 00:00:00.93]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs(119,0): at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_ShouldReturnCreatedAtAndUpdatedAt()
+[Informational] [xUnit.net 00:00:00.93]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:00.93]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:01.17]     CreateOrganiser_ShouldReturnOrganizerDetails [FAIL]
+[Informational] [xUnit.net 00:00:01.17]       Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'OrganiserID'
+[Informational] [xUnit.net 00:00:01.17]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.18]            at CallSite.Target(Closure, CallSite, Object)
+[Informational] [xUnit.net 00:00:01.18]            at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+[Informational] [xUnit.net 00:00:01.18]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs(328,0): at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests.CreateOrganiser_ShouldReturnOrganizerDetails()
+[Informational] [xUnit.net 00:00:01.18]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:01.18]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:01.22]     GetMyProfile_ShouldReturnUserDetails [FAIL]
+[Informational] [xUnit.net 00:00:01.22]       Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'User'
+[Informational] [xUnit.net 00:00:01.22]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.22]            at CallSite.Target(Closure, CallSite, Object)
+[Informational] [xUnit.net 00:00:01.22]            at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+[Informational] [xUnit.net 00:00:01.22]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs(95,0): at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests.GetMyProfile_ShouldReturnUserDetails()
+[Informational] [xUnit.net 00:00:01.23]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:01.23]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:01.24]     GetMyProfile_ShouldReturnCreatedAt [FAIL]
+[Informational] [xUnit.net 00:00:01.24]       Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'CreatedAt'
+[Informational] [xUnit.net 00:00:01.24]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.24]            at CallSite.Target(Closure, CallSite, Object)
+[Informational] [xUnit.net 00:00:01.24]            at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+[Informational] [xUnit.net 00:00:01.24]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs(118,0): at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests.GetMyProfile_ShouldReturnCreatedAt()
+[Informational] [xUnit.net 00:00:01.24]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:01.24]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:01.26]     GetMyProfile_ShouldReturnEmergencyContact [FAIL]
+[Informational] [xUnit.net 00:00:01.26]       Microsoft.CSharp.RuntimeBinder.RuntimeBinderException : 'object' does not contain a definition for 'EmergencyContact'
+[Informational] [xUnit.net 00:00:01.26]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.26]            at CallSite.Target(Closure, CallSite, Object)
+[Informational] [xUnit.net 00:00:01.26]            at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+[Informational] [xUnit.net 00:00:01.26]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs(77,0): at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests.GetMyProfile_ShouldReturnEmergencyContact()
+[Informational] [xUnit.net 00:00:01.26]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:01.26]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Informational] [xUnit.net 00:00:01.39]   Finished:    RaceDayManagementAPI.Tests
+[Informational] ========== Test run finished: 56 Tests (48 Passed, 8 Failed, 0 Skipped) run in 1.4 sec ==========

@@ -1,0 +1,176 @@
+﻿using Microsoft.EntityFrameworkCore;
+using RaceDayManagementAPI.Models;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace RaceDayManagementAPI.Data
+{
+    public class RaceDayDbContext : DbContext
+    {
+        public RaceDayDbContext(DbContextOptions<RaceDayDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Organiser> Organisers { get; set; }
+        public DbSet<Participant> Participants { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Enrolment> Enrolments { get; set; }
+        public DbSet<Result> Results { get; set; }
+        public DbSet<Route> Routes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Hash the default password for seeding
+            var defaultPasswordHash = HashPassword("password123");
+
+            var nextUserID = 1;
+            var nextOrganiserID = 1;
+            var nextParticipantID = 1;
+            var nextEventID = 1;
+            var nextCategoryID = 1;
+            var nextRouteID = 1;
+            var nextEnrolmentID = 1;
+            var nextResultID = 1;
+
+            // Seed Users
+            modelBuilder.Entity<User>().HasData(
+                new User { UserID = nextUserID++, Email = "thabo@runningclub.co.za", PasswordHash = defaultPasswordHash, FullName = "Thabo Mokoena", Phone = "082 123 4567" },
+                new User { UserID = nextUserID++, Email = "susan@capetowncycles.co.za", PasswordHash = defaultPasswordHash, FullName = "Susan van der Merwe", Phone = "083 987 6543" },
+                new User { UserID = nextUserID++, Email = "lindiwe@runsa.co.za", PasswordHash = defaultPasswordHash, FullName = "Lindiwe Nkosi", Phone = "076 555 1234" },
+                new User { UserID = nextUserID++, Email = "michael@cyclezone.co.za", PasswordHash = defaultPasswordHash, FullName = "Michael Jacobs", Phone = "072 444 5678" },
+                new User { UserID = nextUserID++, Email = "sipho@fitness.co.za", PasswordHash = defaultPasswordHash, FullName = "Sipho Dlamini", Phone = "073 333 9012" }
+            );
+
+            // Seed Organisers
+            modelBuilder.Entity<Organiser>().HasData(
+                new Organiser { OrganiserID = nextOrganiserID++, UserID = 1, CompanyName = "Soweto Running Club" },
+                new Organiser { OrganiserID = nextOrganiserID++, UserID = 2, CompanyName = "Cape Town Cycle Tours" }
+            );
+
+            // Seed Participants
+            modelBuilder.Entity<Participant>().HasData(
+                new Participant { ParticipantID = nextParticipantID++, UserID = 3, DateOfBirth = new DateTime(1985, 6, 15), IDNumber = "8506151234089", EmergencyContact = "Sipho Mokoena - 082 111 2222" },
+                new Participant { ParticipantID = nextParticipantID++, UserID = 4, DateOfBirth = new DateTime(1992, 11, 22), IDNumber = "9211225678012", EmergencyContact = "Sarah Jacobs - 083 444 5555" },
+                new Participant { ParticipantID = nextParticipantID++, UserID = 5, DateOfBirth = new DateTime(1998, 3, 1), IDNumber = "9803019012345", EmergencyContact = "Nomsa Dlamini - 076 666 7777" }
+            );
+
+            // Seed Events
+            modelBuilder.Entity<Event>().HasData(
+                new Event
+                {
+                    EventID = nextEventID++,
+                    OrganiserID = 1,
+                    Name = "Soweto Marathon",
+                    Description = "One of South Africa's most iconic road races through the heart of Soweto. Includes 10km, 21km, and 42km categories.",
+                    EventDate = new DateTime(2026, 11, 15),
+                    StartTime = new TimeSpan(6, 0, 0),
+                    Location = "Soweto, Johannesburg",
+                    EventType = "run",
+                    Status = "published"
+                },
+                new Event
+                {
+                    EventID = nextEventID++,
+                    OrganiserID = 2,
+                    Name = "Cape Town Cycle Tour",
+                    Description = "The world's largest timed cycle race. Stunning route along Chapman's Peak and Cape Peninsula.",
+                    EventDate = new DateTime(2026, 3, 8),
+                    StartTime = new TimeSpan(7, 30, 0),
+                    Location = "Cape Town CBD",
+                    EventType = "cycle",
+                    Status = "published"
+                },
+                new Event
+                {
+                    EventID = nextEventID++,
+                    OrganiserID = 1,
+                    Name = "Durban Community Parkrun",
+                    Description = "Weekly free community walking/running event at Durban Botanic Gardens. Open to all ages and fitness levels.",
+                    EventDate = new DateTime(2026, 10, 25),
+                    StartTime = new TimeSpan(8, 0, 0),
+                    Location = "Durban Botanic Gardens",
+                    EventType = "walk",
+                    Status = "published"
+                }
+            );
+
+            // Seed Categories
+            modelBuilder.Entity<Category>().HasData(
+                // Soweto Marathon (Event 1)
+                new Category { CategoryID = nextCategoryID++, EventID = 1, Name = "10km Road Run", Description = "Short distance for beginners", DistanceKm = 10.00m, EntryFee = 150.00m, MaxParticipants = 500, StartTime = new TimeSpan(6, 15, 0) },
+                new Category { CategoryID = nextCategoryID++, EventID = 1, Name = "21km Half Marathon", Description = "Intermediate distance", DistanceKm = 21.10m, EntryFee = 250.00m, MaxParticipants = 300, StartTime = new TimeSpan(6, 0, 0) },
+                new Category { CategoryID = nextCategoryID++, EventID = 1, Name = "42km Full Marathon", Description = "The ultimate challenge", DistanceKm = 42.20m, EntryFee = 350.00m, MaxParticipants = 200, StartTime = new TimeSpan(6, 0, 0) },
+                // Cape Town Cycle Tour (Event 2)
+                new Category { CategoryID = nextCategoryID++, EventID = 2, Name = "40km Fun Ride", Description = "Casual cycle for families", DistanceKm = 40.00m, EntryFee = 100.00m, MaxParticipants = 1000, StartTime = new TimeSpan(8, 0, 0) },
+                new Category { CategoryID = nextCategoryID++, EventID = 2, Name = "109km Classic", Description = "Full Cape Town Cycle Tour", DistanceKm = 109.00m, EntryFee = 300.00m, MaxParticipants = 1500, StartTime = new TimeSpan(7, 30, 0) },
+                // Durban Community Parkrun (Event 3 - FREE!)
+                new Category { CategoryID = nextCategoryID++, EventID = 3, Name = "5km Community Walk", Description = "Free family-friendly walk", DistanceKm = 5.00m, EntryFee = 0.00m, MaxParticipants = 200, StartTime = new TimeSpan(8, 0, 0) },
+                new Category { CategoryID = nextCategoryID++, EventID = 3, Name = "5km Community Run", Description = "Free run for fitness enthusiasts", DistanceKm = 5.00m, EntryFee = 0.00m, MaxParticipants = 150, StartTime = new TimeSpan(8, 0, 0) }
+            );
+
+            // Seed Routes
+            modelBuilder.Entity<Route>().HasData(
+                new Route
+                {
+                    RouteID = nextRouteID++,
+                    CategoryID = 2,
+                    MapUrl = "https://maps.example.com/soweto-21km-route",
+                    ElevationGain = 180,
+                    Description = "Scenic route through Soweto landmarks including Mandela House and Orlando Stadium"
+                },
+                new Route
+                {
+                    RouteID = nextRouteID++,
+                    CategoryID = 5,
+                    MapUrl = "https://maps.example.com/ctct-109km-route",
+                    ElevationGain = 850,
+                    Description = "Challenging route with Chapman's Peak Drive and Constantia climbs"
+                },
+                new Route
+                {
+                    RouteID = nextRouteID++,
+                    CategoryID = 6,
+                    MapUrl = "https://maps.example.com/durban-5km-route",
+                    ElevationGain = 25,
+                    Description = "Flat, family-friendly route through Durban Botanic Gardens"
+                }
+            );
+
+            // Seed Enrolments
+            modelBuilder.Entity<Enrolment>().HasData(
+                // Lindiwe (Participant 1)
+                new Enrolment { EnrolmentID = nextEnrolmentID++, ParticipantID = 1, CategoryID = 2, Status = "confirmed", EnrolmentDate = DateTime.Now.AddDays(-30) },
+                new Enrolment { EnrolmentID = nextEnrolmentID++, ParticipantID = 1, CategoryID = 5, Status = "confirmed", EnrolmentDate = DateTime.Now.AddDays(-60) },
+                new Enrolment { EnrolmentID = nextEnrolmentID++, ParticipantID = 1, CategoryID = 6, Status = "confirmed", EnrolmentDate = DateTime.Now.AddDays(-15) },
+                // Michael (Participant 2)
+                new Enrolment { EnrolmentID = nextEnrolmentID++, ParticipantID = 2, CategoryID = 1, Status = "confirmed", EnrolmentDate = DateTime.Now.AddDays(-30) },
+                new Enrolment { EnrolmentID = nextEnrolmentID++, ParticipantID = 2, CategoryID = 5, Status = "confirmed", EnrolmentDate = DateTime.Now.AddDays(-60) },
+                new Enrolment { EnrolmentID = nextEnrolmentID++, ParticipantID = 2, CategoryID = 7, Status = "pending", EnrolmentDate = DateTime.Now.AddDays(-10) },
+                // Sipho (Participant 3)
+                new Enrolment { EnrolmentID = nextEnrolmentID++, ParticipantID = 3, CategoryID = 3, Status = "confirmed", EnrolmentDate = DateTime.Now.AddDays(-30) },
+                new Enrolment { EnrolmentID = nextEnrolmentID++, ParticipantID = 3, CategoryID = 4, Status = "confirmed", EnrolmentDate = DateTime.Now.AddDays(-60) }
+            );
+
+            // Seed Results
+            modelBuilder.Entity<Result>().HasData(
+                new Result { ResultID = nextResultID++, EnrolmentID = 1, OrganiserID = 1, FinishTimeSeconds = 6300, Position = 42, Status = "finished" },
+                new Result { ResultID = nextResultID++, EnrolmentID = 2, OrganiserID = 2, FinishTimeSeconds = 14520, Position = 156, Status = "finished" },
+                new Result { ResultID = nextResultID++, EnrolmentID = 4, OrganiserID = 1, FinishTimeSeconds = 3600, Position = 18, Status = "finished" },
+                new Result { ResultID = nextResultID++, EnrolmentID = 7, OrganiserID = 1, FinishTimeSeconds = 16200, Position = 89, Status = "finished" }
+            );
+        }
+
+        private static string HashPassword(string password)
+        {
+            using var sha256 = SHA256.Create();
+            var bytes = Encoding.UTF8.GetBytes(password);
+            var hash = sha256.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
+    }
+}

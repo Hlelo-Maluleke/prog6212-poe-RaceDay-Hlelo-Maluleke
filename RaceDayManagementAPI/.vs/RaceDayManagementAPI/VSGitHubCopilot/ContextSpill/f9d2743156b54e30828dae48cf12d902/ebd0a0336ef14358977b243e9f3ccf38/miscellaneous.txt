@@ -1,0 +1,121 @@
+﻿Test run completed. Ran 56 test(s). 52 Passed, 4 Failed 
+GetMyProfile_WithValidParticipant_ShouldReturnProfile Passed
+GetUserById_ShouldIncludeOrganiserStatus Passed
+GetUserById_WithValidId_ShouldReturnUser Passed
+CreateOrganiser_WithValidData_ShouldReturnCreatedAtAction Passed
+Login_ShouldGenerateJwtToken Passed
+GetUserById_WithInvalidId_ShouldReturnNotFound Passed
+Register_WithExistingEmail_ShouldReturnConflict Passed
+UpdateMyProfile_WithOwnEmail_ShouldUpdateSuccessfully Passed
+Register_WithValidData_ShouldReturnCreatedAtAction Passed
+Login_ShouldReturnCorrectUserDetails Passed
+UpdateMyProfile_WithConflictingEmail_ShouldReturnConflict Passed
+UpdateMyProfile_ShouldUpdateTimestamp Passed
+GetAllUsers_ShouldIdentifyOrganizers Passed
+GetMyProfile_WithNonParticipant_ShouldReturnNotFound Passed
+UpdateMyProfile_WithNonExistentParticipant_ShouldReturnNotFound Passed
+Register_WithEmptyPassword_ShouldReturnBadRequest Passed
+GetUserById_ShouldIncludeCreatedAtAndUpdatedAt Passed
+Register_WithNullFields_ShouldReturnBadRequest Passed
+UpdateMyProfile_WithConflictingEmail_ShouldReturnConflict Passed
+CreateOrganiser_WithEmptyPassword_ShouldReturnBadRequest Passed
+UpdateMyProfile_ShouldReturnUpdatedProfile Passed
+GetMyProfile_WithValidOrganiser_ShouldReturnProfile Failed | Error: Assert.Equal() Failure: Strings differ
+Expected: "Soweto Running Club"
+Actual:   "Soweto Running Club - Updated"
+                              ↑ (pos 19) | StackTrace:    at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_WithValidOrganiser_ShouldReturnProfile() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 44
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+UpdateMyProfile_ShouldUpdateUserTimestamp Passed
+GetAllUsers_ShouldIncludeUserDetails Passed
+GetMyProfile_ShouldReturnCompanyName Passed
+CreateOrganiser_WithExistingEmail_ShouldReturnConflict Passed
+CreateOrganiser_ShouldReturnOrganizerDetails Failed | Error: Assert.True() Failure
+Expected: True
+Actual:   False | StackTrace:    at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests.CreateOrganiser_ShouldReturnOrganizerDetails() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 328
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+UpdateMyProfile_ShouldUpdateCompanyName Passed
+Register_ShouldCreateUserWithHashedPassword Passed
+Register_WithEmptyEmail_ShouldReturnBadRequest Passed
+UpdateMyProfile_WithPartialData_ShouldUpdateOnlyProvidedFields Passed
+GetMyProfile_ShouldReturnUserDetails Failed | Error: System.InvalidCastException : Object must implement IConvertible. | StackTrace:    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at RaceDayManagementAPI.Tests.Fixtures.ControllerContextHelper.GetAnonymousProperty[T](Object obj, String propertyName) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Fixtures\ControllerContextHelper.cs:line 39
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests.GetMyProfile_ShouldReturnUserDetails() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 95
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+Login_WithInvalidEmail_ShouldReturnUnauthorized Passed
+GetUserById_ShouldIncludeParticipantStatus Passed
+GetMyProfile_WithNonOrganiser_ShouldReturnNotFound Passed
+UpdateMyProfile_WithPartialData_ShouldUpdateOnlyProvidedFields Passed
+UpdateMyProfile_WithOwnEmail_ShouldUpdateSuccessfully Passed
+GetAllUsers_ShouldIdentifyParticipants Passed
+UpdateMyProfile_ShouldUpdateOrganiserTimestamp Passed
+UpdateMyProfile_WithNonExistentOrganiser_ShouldReturnNotFound Passed
+GetAllUsers_ShouldReturnAllUsers Passed
+GetMyProfile_ShouldReturnCreatedAtAndUpdatedAt Passed
+Login_WithInvalidPassword_ShouldReturnUnauthorized Passed
+UpdateMyProfile_WithValidData_ShouldUpdateSuccessfully Passed
+GetMyProfile_ShouldReturnEmergencyContact Passed
+GetMyProfile_ShouldReturnCreatedAt Passed
+CreateOrganiser_ShouldAssignNewOrganiserID Passed
+Login_WithEmptyEmail_ShouldReturnUnauthorized Passed
+UpdateMyProfile_ShouldUpdateIDNumber Passed
+UpdateMyProfile_WithValidData_ShouldUpdateSuccessfully Passed
+UpdateMyProfile_ShouldUpdateDateOfBirth Passed
+CreateOrganiser_ShouldCreateUserWithHashedPassword Passed
+Login_WithValidCredentials_ShouldReturnLoginResponse Passed
+GetMyProfile_ShouldReturnUserDetails Failed | Error: System.InvalidCastException : Object must implement IConvertible. | StackTrace:    at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at RaceDayManagementAPI.Tests.Fixtures.ControllerContextHelper.GetAnonymousProperty[T](Object obj, String propertyName) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Fixtures\ControllerContextHelper.cs:line 39
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_ShouldReturnUserDetails() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 97
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+CreateOrganiser_WithEmptyEmail_ShouldReturnBadRequest Passed
+Login_AsOrganizer_ShouldSetIsOrganiserTrue Passed
+
+Test Output:
+[Informational] Building Test Projects
+[Informational] Starting test discovery for requested test run
+[Informational] ========== Starting test discovery ==========
+[Informational] [xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.3.1+6b60a9e56a (64-bit .NET 8.0.31)
+[Informational] [xUnit.net 00:00:00.34]   Discovering: RaceDayManagementAPI.Tests
+[Informational] [xUnit.net 00:00:00.48]   Discovered:  RaceDayManagementAPI.Tests
+[Informational] ========== Test discovery finished: 56 Tests found in 2.2 sec ==========
+[Informational] ========== Starting test run ==========
+[Informational] [xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.3.1+6b60a9e56a (64-bit .NET 8.0.31)
+[Informational] [xUnit.net 00:00:00.23]   Starting:    RaceDayManagementAPI.Tests
+[Error] [xUnit.net 00:00:00.48]     GetMyProfile_ShouldReturnUserDetails [FAIL]
+[Informational] [xUnit.net 00:00:00.48]       System.InvalidCastException : Object must implement IConvertible.
+[Informational] [xUnit.net 00:00:00.48]       Stack Trace:
+[Informational] [xUnit.net 00:00:00.48]            at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+[Informational] [xUnit.net 00:00:00.48]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Fixtures\ControllerContextHelper.cs(39,0): at RaceDayManagementAPI.Tests.Fixtures.ControllerContextHelper.GetAnonymousProperty[T](Object obj, String propertyName)
+[Informational] [xUnit.net 00:00:00.48]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs(97,0): at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_ShouldReturnUserDetails()
+[Informational] [xUnit.net 00:00:00.48]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:00.48]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:00.51]     GetMyProfile_WithValidOrganiser_ShouldReturnProfile [FAIL]
+[Informational] [xUnit.net 00:00:00.51]       Assert.Equal() Failure: Strings differ
+[Informational] [xUnit.net 00:00:00.51]       Expected: "Soweto Running Club"
+[Informational] [xUnit.net 00:00:00.51]       Actual:   "Soweto Running Club - Updated"
+[Informational] [xUnit.net 00:00:00.51]                                     ↑ (pos 19)
+[Informational] [xUnit.net 00:00:00.51]       Stack Trace:
+[Informational] [xUnit.net 00:00:00.51]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs(44,0): at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests.GetMyProfile_WithValidOrganiser_ShouldReturnProfile()
+[Informational] [xUnit.net 00:00:00.51]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:00.51]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:00.85]     GetMyProfile_ShouldReturnUserDetails [FAIL]
+[Informational] [xUnit.net 00:00:00.85]       System.InvalidCastException : Object must implement IConvertible.
+[Informational] [xUnit.net 00:00:00.85]       Stack Trace:
+[Informational] [xUnit.net 00:00:00.85]            at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+[Informational] [xUnit.net 00:00:00.85]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Fixtures\ControllerContextHelper.cs(39,0): at RaceDayManagementAPI.Tests.Fixtures.ControllerContextHelper.GetAnonymousProperty[T](Object obj, String propertyName)
+[Informational] [xUnit.net 00:00:00.85]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs(95,0): at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests.GetMyProfile_ShouldReturnUserDetails()
+[Informational] [xUnit.net 00:00:00.86]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:00.86]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:01.13]     CreateOrganiser_ShouldReturnOrganizerDetails [FAIL]
+[Informational] [xUnit.net 00:00:01.13]       Assert.True() Failure
+[Informational] [xUnit.net 00:00:01.13]       Expected: True
+[Informational] [xUnit.net 00:00:01.13]       Actual:   False
+[Informational] [xUnit.net 00:00:01.13]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.13]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs(328,0): at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests.CreateOrganiser_ShouldReturnOrganizerDetails()
+[Informational] [xUnit.net 00:00:01.13]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:01.13]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Informational] [xUnit.net 00:00:01.13]   Finished:    RaceDayManagementAPI.Tests
+[Informational] ========== Test run finished: 56 Tests (52 Passed, 4 Failed, 0 Skipped) run in 1.2 sec ==========

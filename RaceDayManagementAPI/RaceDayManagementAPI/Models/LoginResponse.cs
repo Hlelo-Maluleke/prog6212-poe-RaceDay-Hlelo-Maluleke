@@ -1,4 +1,4 @@
-﻿namespace RaceDayManagementAPI.Models
+﻿    namespace RaceDayManagementAPI.Models
 {
     public class LoginResponse
     {

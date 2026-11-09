@@ -1,0 +1,67 @@
+﻿Test run completed. Ran 4 test(s). 0 Passed, 4 Failed 
+GET_ReadEvent Failed | Error: Assert.IsType() Failure: Value is not the exact type
+Expected: typeof(Microsoft.AspNetCore.Mvc.OkObjectResult)
+Actual:   typeof(Microsoft.AspNetCore.Mvc.NotFoundObjectResult) | StackTrace:    at RaceDayManagementAPI.Tests.Controllers.EventsControllerCrudTests.GET_ReadEvent() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\EventsControllerCrudTests.cs:line 81
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+POST_CreateEvent Failed | Error: Assert.IsType() Failure: Value is not the exact type
+Expected: typeof(Microsoft.AspNetCore.Mvc.CreatedAtActionResult)
+Actual:   typeof(Microsoft.AspNetCore.Mvc.ForbidResult) | StackTrace:    at RaceDayManagementAPI.Tests.Controllers.EventsControllerCrudTests.POST_CreateEvent() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\EventsControllerCrudTests.cs:line 46
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+DELETE_RemoveEvent Failed | Error: Assert.IsType() Failure: Value is not the exact type
+Expected: typeof(Microsoft.AspNetCore.Mvc.NoContentResult)
+Actual:   typeof(Microsoft.AspNetCore.Mvc.NotFoundObjectResult) | StackTrace:    at RaceDayManagementAPI.Tests.Controllers.EventsControllerCrudTests.DELETE_RemoveEvent() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\EventsControllerCrudTests.cs:line 148
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+PUT_UpdateEvent Failed | Error: Assert.IsType() Failure: Value is not the exact type
+Expected: typeof(Microsoft.AspNetCore.Mvc.OkObjectResult)
+Actual:   typeof(Microsoft.AspNetCore.Mvc.NotFoundObjectResult) | StackTrace:    at RaceDayManagementAPI.Tests.Controllers.EventsControllerCrudTests.PUT_UpdateEvent() in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\EventsControllerCrudTests.cs:line 116
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+
+Test Output:
+[Informational] Building Test Projects
+[Informational] Starting test discovery for requested test run
+[Informational] ========== Starting test discovery ==========
+[Informational] [xUnit.net 00:00:00.03] xUnit.net VSTest Adapter v2.5.3.1+6b60a9e56a (64-bit .NET 8.0.31)
+[Informational] [xUnit.net 00:00:00.95]   Discovering: RaceDayManagementAPI.Tests
+[Informational] [xUnit.net 00:00:01.47]   Discovered:  RaceDayManagementAPI.Tests
+[Informational] ========== Test discovery finished: 60 Tests found in 8.6 sec ==========
+[Informational] ========== Starting test run ==========
+[Informational] [xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.3.1+6b60a9e56a (64-bit .NET 8.0.31)
+[Informational] [xUnit.net 00:00:00.29]   Starting:    RaceDayManagementAPI.Tests
+[Error] [xUnit.net 00:00:01.26]     POST_CreateEvent [FAIL]
+[Informational] [xUnit.net 00:00:01.27]       Assert.IsType() Failure: Value is not the exact type
+[Informational] [xUnit.net 00:00:01.27]       Expected: typeof(Microsoft.AspNetCore.Mvc.CreatedAtActionResult)
+[Informational] [xUnit.net 00:00:01.27]       Actual:   typeof(Microsoft.AspNetCore.Mvc.ForbidResult)
+[Informational] [xUnit.net 00:00:01.28]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.28]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\EventsControllerCrudTests.cs(46,0): at RaceDayManagementAPI.Tests.Controllers.EventsControllerCrudTests.POST_CreateEvent()
+[Informational] [xUnit.net 00:00:01.28]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:01.28]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:01.33]     GET_ReadEvent [FAIL]
+[Informational] [xUnit.net 00:00:01.33]       Assert.IsType() Failure: Value is not the exact type
+[Informational] [xUnit.net 00:00:01.33]       Expected: typeof(Microsoft.AspNetCore.Mvc.OkObjectResult)
+[Informational] [xUnit.net 00:00:01.33]       Actual:   typeof(Microsoft.AspNetCore.Mvc.NotFoundObjectResult)
+[Informational] [xUnit.net 00:00:01.33]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.33]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\EventsControllerCrudTests.cs(81,0): at RaceDayManagementAPI.Tests.Controllers.EventsControllerCrudTests.GET_ReadEvent()
+[Informational] [xUnit.net 00:00:01.33]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:01.33]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:01.33]     PUT_UpdateEvent [FAIL]
+[Informational] [xUnit.net 00:00:01.33]       Assert.IsType() Failure: Value is not the exact type
+[Informational] [xUnit.net 00:00:01.34]       Expected: typeof(Microsoft.AspNetCore.Mvc.OkObjectResult)
+[Informational] [xUnit.net 00:00:01.34]       Actual:   typeof(Microsoft.AspNetCore.Mvc.NotFoundObjectResult)
+[Informational] [xUnit.net 00:00:01.34]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.34]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\EventsControllerCrudTests.cs(116,0): at RaceDayManagementAPI.Tests.Controllers.EventsControllerCrudTests.PUT_UpdateEvent()
+[Informational] [xUnit.net 00:00:01.34]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:01.34]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Error] [xUnit.net 00:00:01.34]     DELETE_RemoveEvent [FAIL]
+[Informational] [xUnit.net 00:00:01.34]       Assert.IsType() Failure: Value is not the exact type
+[Informational] [xUnit.net 00:00:01.34]       Expected: typeof(Microsoft.AspNetCore.Mvc.NoContentResult)
+[Informational] [xUnit.net 00:00:01.34]       Actual:   typeof(Microsoft.AspNetCore.Mvc.NotFoundObjectResult)
+[Informational] [xUnit.net 00:00:01.34]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.34]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\EventsControllerCrudTests.cs(148,0): at RaceDayManagementAPI.Tests.Controllers.EventsControllerCrudTests.DELETE_RemoveEvent()
+[Informational] [xUnit.net 00:00:01.34]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[Informational] [xUnit.net 00:00:01.34]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[Informational] [xUnit.net 00:00:01.35]   Finished:    RaceDayManagementAPI.Tests
+[Informational] ========== Test run finished: 4 Tests (0 Passed, 4 Failed, 0 Skipped) run in 1.7 sec ==========

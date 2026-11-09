@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Text.Json.Serialization;
 
 namespace RaceDayManagementAPI.Models
 {
@@ -16,8 +16,10 @@ namespace RaceDayManagementAPI.Models
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         // Navigation properties
+        [JsonIgnore]
         public Event? Event { get; set; }
         public Route? Route { get; set; }
+        [JsonIgnore]
         public List<Enrolment> Enrolments { get; set; } = new List<Enrolment>();
     }
 }

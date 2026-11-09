@@ -1,0 +1,145 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Data;
+using RaceDayManagementAPI.Models;
+using RaceDayManagementAPI.Services;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace RaceDayManagementAPI.Controllers
+{
+    [ApiController]
+    [Route("api/admin")]
+    [Authorize]
+    public class AdminController : ControllerBase
+    {
+        private readonly JwtService _jwtService;
+        private readonly RaceDayDbContext _dbContext;
+
+        public AdminController(JwtService jwtService, RaceDayDbContext dbContext)
+        {
+            _jwtService = jwtService;
+            _dbContext = dbContext;
+        }
+
+        private string HashPassword(string password)
+        {
+            using var sha256 = SHA256.Create();
+            var bytes = Encoding.UTF8.GetBytes(password);
+            var hash = sha256.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
+
+        // 1. LIST ALL USERS (Admin)
+        [HttpGet("users")]
+        public IActionResult GetAllUsers()
+        {
+            var users = _dbContext.Users.Select(u => new
+            {
+                u.UserID,
+                u.Email,
+                u.FullName,
+                u.Phone,
+                IsOrganiser = _dbContext.Organisers.Any(o => o.UserID == u.UserID),
+                IsParticipant = _dbContext.Participants.Any(p => p.UserID == u.UserID),
+                u.CreatedAt
+            }).ToList();
+
+            return Ok(users);
+        }
+ 
+        // 2. GET USER BY ID (Admin)
+        [HttpGet("users/{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.UserID == id);
+            if (user == null)
+                return NotFound(new { message = "User not found." });
+
+            return Ok(new
+            {
+                user.UserID,
+                user.Email,
+                user.FullName,
+                user.Phone,
+                IsOrganiser = _dbContext.Organisers.Any(o => o.UserID == user.UserID),
+                IsParticipant = _dbContext.Participants.Any(p => p.UserID == user.UserID),
+                user.CreatedAt,
+                user.UpdatedAt
+            });
+        }
+
+        // 3. CREATE ORGANISER (Admin pre-seeds organisers)
+        [HttpPost("organisers")]
+        [AllowAnonymous] // Remove this if you want only admins to access it
+        public IActionResult CreateOrganiser([FromBody] CreateOrganiserRequest request)
+        {
+            if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
+                return BadRequest(new { message = "Email and password are required." });
+
+            var existingUser = _dbContext.Users.FirstOrDefault(u => u.Email == request.Email);
+            if (existingUser != null)
+                return Conflict(new { message = "Email already registered." });
+
+            var passwordHash = HashPassword(request.Password);
+
+            var user = new User
+            {
+                Email = request.Email,
+                PasswordHash = passwordHash,
+                FullName = request.FullName,
+                Phone = request.Phone
+            };
+            _dbContext.Users.Add(user);
+            _dbContext.SaveChanges();
+
+            var organiser = new Organiser
+            {
+                UserID = user.UserID,
+                CompanyName = request.CompanyName
+            };
+            _dbContext.Organisers.Add(organiser);
+            _dbContext.SaveChanges();
+
+            return CreatedAtAction(nameof(GetUserById), new { id = user.UserID }, new
+            {
+                user.UserID,
+                user.Email,
+                user.FullName,
+                user.Phone,
+                organiser.CompanyName,
+                user.CreatedAt
+            });
+        }
+
+        // 4. DELETE USER (Admin)
+        [HttpDelete("users/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.UserID == id);
+            if (user == null)
+                return NotFound(new { message = "User not found." });
+
+            // Remove subtype records
+            var organisersToDelete = _dbContext.Organisers.Where(o => o.UserID == id).ToList();
+            _dbContext.Organisers.RemoveRange(organisersToDelete);
+
+            var participantsToDelete = _dbContext.Participants.Where(p => p.UserID == id).ToList();
+            _dbContext.Participants.RemoveRange(participantsToDelete);
+
+            _dbContext.Users.Remove(user);
+            _dbContext.SaveChanges();
+
+            return NoContent();
+        }
+    }
+
+    public class CreateOrganiserRequest
+    {
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string FullName { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
+        public string? CompanyName { get; set; }
+    }
+}

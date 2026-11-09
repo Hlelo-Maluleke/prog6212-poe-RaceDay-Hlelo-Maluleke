@@ -1,0 +1,943 @@
+﻿Test run completed. Ran 56 test(s). 0 Passed, 56 Failed 
+GetMyProfile_WithValidParticipant_ShouldReturnProfile Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetUserById_ShouldIncludeOrganiserStatus Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetUserById_WithValidId_ShouldReturnUser Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+CreateOrganiser_WithValidData_ShouldReturnCreatedAtAction Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Login_ShouldGenerateJwtToken Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetUserById_WithInvalidId_ShouldReturnNotFound Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Register_WithExistingEmail_ShouldReturnConflict Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_WithOwnEmail_ShouldUpdateSuccessfully Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Register_WithValidData_ShouldReturnCreatedAtAction Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Login_ShouldReturnCorrectUserDetails Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_WithConflictingEmail_ShouldReturnConflict Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_ShouldUpdateTimestamp Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetAllUsers_ShouldIdentifyOrganizers Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetMyProfile_WithNonParticipant_ShouldReturnNotFound Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_WithNonExistentParticipant_ShouldReturnNotFound Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Register_WithEmptyPassword_ShouldReturnBadRequest Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetUserById_ShouldIncludeCreatedAtAndUpdatedAt Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Register_WithNullFields_ShouldReturnBadRequest Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_WithConflictingEmail_ShouldReturnConflict Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+CreateOrganiser_WithEmptyPassword_ShouldReturnBadRequest Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_ShouldReturnUpdatedProfile Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetMyProfile_WithValidOrganiser_ShouldReturnProfile Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_ShouldUpdateUserTimestamp Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetAllUsers_ShouldIncludeUserDetails Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetMyProfile_ShouldReturnCompanyName Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+CreateOrganiser_WithExistingEmail_ShouldReturnConflict Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+CreateOrganiser_ShouldReturnOrganizerDetails Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_ShouldUpdateCompanyName Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Register_ShouldCreateUserWithHashedPassword Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Register_WithEmptyEmail_ShouldReturnBadRequest Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_WithPartialData_ShouldUpdateOnlyProvidedFields Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetMyProfile_ShouldReturnUserDetails Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Login_WithInvalidEmail_ShouldReturnUnauthorized Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetUserById_ShouldIncludeParticipantStatus Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetMyProfile_WithNonOrganiser_ShouldReturnNotFound Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_WithPartialData_ShouldUpdateOnlyProvidedFields Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_WithOwnEmail_ShouldUpdateSuccessfully Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetAllUsers_ShouldIdentifyParticipants Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_ShouldUpdateOrganiserTimestamp Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_WithNonExistentOrganiser_ShouldReturnNotFound Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetAllUsers_ShouldReturnAllUsers Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetMyProfile_ShouldReturnCreatedAtAndUpdatedAt Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Login_WithInvalidPassword_ShouldReturnUnauthorized Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_WithValidData_ShouldUpdateSuccessfully Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetMyProfile_ShouldReturnEmergencyContact Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetMyProfile_ShouldReturnCreatedAt Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+CreateOrganiser_ShouldAssignNewOrganiserID Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Login_WithEmptyEmail_ShouldReturnUnauthorized Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_ShouldUpdateIDNumber Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_WithValidData_ShouldUpdateSuccessfully Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+UpdateMyProfile_ShouldUpdateDateOfBirth Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs:line 20
+   at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+CreateOrganiser_ShouldCreateUserWithHashedPassword Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Login_WithValidCredentials_ShouldReturnLoginResponse Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+GetMyProfile_ShouldReturnUserDetails Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs:line 20
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+CreateOrganiser_WithEmptyEmail_ShouldReturnBadRequest Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs:line 20
+   at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+Login_AsOrganizer_ShouldSetIsOrganiserTrue Failed | Error: System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found. | StackTrace:    at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 110
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 502
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 516
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 180
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 453
+   at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture) in C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs:line 20
+   at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+----- Inner Stack Trace -----
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+
+Test Output:
+[Informational] [xUnit.net 00:00:01.59]       Could not find a parameterless constructor. (Parameter 'constructorArguments')
+[Informational] [xUnit.net 00:00:01.59]       ---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found.
+[Informational] [xUnit.net 00:00:01.60]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Interception/CastleProxyFactory.cs(110,0): at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments)
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock`1.cs(502,0): at Moq.Mock`1.InitializeInstance()
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock`1.cs(516,0): at Moq.Mock`1.OnGetObject()
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock.cs(180,0): at Moq.Mock.get_Object()
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock`1.cs(453,0): at Moq.Mock`1.get_Object()
+[Informational] [xUnit.net 00:00:01.60]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs(20,0): at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture)
+[Informational] [xUnit.net 00:00:01.60]            at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+[Informational] [xUnit.net 00:00:01.60]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[Informational] [xUnit.net 00:00:01.60]         ----- Inner Stack Trace -----
+[Informational] [xUnit.net 00:00:01.60]            at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Error] [xUnit.net 00:00:01.60]     GetUserById_ShouldIncludeOrganiserStatus [FAIL]
+[Informational] [xUnit.net 00:00:01.60]       System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+[Informational] [xUnit.net 00:00:01.60]       Could not find a parameterless constructor. (Parameter 'constructorArguments')
+[Informational] [xUnit.net 00:00:01.60]       ---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found.
+[Informational] [xUnit.net 00:00:01.60]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Interception/CastleProxyFactory.cs(110,0): at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments)
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock`1.cs(502,0): at Moq.Mock`1.InitializeInstance()
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock`1.cs(516,0): at Moq.Mock`1.OnGetObject()
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock.cs(180,0): at Moq.Mock.get_Object()
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock`1.cs(453,0): at Moq.Mock`1.get_Object()
+[Informational] [xUnit.net 00:00:01.60]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AdminControllerTests.cs(20,0): at RaceDayManagementAPI.Tests.Controllers.AdminControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture)
+[Informational] [xUnit.net 00:00:01.60]            at InvokeStub_AdminControllerTests..ctor(Object, Span`1)
+[Informational] [xUnit.net 00:00:01.60]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[Informational] [xUnit.net 00:00:01.60]         ----- Inner Stack Trace -----
+[Informational] [xUnit.net 00:00:01.60]            at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Error] [xUnit.net 00:00:01.60]     UpdateMyProfile_WithConflictingEmail_ShouldReturnConflict [FAIL]
+[Informational] [xUnit.net 00:00:01.60]       System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+[Informational] [xUnit.net 00:00:01.60]       Could not find a parameterless constructor. (Parameter 'constructorArguments')
+[Informational] [xUnit.net 00:00:01.60]       ---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found.
+[Informational] [xUnit.net 00:00:01.60]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Interception/CastleProxyFactory.cs(110,0): at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments)
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock`1.cs(502,0): at Moq.Mock`1.InitializeInstance()
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock`1.cs(516,0): at Moq.Mock`1.OnGetObject()
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock.cs(180,0): at Moq.Mock.get_Object()
+[Informational] [xUnit.net 00:00:01.60]         /_/src/Moq/Mock`1.cs(453,0): at Moq.Mock`1.get_Object()
+[Informational] [xUnit.net 00:00:01.60]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\ParticipantControllerTests.cs(20,0): at RaceDayManagementAPI.Tests.Controllers.ParticipantControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture)
+[Informational] [xUnit.net 00:00:01.60]            at InvokeStub_ParticipantControllerTests..ctor(Object, Span`1)
+[Informational] [xUnit.net 00:00:01.60]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[Informational] [xUnit.net 00:00:01.60]         ----- Inner Stack Trace -----
+[Informational] [xUnit.net 00:00:01.60]            at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Error] [xUnit.net 00:00:01.60]     UpdateMyProfile_ShouldUpdateCompanyName [FAIL]
+[Informational] [xUnit.net 00:00:01.60]       System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+[Informational] [xUnit.net 00:00:01.60]       Could not find a parameterless constructor. (Parameter 'constructorArguments')
+[Informational] [xUnit.net 00:00:01.60]       ---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found.
+[Informational] [xUnit.net 00:00:01.60]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Informational] [xUnit.net 00:00:01.60]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+[Informational] [xUnit.net 00:00:01.61]         /_/src/Moq/Interception/CastleProxyFactory.cs(110,0): at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments)
+[Informational] [xUnit.net 00:00:01.61]         /_/src/Moq/Mock`1.cs(502,0): at Moq.Mock`1.InitializeInstance()
+[Informational] [xUnit.net 00:00:01.61]         /_/src/Moq/Mock`1.cs(516,0): at Moq.Mock`1.OnGetObject()
+[Informational] [xUnit.net 00:00:01.61]         /_/src/Moq/Mock.cs(180,0): at Moq.Mock.get_Object()
+[Informational] [xUnit.net 00:00:01.61]         /_/src/Moq/Mock`1.cs(453,0): at Moq.Mock`1.get_Object()
+[Informational] [xUnit.net 00:00:01.61]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\OrganiserControllerTests.cs(20,0): at RaceDayManagementAPI.Tests.Controllers.OrganiserControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture)
+[Informational] [xUnit.net 00:00:01.61]            at InvokeStub_OrganiserControllerTests..ctor(Object, Span`1)
+[Informational] [xUnit.net 00:00:01.61]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[Informational] [xUnit.net 00:00:01.61]         ----- Inner Stack Trace -----
+[Informational] [xUnit.net 00:00:01.61]            at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+[Informational] [xUnit.net 00:00:01.61]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Informational] [xUnit.net 00:00:01.61]       System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+[Informational] [xUnit.net 00:00:01.61]       Could not find a parameterless constructor. (Parameter 'constructorArguments')
+[Informational] [xUnit.net 00:00:01.61]       ---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found.
+[Informational] [xUnit.net 00:00:01.61]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.61]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Informational] [xUnit.net 00:00:01.61]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+[Informational] [xUnit.net 00:00:01.61]         /_/src/Moq/Interception/CastleProxyFactory.cs(110,0): at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments)
+[Informational] [xUnit.net 00:00:01.61]         /_/src/Moq/Mock`1.cs(502,0): at Moq.Mock`1.InitializeInstance()
+[Informational] [xUnit.net 00:00:01.61]         /_/src/Moq/Mock`1.cs(516,0): at Moq.Mock`1.OnGetObject()
+[Informational] [xUnit.net 00:00:01.61]         /_/src/Moq/Mock.cs(180,0): at Moq.Mock.get_Object()
+[Informational] [xUnit.net 00:00:01.61]         /_/src/Moq/Mock`1.cs(453,0): at Moq.Mock`1.get_Object()
+[Informational] [xUnit.net 00:00:01.61]         C:\Users\hmalu\source\repos\RaceDayManagementAPI\RaceDayManagementAPI.Tests\Controllers\AuthControllerTests.cs(20,0): at RaceDayManagementAPI.Tests.Controllers.AuthControllerTests..ctor(RaceDayDBFixture dbFixture, JwtServiceFixture jwtFixture)
+[Informational] [xUnit.net 00:00:01.61]            at InvokeStub_AuthControllerTests..ctor(Object, Span`1)
+[Informational] [xUnit.net 00:00:01.61]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[Informational] [xUnit.net 00:00:01.61]         ----- Inner Stack Trace -----
+[Informational] [xUnit.net 00:00:01.61]            at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+[Informational] [xUnit.net 00:00:01.61]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Error] [xUnit.net 00:00:01.62]     GetMyProfile_WithValidOrganiser_ShouldReturnProfile [FAIL]
+[Informational] [xUnit.net 00:00:01.62]       System.ArgumentException : Can not instantiate proxy of class: RaceDayManagementAPI.Services.JwtService.
+[Informational] [xUnit.net 00:00:01.62]       Could not find a parameterless constructor. (Parameter 'constructorArguments')
+[Informational] [xUnit.net 00:00:01.62]       ---- System.MissingMethodException : Constructor on type 'Castle.Proxies.JwtServiceProxy' not found.
+[Informational] [xUnit.net 00:00:01.62]       Stack Trace:
+[Informational] [xUnit.net 00:00:01.62]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+[Informational] [xUnit.net 00:00:01.62]            at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+[Informational] [xUnit.net 00:00:01.62]         /_/src/Moq/Interception/CastleProxyFactory.cs(110,0): at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments)
+[Informational] [xUnit.net 00:00:01.62]         /_/src/Moq/Mock`1.cs(502,0): at Moq.Mock`1.InitializeInstance()
+[Informational] [xUnit.net 00:00:01.62]         /_/src/Moq/Mock`1.cs(516,0): at Moq.Mock`1.OnGetObject()
+[Informational] [xUnit.net 00:00:01.62]         /_/src/Moq/Mock.cs(180,0): at Moq.Mock.get_Object()
+[Informational] [xUnit.net 00:00:01.62]         /_/src/Moq/Mock`1.cs(453,0): at Moq.Mock`1.get_Object()
+[Error] [xUnit.net 00:00:01.61]     Register_WithEmptyEmail_ShouldReturnBadRequest [FAIL]

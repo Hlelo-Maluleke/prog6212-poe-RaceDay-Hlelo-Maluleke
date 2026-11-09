@@ -1,0 +1,389 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\models\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\models\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A12370D2-73DF-4876-9616-199D39E1A17B}|RaceDayManagementAPI.Tests\\RaceDayManagementAPI.Tests.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi.tests\\controllers\\authcontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A12370D2-73DF-4876-9616-199D39E1A17B}|RaceDayManagementAPI.Tests\\RaceDayManagementAPI.Tests.csproj|solutionrelative:racedaymanagementapi.tests\\controllers\\authcontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\models\\enrolment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\models\\enrolment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\models\\route.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\models\\route.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\controllers\\resultscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\controllers\\resultscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\controllers\\enrolmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\controllers\\enrolmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\controllers\\participantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\controllers\\participantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\controllers\\organisercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\controllers\\organisercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\services\\blobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\services\\blobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\services\\iblobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\services\\iblobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\data\\racedaydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\data\\racedaydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A12370D2-73DF-4876-9616-199D39E1A17B}|RaceDayManagementAPI.Tests\\RaceDayManagementAPI.Tests.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi.tests\\controllers\\eventscontrollercrudtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A12370D2-73DF-4876-9616-199D39E1A17B}|RaceDayManagementAPI.Tests\\RaceDayManagementAPI.Tests.csproj|solutionrelative:racedaymanagementapi.tests\\controllers\\eventscontrollercrudtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A12370D2-73DF-4876-9616-199D39E1A17B}|RaceDayManagementAPI.Tests\\RaceDayManagementAPI.Tests.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi.tests\\fakes\\fakeblobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A12370D2-73DF-4876-9616-199D39E1A17B}|RaceDayManagementAPI.Tests\\RaceDayManagementAPI.Tests.csproj|solutionrelative:racedaymanagementapi.tests\\fakes\\fakeblobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|c:\\users\\hmalu\\source\\repos\\racedaymanagementapi\\racedaymanagementapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FD295F-5478-45D6-B4DB-BFE8C5191192}|RaceDayManagementAPI\\RaceDayManagementAPI.csproj|solutionrelative:racedaymanagementapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Result.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Result.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Models\\Result.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Result.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Models\\Result.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-28T07:13:31.072Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Enrolment.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Enrolment.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Models\\Enrolment.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Enrolment.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Models\\Enrolment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-28T07:11:53.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Route.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Route.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Models\\Route.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Route.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Models\\Route.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-28T07:10:23.868Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Models\\Category.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Category.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-28T07:09:12.703Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "JwtService.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Services\\JwtService.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Services\\JwtService.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Services\\JwtService.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Services\\JwtService.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAmwFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-28T06:41:55.847Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "FakeBlobService.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI.Tests\\Fakes\\FakeBlobService.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI.Tests\\Fakes\\FakeBlobService.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI.Tests\\Fakes\\FakeBlobService.cs",
+              "RelativeToolTip": "RaceDayManagementAPI.Tests\\Fakes\\FakeBlobService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T17:09:00.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Event.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Event.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Models\\Event.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\Event.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Models\\Event.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA0wBkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T17:01:11.978Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IBlobService.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Services\\IBlobService.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Services\\IBlobService.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Services\\IBlobService.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Services\\IBlobService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T12:41:00.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "BlobService.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Services\\BlobService.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Services\\BlobService.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Services\\BlobService.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Services\\BlobService.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAcwCQAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T12:05:11.807Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CategoriesController.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\CategoriesController.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Controllers\\CategoriesController.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\CategoriesController.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Controllers\\CategoriesController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAANIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T16:22:50.425Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ResultsController.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\ResultsController.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Controllers\\ResultsController.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\ResultsController.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Controllers\\ResultsController.cs",
+              "ViewState": "AgIAAMkAAAAAAAAAAAAiwM8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T16:21:24.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EnrolmentsController.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\EnrolmentsController.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Controllers\\EnrolmentsController.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\EnrolmentsController.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Controllers\\EnrolmentsController.cs",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAUwLwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T16:19:33.379Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "EventsController.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\EventsController.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Controllers\\EventsController.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\EventsController.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Controllers\\EventsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T14:20:03.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ParticipantController.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\ParticipantController.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Controllers\\ParticipantController.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\ParticipantController.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Controllers\\ParticipantController.cs",
+              "ViewState": "AgIAAAgBAAAAAAAAAAAUwCIBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T08:01:34.999Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "OrganiserController.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\OrganiserController.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Controllers\\OrganiserController.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\OrganiserController.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Controllers\\OrganiserController.cs",
+              "ViewState": "AgIAAAMBAAAAAAAAAAAUwAsBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T08:01:29.649Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAUwI0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T07:55:15.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\User.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Models\\User.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T07:53:08.552Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\appsettings.json",
+              "RelativeToolTip": "RaceDayManagementAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-20T07:40:05.723Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "EventsControllerCrudTests.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI.Tests\\Controllers\\EventsControllerCrudTests.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI.Tests\\Controllers\\EventsControllerCrudTests.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI.Tests\\Controllers\\EventsControllerCrudTests.cs",
+              "RelativeToolTip": "RaceDayManagementAPI.Tests\\Controllers\\EventsControllerCrudTests.cs",
+              "ViewState": "AgIAANIAAAAAAAAAAAAkwOUAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-15T20:27:05.472Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthControllerTests.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI.Tests\\Controllers\\AuthControllerTests.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI.Tests\\Controllers\\AuthControllerTests.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI.Tests\\Controllers\\AuthControllerTests.cs",
+              "RelativeToolTip": "RaceDayManagementAPI.Tests\\Controllers\\AuthControllerTests.cs",
+              "ViewState": "AgIAAP0AAAAAAAAAAAAAwDQBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-15T17:47:02.984Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAUwIsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-15T17:46:30.346Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Program.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Program.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Program.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAI0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-15T17:08:32.376Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "RaceDayDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Data\\RaceDayDbContext.cs",
+              "RelativeDocumentMoniker": "RaceDayManagementAPI\\Data\\RaceDayDbContext.cs",
+              "ToolTip": "C:\\Users\\hmalu\\source\\repos\\RaceDayManagementAPI\\RaceDayManagementAPI\\Data\\RaceDayDbContext.cs",
+              "RelativeToolTip": "RaceDayManagementAPI\\Data\\RaceDayDbContext.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAkwCMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-06T06:21:17.824Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

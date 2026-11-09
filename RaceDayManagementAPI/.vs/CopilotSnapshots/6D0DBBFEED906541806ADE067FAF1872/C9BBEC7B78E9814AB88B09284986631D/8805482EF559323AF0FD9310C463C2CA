@@ -1,0 +1,127 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RaceDayManagementAPI.Models;
+using RaceDayManagementAPI.Services;
+
+namespace RaceDayManagementAPI.Controllers
+{
+    [ApiController]
+    [Route("api/admin")]
+    [Authorize]
+    public class AdminController : ControllerBase
+    {
+        private readonly JwtService _jwtService;
+
+        public AdminController(JwtService jwtService)
+        {
+            _jwtService = jwtService;
+        }
+
+        // 1. LIST ALL USERS (Admin)
+        [HttpGet("users")]
+        public IActionResult GetAllUsers()
+        {
+            var users = RaceDayDB.Users.Select(u => new
+            {
+                u.UserID,
+                u.Email,
+                u.FullName,
+                u.Phone,
+                IsOrganiser = RaceDayDB.Organisers.Any(o => o.UserID == u.UserID),
+                IsParticipant = RaceDayDB.Participants.Any(p => p.UserID == u.UserID),
+                u.CreatedAt
+            }).ToList();
+
+            return Ok(users);
+        }
+ 
+        // 2. GET USER BY ID (Admin)
+        [HttpGet("users/{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            var user = RaceDayDB.Users.FirstOrDefault(u => u.UserID == id);
+            if (user == null)
+                return NotFound(new { message = "User not found." });
+
+            return Ok(new
+            {
+                user.UserID,
+                user.Email,
+                user.FullName,
+                user.Phone,
+                IsOrganiser = RaceDayDB.Organisers.Any(o => o.UserID == user.UserID),
+                IsParticipant = RaceDayDB.Participants.Any(p => p.UserID == user.UserID),
+                user.CreatedAt,
+                user.UpdatedAt
+            });
+        }
+
+        // 3. CREATE ORGANISER (Admin pre-seeds organisers)
+        [HttpPost("organisers")]
+        [AllowAnonymous] // Remove this if you want only admins to access it
+        public IActionResult CreateOrganiser([FromBody] CreateOrganiserRequest request)
+        {
+            if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
+                return BadRequest(new { message = "Email and password are required." });
+
+            var existingUser = RaceDayDB.Users.FirstOrDefault(u => u.Email == request.Email);
+            if (existingUser != null)
+                return Conflict(new { message = "Email already registered." });
+
+            var passwordHash = RaceDayDB.HashPassword(request.Password);
+
+            var user = new User
+            {
+                UserID = RaceDayDB.NextUserID++,
+                Email = request.Email,
+                PasswordHash = passwordHash,
+                FullName = request.FullName,
+                Phone = request.Phone
+            };
+            RaceDayDB.Users.Add(user);
+
+            var organiser = new Organiser
+            {
+                OrganiserID = RaceDayDB.NextOrganiserID++,
+                UserID = user.UserID,
+                CompanyName = request.CompanyName
+            };
+            RaceDayDB.Organisers.Add(organiser);
+
+            return CreatedAtAction(nameof(GetUserById), new { id = user.UserID }, new
+            {
+                user.UserID,
+                user.Email,
+                user.FullName,
+                user.Phone,
+                organiser.CompanyName,
+                user.CreatedAt
+            });
+        }
+
+        // 4. DELETE USER (Admin)
+        [HttpDelete("users/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            var user = RaceDayDB.Users.FirstOrDefault(u => u.UserID == id);
+            if (user == null)
+                return NotFound(new { message = "User not found." });
+
+            // Remove subtype records
+            RaceDayDB.Organisers.RemoveAll(o => o.UserID == id);
+            RaceDayDB.Participants.RemoveAll(p => p.UserID == id);
+            RaceDayDB.Users.Remove(user);
+
+            return NoContent();
+        }
+    }
+
+    public class CreateOrganiserRequest
+    {
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string FullName { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
+        public string? CompanyName { get; set; }
+    }
+}

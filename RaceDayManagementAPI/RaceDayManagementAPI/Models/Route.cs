@@ -1,4 +1,6 @@
-﻿namespace RaceDayManagementAPI.Models
+﻿using System.Text.Json.Serialization;
+
+namespace RaceDayManagementAPI.Models
 {
     public class Route
     {
@@ -11,6 +13,7 @@
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         // Navigation property
+        [JsonIgnore]
         public Category? Category { get; set; }
     }
 }

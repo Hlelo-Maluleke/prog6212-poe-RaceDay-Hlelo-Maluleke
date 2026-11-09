@@ -1,0 +1,17 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using RaceDayManagementAPI.Models;
+
+namespace RaceDayManagementAPI.Data
+{
+        public class RaceDayDbContext : DbContext
+        {
+            public RaceDayDbContext(DbContextOptions<RaceDayDbContext> options)
+                : base(options)
+            {
+            }
+
+            public DbSet<RaceDay> RaceDayDB { get; set; }
+        }
+
+}
